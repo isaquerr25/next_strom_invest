@@ -23,11 +23,51 @@ import {
 	ChevronRightIcon,
 } from '@chakra-ui/icons';
 
-import LogoFrist from '../assets/logo.png';
+import {
+	FiHome,
+	FiTrendingUp,
+	FiCompass,
+	FiStar,
+	FiSettings,
+	FiMenu,
+	FiBox,
+	FiLogOut,
+	FiChevronDown,
+	FiBell,
+} from 'react-icons/fi';
+import {
+	FaMoneyBill,
+	FaBitcoin,
+	FaChartLine,
+	FaUserAlt,
+	FaCompass
+} from 'react-icons/fa';
+import { IconType } from 'react-icons';
+import { ReactText } from 'react';
 
 
 
-export default function WithSubnavigation() {
+interface NavItem {
+	label: string;
+	subLabel?: string;
+	children?: Array<NavItem>;
+	href?: string;
+	icon?: IconType;
+}
+
+const NAV_ITEMS: Array<NavItem> = [
+	{ href: '#' , label: 'Home', icon: FiHome },
+	{ href: '#' , label: 'Fund Account', icon: FaMoneyBill },
+	{ href: '#' , label: 'Transactions', icon: FaChartLine },
+	{ href: '#' , label: 'Cycles', icon: FaCompass },
+	{ href: '#' , label: 'Account Settings', icon: FaUserAlt }
+
+];
+
+
+
+
+export function NavLogin() {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
@@ -55,7 +95,7 @@ export default function WithSubnavigation() {
 						aria-label={'Toggle Navigation'}
 					/>
 				</Flex>
-				<Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+				<Flex	 flex={{ base: 1 }}  justify={{ base: 'center', md: 'start' }}>
 					{/* <Text
 						textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
 						fontFamily={'heading'}
@@ -63,17 +103,16 @@ export default function WithSubnavigation() {
 						Logo
 					</Text> */}
 					<Image
-						width={'100px'}
-
+						width={'150px'}
+						minWidth={'150px'}
+						minHeight={'55px'}
 						src='./logo.png'
 						alt='Dan Abramov'
 					/>
-
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />
 					</Flex>
 				</Flex>
-
 				<Stack
 					flex={{ base: 1, md: 0 }}
 					justify={'flex-end'}
@@ -84,20 +123,21 @@ export default function WithSubnavigation() {
 						fontSize={'sm'}
 						fontWeight={400}
 						variant={'link'}
-						href={'#'}>
-						Sign In
-					</Button>
-					<Button
-						display={{ base: 'none', md: 'inline-flex' }}
-						fontSize={'sm'}
-						fontWeight={600}
-						color={'white'}
-						bg={'blue.400'}
 						href={'#'}
-						_hover={{
-							bg: 'blue.800',
-						}}>
-						Sign Up
+						paddingBlock={3}
+						bg='red'
+						borderRadius={50}
+						color='white'
+					>
+
+						<Icon
+							mr="1"
+							fontSize="16"
+							_groupHover={{
+								color: 'white',
+							}}
+							as={FiLogOut}
+						/>
 					</Button>
 				</Stack>
 			</Flex>
@@ -121,6 +161,7 @@ const DesktopNav = () => {
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
 							<Link
+								display={'inline-flex'}
 								p={2}
 								href={navItem.href ?? '#'}
 								fontSize={'sm'}
@@ -130,7 +171,17 @@ const DesktopNav = () => {
 									textDecoration: 'none',
 									color: linkHoverColor,
 								}}>
-								{navItem.label}
+								{navItem.icon && (
+									<Icon
+										mr="1"
+										fontSize="16"
+										_groupHover={{
+											color: 'white',
+										}}
+										as={navItem.icon}
+									/>
+								)}
+								 {navItem.label }
 							</Link>
 						</PopoverTrigger>
 
@@ -203,13 +254,13 @@ const MobileNav = () => {
 	);
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href,icon }: NavItem) => {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
 		<Stack spacing={4} onClick={children && onToggle}>
 			<Flex
-				py={2}
+				py={7}
 				as={Link}
 				href={href ?? '#'}
 				justify={'space-between'}
@@ -220,7 +271,17 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 				<Text
 					fontWeight={600}
 					color={useColorModeValue('gray.600', 'gray.200')}>
-					{label}
+					{icon && (
+						<Icon
+							mr="1"
+							fontSize="16"
+							_groupHover={{
+								color: 'white',
+							}}
+							as={icon}
+						/>
+					)}
+					{' '+label }
 				</Text>
 				{children && (
 					<Icon
@@ -252,29 +313,3 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 		</Stack>
 	);
 };
-
-interface NavItem {
-	label: string;
-	subLabel?: string;
-	children?: Array<NavItem>;
-	href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-	{
-		label: 'Home',
-		href: '#',
-	},
-	{
-		label: 'Contact',
-		href: '#',
-	},
-	{
-		label: 'About',
-		href: '#',
-	},
-	{
-		label: 'Questions',
-		href: '#',
-	},
-];

@@ -74,7 +74,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 	);
 };
 
-export default function FooterModify() {
+export function FooterModify() {
 	return (
 		<Box
 			bg={useColorModeValue('gray.50', 'gray.900')}
@@ -95,17 +95,7 @@ export default function FooterModify() {
 						<Text fontSize={'sm'}>
               © 2020 STORM INVEST. All rights reserved
 						</Text>
-						<Stack direction={'row'} spacing={6}>
-							<SocialButton label={'Twitter'} href={'#'}>
-								<FaTwitter />
-							</SocialButton>
-							<SocialButton label={'YouTube'} href={'#'}>
-								<FaYoutube />
-							</SocialButton>
-							<SocialButton label={'Instagram'} href={'#'}>
-								<FaInstagram />
-							</SocialButton>
-						</Stack>
+
 					</Stack>
 					<Stack align={'flex-start'}>
 						<ListHeader>Company</ListHeader>

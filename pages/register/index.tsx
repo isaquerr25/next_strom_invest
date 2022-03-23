@@ -3,19 +3,19 @@ import Head from 'next/head';
 import {FooterModify} from '../../components/utils/footerModify';
 import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
-import {SimpleCard} from './body';
+import {RegisterBody} from './body';
 
 
 
-const Login = () =>{
+const Register = () =>{
 	return(
 		<>
 			<HeaderMod title='Login' />
 			<Nav/>
-			<SimpleCard/>
+			<RegisterBody/>
 			<FooterModify/>
 		</>
 	);
 };
 
-export default Login;
+export default Register;

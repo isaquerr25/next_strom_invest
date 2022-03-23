@@ -20,7 +20,7 @@ const testimonials = [
 	},
 	{
 		name: 'Krysta B.',
-		role: 'Entrepreneur',
+		role: '',
 		content:
 			'I don\'t even have to worry about money anymore. We have worked with Storm Invest for the past 2 years. I got more than twice what I invested. I just have the company to thank! ',
 		avatar:
@@ -28,17 +28,17 @@ const testimonials = [
 	},
 	{
 		name: 'Darcy L.',
-		role: 'Movie star',
+		role: '',
 		content:
-			'Thank you for making it painless, pleasant and most of all, hassle free! I\'m good to go. No matter where you go, EEZY is the coolest, most happening thing around! I love EEZY!',
+			'Top service, with quality and responsibility, deserving all the merit that the Storm Invest brand has achieved with great competence; Congratulations to the entire team for their professionalism.',
 		avatar:
 			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
 	},
 	{
 		name: 'Daniel T.',
-		role: 'Musician',
+		role: '',
 		content:
-			'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
+			'We were very satisfied with Storm Invest service!! We are one of its first customers and we have always had an accurate and quality service. Congratulations to the whole team!!',
 		avatar:
 			'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
 	},
@@ -130,7 +130,7 @@ function TestimonialCard(props: TestimonialCardProps) {
 	);
 }
 
-export default function GridBlurredBackdrop() {
+export function GridBlurredBackdrop() {
 	return (
 		<Flex
 			textAlign={'center'}

@@ -27,7 +27,7 @@ import LogoFrist from '../assets/logo.png';
 
 
 
-export default function WithSubnavigation() {
+export function Nav() {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
@@ -64,16 +64,14 @@ export default function WithSubnavigation() {
 					</Text> */}
 					<Image
 						width={'100px'}
-
 						src='./logo.png'
-						alt='Dan Abramov'
+						alt='Storm Invest'
 					/>
 
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />
 					</Flex>
 				</Flex>
-
 				<Stack
 					flex={{ base: 1, md: 0 }}
 					justify={'flex-end'}
@@ -262,41 +260,19 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
 	{
-		label: 'Inspiration',
-		children: [
-			{
-				label: 'Explore Design Work',
-				subLabel: 'Trending Design to inspire you',
-				href: '#',
-			},
-			{
-				label: 'New & Noteworthy',
-				subLabel: 'Up-and-coming Designers',
-				href: '#',
-			},
-		],
-	},
-	{
-		label: 'Find Work',
-		children: [
-			{
-				label: 'Job Board',
-				subLabel: 'Find your dream design job',
-				href: '#',
-			},
-			{
-				label: 'Freelance Projects',
-				subLabel: 'An exclusive list for contract work',
-				href: '#',
-			},
-		],
-	},
-	{
-		label: 'Learn Design',
+		label: 'Home',
 		href: '#',
 	},
 	{
-		label: 'Hire Designers',
+		label: 'Contact',
+		href: '#',
+	},
+	{
+		label: 'About',
+		href: '#',
+	},
+	{
+		label: 'Questions',
 		href: '#',
 	},
 ];
