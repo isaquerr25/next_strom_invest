@@ -4,20 +4,20 @@ import {FooterModify} from '../../components/utils/footerModify';
 import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
 import { NavLogin } from '../../components/utils/navigateLogin';
-import { BodyFunds } from './body';
+import { BodyTransactions } from './body';
 
 
 
 
-const FundsDeposit = () =>{
+const Transactions = () =>{
 	return(
 		<>
-			<HeaderMod title='Funds Deposit' />
+			<HeaderMod title='Transactions' />
 			<NavLogin children={undefined}/>
-			<BodyFunds/>
+			<BodyTransactions/>
 			{/* <FooterModify/> */}
 		</>
 	);
 };
 
-export default FundsDeposit;
+export default Transactions;

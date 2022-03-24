@@ -1,15 +1,18 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from '@chakra-ui/react';
+import { addDays, addMonths } from 'date-fns';
 import { Field,  Form, Formik } from 'formik';
-
-export const BodyFunds = () =>{
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+export const BodyCycle= () =>{
 	return(
 
 		<Flex
+
 			flexWrap={'wrap'}
 			justifyContent={'center'}
 			gap={2}
 			p={2}
-
 		>
 			<Flex
 				boxShadow='xl'
@@ -25,13 +28,13 @@ export const BodyFunds = () =>{
 
 			>
 				<Text fontSize={'2xl'}>
-            Deposit using Bitcoin
+						Deposit using Bitcoin
 				</Text>
 					
 				<Text>
-            All fields below are mandatory
+						All fields below are mandatory
 				</Text>
-          	<Image
+				<Image
 					width={'100px'}
 					src='./icon_bitcoin.png'
 					alt='Storm Invest'
@@ -69,10 +72,11 @@ export const BodyFunds = () =>{
 	);
 };
 
-
-
-
 function FormikExample() {
+
+
+
+	const [startDate, setStartDate] = useState(null);
 	function validateTrading(value) {
 		let error;
 		if (!value) {
@@ -138,13 +142,20 @@ function FormikExample() {
 
 						)}
 					</Field>
+					<DatePicker
+						selected={startDate}
+						onChange={(date) => setStartDate(date)}
+						minDate={addDays(new Date(),+15)}
+						maxDate={addMonths(new Date(), 12)}
+						withPortal
+					/>
 					<Button
 						mt={4}
 						colorScheme='teal'
 						isLoading={props.isSubmitting}
 						type='submit'
 					>
-            Deposit Funds
+						Deposit Funds
 					</Button>
 				</Form>
 			)}
@@ -152,21 +163,19 @@ function FormikExample() {
 	);
 }
 
-
-
 const DescriptionAndRestriction = () =>(
 	<>
 		<Text fontSize={'xl'}>
-      Important Information
+			Important Information
 		</Text>
 		<Text >
-      Please fill in the required fields below
+			Please fill in the required fields below
 		</Text>
 		<Text>
-      Minimum Deposit is 100 USD
+			Minimum Deposit is 100 USD
 		</Text>
 		<Text>
-      Every transfer transaction is made in BTC and converted into USD for us to operate.
+			Every transfer transaction is made in BTC and converted into USD for us to operate.
 		</Text>
 	</>
 

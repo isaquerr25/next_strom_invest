@@ -4,20 +4,20 @@ import {FooterModify} from '../../components/utils/footerModify';
 import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
 import { NavLogin } from '../../components/utils/navigateLogin';
-import { BodyFunds } from './body';
+import { BodyCycle } from './body';
 
 
 
 
-const FundsDeposit = () =>{
+const Cycles = () =>{
 	return(
 		<>
 			<HeaderMod title='Funds Deposit' />
 			<NavLogin children={undefined}/>
-			<BodyFunds/>
+			<BodyCycle/>
 			{/* <FooterModify/> */}
 		</>
 	);
 };
 
-export default FundsDeposit;
+export default Cycles;
