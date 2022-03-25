@@ -1,0 +1,14 @@
+mutation CreateCycle($valueUSD: Number, $beginDate: Date, $finishDate: Date) {
+  createCycle(
+    data: {
+      action: "invest"
+      valueUSD: $valueUSD
+      state: "wait"
+      beginDate: $beginDate
+      finishDate: $finishDate
+    }
+  ) {
+    field
+    message
+  }
+}

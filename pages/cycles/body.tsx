@@ -1,10 +1,13 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from '@chakra-ui/react';
 import { addDays, addMonths } from 'date-fns';
 import { Field,  Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { FC, forwardRef, MouseEventHandler, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {validateUSD,validateEmail} from '../../components/utils/validateInputs';
+
 export const BodyCycle= () =>{
+
 	return(
 
 		<Flex
@@ -28,23 +31,20 @@ export const BodyCycle= () =>{
 
 			>
 				<Text fontSize={'2xl'}>
-						Deposit using Bitcoin
+					Create Cyle Invest
 				</Text>
-					
 				<Text>
-						All fields below are mandatory
+					All fields below are mandatory
 				</Text>
-				<Image
-					width={'100px'}
-					src='./icon_bitcoin.png'
-					alt='Storm Invest'
-				/>
+
+
+
 				<Box>
 					<Flex alignItems={'center'}>
 						<FormLabel htmlFor='name'>Trading Amount:</FormLabel>
 						<FormLabel fontSize={'xl'}>5445.74(USD)</FormLabel>
 					</Flex>
-					<FormikExample/>
+					<FormikInputs/>
 				</Box>
 
 			</Flex>
@@ -72,83 +72,94 @@ export const BodyCycle= () =>{
 	);
 };
 
-function FormikExample() {
+function FormikInputs() {
 
+	type typesCycle = {
+		valueUSD:Number
+		beginDate:Date
+		finishDate:Date
+	}
 
+	const [startDate, setStartDate] = useState<Date|null>();
+	const [cycleGraph, setCycleGraph] = useState<typesCycle>({
 
-	const [startDate, setStartDate] = useState(null);
-	function validateTrading(value) {
-		let error;
-		if (!value) {
-			error = 'Number is required';
-		}
-		else if(!/^[0-9]+$/.test(value)){
-			error = 'Fill in the value with numbers only';
-		}
-		else if (value.toLowerCase() !== 'naruto') {
-			error = 'Jeez! You\'re not a fan 😱';
-		}
-		return error;
-	}
-	function validateAmount(value) {
-		let error;
-		if (!value) {
-			error = 'Name is required';
-		}
-		return error;
-	}
-	function validateEmail(value) {
-		let error;
-		if (!value) {
-			error = 'Name is required';
-		} else if (value.toLowerCase() !== 'naruto') {
-			error = 'Jeez! You\'re not a fan 😱';
-		}
-		return error;
-	}
+		valueUSD:0,
+		beginDate:(new Date()),
+		finishDate:(new Date()),
+	});
 
 	return (
 		<Formik
-			initialValues={{ name: 'Sasuke' }}
+			initialValues={cycleGraph}
 			onSubmit={(values, actions) => {
+
 				setTimeout(() => {
 					alert(JSON.stringify(values, null, 2));
 					actions.setSubmitting(false);
 				}, 1000);
+
 			}}
 		>
 			{(props) => (
-				<Form>
-					<Field name='amount' validate={validateAmount}>
-						{({ field, form }) => (
-							<FormControl isRequired>
-								<FormLabel htmlFor='amount'>Amount</FormLabel>
-								<NumberInput min={100} defaultValue={0.00}>
-									<NumberInputField id='amount' />
-									<NumberInputStepper>
-										<NumberIncrementStepper />
-										<NumberDecrementStepper />
-									</NumberInputStepper>
-								</NumberInput>
-							</FormControl>
-						)}
-					</Field>
-					<Field name='name' validate={validateEmail}>
+				<Form >
+					<Field name='email' validate={validateEmail}>
 						{({ field, form }) => (
 							<FormControl isRequired>
 								<FormLabel htmlFor='email'>Email</FormLabel>
-								<Input id='email' placeholder='Email' />
+								<Input
+
+									id='email'
+									placeholder='Email'
+								/>
 							</FormControl>
 
 						)}
 					</Field>
-					<DatePicker
-						selected={startDate}
-						onChange={(date) => setStartDate(date)}
-						minDate={addDays(new Date(),+15)}
-						maxDate={addMonths(new Date(), 12)}
-						withPortal
-					/>
+					<Field name='amount' validate={validateUSD}>
+						{({ field, form }) => (
+							<FormControl
+								isRequired
+								maxW='200px'
+							>
+								<FormLabel htmlFor='amount'>Amount</FormLabel>
+								<NumberInput
+
+									min={100}
+									defaultValue={0.00}
+								>
+									<NumberInputField
+										background='white'
+										borderRadius={10}
+										borderColor={'blackAlpha.500'}
+										id='amount'
+
+									/>
+
+								</NumberInput>
+							</FormControl>
+						)}
+					</Field>
+
+					<Field name='datePicker' validate={validateEmail}>
+						{({ field, form }) => (
+							<FormControl
+								isRequired
+								justifyContent={'left'}
+							>
+								<FormLabel htmlFor='datePicker'>Date Close Cycle</FormLabel>
+								<DatePicker
+
+									wrapperClassName="datePicker"
+									selected={startDate}
+									onChange={(date) => setStartDate(date)}
+									minDate={addDays(new Date(),+15)}
+									maxDate={addMonths(new Date(), 12)}
+									withPortal
+									customInput={<CalenderCustomInput />}
+								/>
+							</FormControl>
+						)}
+					</Field>
 					<Button
 						mt={4}
 						colorScheme='teal'
@@ -172,11 +183,40 @@ const DescriptionAndRestriction = () =>(
 			Please fill in the required fields below
 		</Text>
 		<Text>
-			Minimum Deposit is 100 USD
+			Minimum in account is 100 USD
 		</Text>
 		<Text>
-			Every transfer transaction is made in BTC and converted into USD for us to operate.
+			To make a new investment cycle, the money must already be in account
+		</Text>
+		<Text>
+			* After the end of each cycle, the money will return to your account
+			with the additional profit generated over time. <br/>
+			* The forecast value is an approximation of how much profit you will receive.
+			Since it will only be counted at the end of the cycle.
 		</Text>
 	</>
+
+);
+
+interface Props{
+	value?: string
+	onClick?:MouseEventHandler
+}
+const CalenderCustomInput:FC<Props> = ({ value, onClick }) => (
+
+	<Input
+		w='200px'
+		id='calender-input'
+		type='text'
+		value={value}
+		placeholder='00/00/0000'
+		onClick={onClick}
+		colorScheme='transparent'
+		color='black'
+		alignItems='center'
+		bg='white'
+		borderRadius={10}
+		borderColor='blackAlpha.500'
+	/>
 
 );

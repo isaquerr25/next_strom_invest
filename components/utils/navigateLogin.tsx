@@ -40,7 +40,8 @@ import {
 	FaBitcoin,
 	FaChartLine,
 	FaUserAlt,
-	FaCompass
+	FaCompass,
+	FaVoteYea
 } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
@@ -60,7 +61,8 @@ const NAV_ITEMS: Array<NavItem> = [
 	{ href: '#' , label: 'Fund Account', icon: FaMoneyBill },
 	{ href: '#' , label: 'Transactions', icon: FaChartLine },
 	{ href: '#' , label: 'Cycles', icon: FaCompass },
-	{ href: '#' , label: 'Account Settings', icon: FaUserAlt }
+	{ href: '#' , label: 'Requests', icon: FaVoteYea },
+	{ href: '#' , label: 'Account Settings', icon: FaUserAlt },
 
 ];
 
