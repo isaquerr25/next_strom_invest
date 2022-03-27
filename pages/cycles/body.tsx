@@ -104,15 +104,12 @@ function FormikInputs() {
 				<Form >
 					<Field name='email' validate={validateEmail}>
 						{({ field, form }) => (
-							<FormControl isRequired>
+							<FormControl isRequired
+								isInvalid={form.errors.email && form.touched.email}
+							>
 								<FormLabel htmlFor='email'>Email</FormLabel>
-								<Input
-
-									id='email'
-									placeholder='Email'
-								/>
+								<Input id='email'	placeholder='Email'	/>
 							</FormControl>
-
 						)}
 					</Field>
 					<Field name='amount' validate={validateUSD}>

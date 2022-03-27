@@ -1,0 +1,12 @@
+mutation CreateUserResolver(
+  $email: String!
+  $password: String!
+  $name: String!
+) {
+  createUserResolver(
+    data: { email: $email, password: $password, name: $name }
+  ) {
+    field
+    message
+  }
+}

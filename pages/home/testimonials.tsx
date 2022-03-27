@@ -133,6 +133,7 @@ function TestimonialCard(props: TestimonialCardProps) {
 export function GridBlurredBackdrop() {
 	return (
 		<Flex
+			id="testimonies"
 			textAlign={'center'}
 			pt={10}
 			justifyContent={'center'}

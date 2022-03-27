@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 export const validateTrading = (value) => {
 	let error;
 	if (!value) {
@@ -41,4 +42,38 @@ export const validateEmail = (value:string) => {
 
 
 	return error;
+
 };
+
+export const validationLogin = yup.object({
+	email: yup
+		.string()
+		.required('This field is required')
+		.email('The email is invalid'),
+	password: yup
+		.string()
+		.required('This field is required')
+		.matches(
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			'Your password is not strong enough',
+		),
+});
+
+export const validationRegister = yup.object({
+	name: yup.string().required('This field is required'),
+	email: yup
+		.string()
+		.required('This field is required')
+		.email('The email is invalid'),
+	password: yup
+		.string()
+		.required('This field is required')
+		.matches(
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			'Your password is not strong enough',
+		),
+	confirmPassword: yup
+		.string()
+		.required('This field is required')
+		.oneOf([yup.ref('password'), null], 'Passwords must match'),
+});

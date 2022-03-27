@@ -11,9 +11,43 @@ import {
 	Heading,
 	Text,
 	useColorModeValue,
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalHeader,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	Spinner,
+	Icon,
+	useBoolean,
 } from '@chakra-ui/react';
-import background from './background_login.jpg';
+import { useLoginAuthUserMutation } from '../generated/graphql';
+import FormInput from '../../components/utils/formInput';
+import { Form, Formik } from 'formik';
+import Router from 'next/router';
+import { validationLogin } from '../../components/utils/validateInputs';
+import { MdCreate, MdLogin } from 'react-icons/md';
+import { FaFeatherAlt } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { VscError } from 'react-icons/vsc';
+import { PopMsg } from '../../components/utils/PopMsg';
+
+
+interface Values {
+  email: string;
+  password: string;
+}
+
+
 export function SimpleCard() {
+
+
+	const [loginAuthUser, ] = useLoginAuthUserMutation();
+	const [errorMsg, setErrorMsg] = useState('');
+	const [popShow, setPopShow] = useBoolean(false);
+
 	return (
 		<Flex
 			minH={'100vh'}
@@ -33,35 +67,69 @@ export function SimpleCard() {
 					bg={useColorModeValue('white', 'gray.700')}
 					boxShadow={'lg'}
 					p={8}>
-					<Stack spacing={4}>
-						<FormControl id="email">
-							<FormLabel>Email address</FormLabel>
-							<Input type="email" />
-						</FormControl>
-						<FormControl id="password">
-							<FormLabel>Password</FormLabel>
-							<Input type="password" />
-						</FormControl>
-						<Stack spacing={10}>
-							<Stack
-								direction={{ base: 'column', sm: 'row' }}
-								align={'start'}
-								justify={'space-between'}>
-								<Checkbox>Remember me</Checkbox>
-								<Link color={'blue.400'}>Forgot password?</Link>
-							</Stack>
-							<Button
-								bg={'blue.400'}
-								color={'white'}
-								_hover={{
-									bg: 'blue.500',
-								}}>
-                Sign in
-							</Button>
-						</Stack>
-					</Stack>
+
+					<Formik
+					 	initialValues={{
+							email: '',
+							password: '',
+						}}
+						validationSchema={validationLogin}
+
+						onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
+
+							setSubmitting(true);
+							const result = await loginAuthUser({variables:values});
+							setSubmitting(false);
+							const errors = result.data?.loginAuthUser[0];
+							if (errors?.field=='success') {
+								Router.push('/user');
+							} else {
+								setErrorMsg(errors?.message  ?? '');
+								setPopShow.on();
+							}
+
+						}}
+
+					>
+						{({ isSubmitting }) => (
+							<Form >
+								<Stack spacing={4}>
+									<FormLabel>Email</FormLabel>
+									<FormInput type="text" placeholder="email" name="email" />
+									<FormLabel>Password</FormLabel>
+									<FormInput type="password" placeholder="Password" name="password" />
+
+									<Stack spacing={10}>
+										<Stack
+											direction={{ base: 'column', sm: 'row' }}
+											align={'start'}
+											justify={'space-between'}>
+											<Checkbox>Remember me</Checkbox>
+											<Link color={'blue.400'}>Forgot password?</Link>
+										</Stack>
+										<Button
+											bg={'blue.400'}
+											color={'white'}
+											_hover={{
+												bg: 'blue.500',
+											}}
+											onClick={()=>{console.log('das');}}
+											type="submit"
+											leftIcon={isSubmitting ? <Spinner /> : <Icon as={FaFeatherAlt} />}
+											disabled={isSubmitting}
+										>
+											Sign in
+										</Button>
+
+									</Stack>
+								</Stack>
+							</Form>
+						)}
+					</Formik>
+
 				</Box>
 			</Stack>
+			<PopMsg title={'Error'} msg={errorMsg} display={popShow} hide={setPopShow.off}/>
 		</Flex>
 	);
 }

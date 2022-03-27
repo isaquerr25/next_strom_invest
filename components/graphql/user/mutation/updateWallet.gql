@@ -1,0 +1,6 @@
+mutation UpdateWallet($wallet: String!) {
+  updateWallet(data: { wallet: $wallet }) {
+    field
+    message
+  }
+}

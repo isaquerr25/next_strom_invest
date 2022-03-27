@@ -13,12 +13,36 @@ import {
 	Text,
 	useColorModeValue,
 	Link,
+	Checkbox,
+	Spinner,
+	Icon,
+	useBoolean,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Form, Formik } from 'formik';
+import FormInput from '../../components/utils/formInput';
+import { MdCreate } from 'react-icons/md';
+import Router  from 'next/router';
+import { useCreateUserResolverMutation } from '../generated/graphql';
+import { validationRegister } from '../../components/utils/validateInputs';
+import { PopMsg } from '../../components/utils/PopMsg';
+
+
+
+interface Values{
+		email: ''
+		password:''
+		confirmPassword: ''
+		name: ''
+	}
+
 
 export function RegisterBody() {
-	const [showPassword, setShowPassword] = useState(false);
+
+	const [createAccount,] = useCreateUserResolverMutation();
+	const [errorMsg, setErrorMsg] = useState('');
+	const [popShow, setPopShow] = useBoolean(false);
 
 	return (
 		<Flex
@@ -30,74 +54,76 @@ export function RegisterBody() {
 			backgroundSize='cover'
 			width='100%'
 		>
-			<Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-				<Stack align={'center'}>
-					<Heading fontSize={'4xl'} color='white' textAlign={'center'}>
-						Sign up
-					</Heading>
-					<Text fontSize={'lg'} color={'gray.600'}>
-						to enjoy all of our cool features ✌️
-					</Text>
-				</Stack>
-				<Box
-					rounded={'lg'}
-					bg={useColorModeValue('white', 'gray.700')}
-					boxShadow={'lg'}
-					p={8}>
-					<Stack spacing={4}>
-						<HStack>
-							<Box>
-								<FormControl id="firstName" isRequired>
-									<FormLabel>First Name</FormLabel>
-									<Input type="text" />
-								</FormControl>
-							</Box>
-							<Box>
-								<FormControl id="lastName">
-									<FormLabel>Last Name</FormLabel>
-									<Input type="text" />
-								</FormControl>
-							</Box>
-						</HStack>
-						<FormControl id="email" isRequired>
-							<FormLabel>Email address</FormLabel>
-							<Input type="email" />
-						</FormControl>
-						<FormControl id="password" isRequired>
-							<FormLabel>Password</FormLabel>
-							<InputGroup>
-								<Input type={showPassword ? 'text' : 'password'} />
-								<InputRightElement h={'full'}>
+			<Box
+				rounded={'lg'}
+				bg={useColorModeValue('white', 'gray.700')}
+				boxShadow={'lg'}
+				p={8}>
+
+				<Formik
+					initialValues={{
+						email: '',
+						password: '',
+						confirmPassword: '',
+						name: ''
+					}}
+					validationSchema={validationRegister}
+
+					onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
+						console.log('entrio');
+						setSubmitting(true);
+						const result = await createAccount({variables:values});
+						setSubmitting(false);
+						const errors = result.data?.createUserResolver[0];
+						if (errors?.message=='success') {
+							Router.push('/login');
+						} else {
+							setErrorMsg(errors?.message  ?? '');
+							setPopShow.on();
+						}
+					}}
+				>
+					{({ isSubmitting }) => (
+						<Form >
+							<Stack spacing={4}>
+								<Box>
+									<FormLabel>Name</FormLabel>
+									<FormInput type="text" placeholder="Name" name="name" />
+								</Box>
+								<Box>
+									<FormLabel>Email</FormLabel>
+									<FormInput type="text" placeholder="email" name="email" />
+								</Box>
+								<Box>
+									<FormLabel>Password</FormLabel>
+									<FormInput type="password" placeholder="Password" name="password" />
+								</Box>
+								<Box>
+									<FormLabel>Confirm Password</FormLabel>
+									<FormInput type="password" placeholder="Confirm Password" name="confirmPassword" />
+								</Box>
+								<Stack spacing={10}>
 									<Button
-										variant={'ghost'}
-										onClick={() =>
-											setShowPassword((showPassword) => !showPassword)
-										}>
-										{showPassword ? <ViewIcon /> : <ViewOffIcon />}
+										bg={'blue.400'}
+										color={'white'}
+										_hover={{
+											bg: 'blue.500',
+										}}
+										onClick={()=>{console.log('das');}}
+										type="submit"
+										leftIcon={isSubmitting ? <Spinner /> : <Icon as={MdCreate} />}
+										disabled={isSubmitting}
+									>
+											Register
 									</Button>
-								</InputRightElement>
-							</InputGroup>
-						</FormControl>
-						<Stack spacing={10} pt={2}>
-							<Button
-								loadingText="Submitting"
-								size="lg"
-								bg={'blue.400'}
-								color={'white'}
-								_hover={{
-									bg: 'blue.500',
-								}}>
-								Sign up
-							</Button>
-						</Stack>
-						<Stack pt={6}>
-							<Text align={'center'}>
-								Already a user? <Link color={'blue.400'}>Login</Link>
-							</Text>
-						</Stack>
-					</Stack>
-				</Box>
-			</Stack>
+								</Stack>
+							</Stack>
+						</Form>
+					)}
+				</Formik>
+			</Box>
+			<PopMsg title={'Error'} msg={errorMsg} display={popShow} hide={setPopShow.off}/>
+
 		</Flex>
 	);
 }

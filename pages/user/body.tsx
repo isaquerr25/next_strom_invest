@@ -17,21 +17,40 @@ export const BodySetOne = () =>{
 						gap={2}
 
 					>
-						<Block/>
-						<Block/>
-						<Block/>
-						<Block/>
+						<Block
+							title={'Balance'}
+							value={'$98789,57'}
+							subTitle={ () =>(
+								<Button
+									size='md'
+									pt={4}
+									pb={4}
+									pr={8}
+									pl={8}
+									borderRadius={10}
+									bg='#358960'
+								>
+									Deposit
+								</Button>)
+							}
+						/>
 					</Flex>
 				</Box>
 				<Box>
-
 				</Box>
 			</Flex>
 		</>
 	);
 };
 
-const Block = () =>(
+interface typeBlock{
+	value:string
+	title:string
+	subTitle: () => JSX.Element
+};
+
+const Block = ({value,title,subTitle}:typeBlock) =>(
+
 	<Flex
 		direction={'column'}
 		align={'center'}
@@ -43,24 +62,12 @@ const Block = () =>(
 		borderRadius={5}
 	>
 		<Text color='white' fontSize='2xl' fontWeight='black' >
-							Your Balance
+			{title}
 		</Text>
 		<Text color='white' fontSize='4xl' fontWeight='black'>
-							$9,999.95
+			{value}
 		</Text>
-		<Button
+		{subTitle}
 
-
-			size='md'
-			pt={4}
-			pb={4}
-			pr={8}
-			pl={8}
-			borderRadius={10}
-			bg='#358960'
-
-		>
-							Deposit
-		</Button>
 	</Flex>
 );

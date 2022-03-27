@@ -3,7 +3,7 @@ import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
 import TopBody from './bodyStepOne';
 import SplitWithImage from './features';
-import BasicStatistics from './statistics';
+import {BasicStatistics} from './statistics';
 import {GridBlurredBackdrop} from './testimonials';
 import {Contact} from './contact';
 import {Graphic} from './graphicDev';
@@ -13,7 +13,7 @@ const home = () =>{
 		<>
 			<HeaderMod title='Home' />
 			<Nav/>
-			<TopBody/>
+			<TopBody />
 			<SplitWithImage/>
 			<Graphic/>
 			<GridBlurredBackdrop/>

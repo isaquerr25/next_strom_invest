@@ -23,6 +23,38 @@ import {
 	ChevronRightIcon,
 } from '@chakra-ui/icons';
 
+import Router from 'next/router';
+interface NavItem {
+	label: string;
+	subLabel?: string;
+	children?: Array<NavItem>;
+	href?: string;
+}
+const NAV_ITEMS: Array<NavItem> = [
+	{
+		label: 'Home',
+		href:'/home#home',
+	},
+	{
+		label: 'Contact',
+		href: '/home#contact',
+	},
+	{
+		label: 'About',
+		href: '/home#about',
+	},
+	{
+		label: 'Testimonies',
+		href: '/home#testimonies',
+	},
+];
+
+
+
+
+
+
+
 import LogoFrist from '../assets/logo.png';
 
 
@@ -82,16 +114,18 @@ export function Nav() {
 						fontSize={'sm'}
 						fontWeight={400}
 						variant={'link'}
-						href={'#'}>
+
+						onClick={()=>{Router.push('/login');}}
+					>
 						Sign In
 					</Button>
 					<Button
+						onClick={()=>{Router.push('/register');}}
 						display={{ base: 'none', md: 'inline-flex' }}
 						fontSize={'sm'}
 						fontWeight={600}
 						color={'white'}
 						bg={'blue.400'}
-						href={'#'}
 						_hover={{
 							bg: 'blue.800',
 						}}>
@@ -250,29 +284,3 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 		</Stack>
 	);
 };
-
-interface NavItem {
-	label: string;
-	subLabel?: string;
-	children?: Array<NavItem>;
-	href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-	{
-		label: 'Home',
-		href: '#',
-	},
-	{
-		label: 'Contact',
-		href: '#',
-	},
-	{
-		label: 'About',
-		href: '#',
-	},
-	{
-		label: 'Questions',
-		href: '#',
-	},
-];
