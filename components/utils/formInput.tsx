@@ -15,7 +15,7 @@ type FormInputProps = {
   inputIcon?: ReactNode;
   label?: string;
   placeholder?: string;
-  type: 'text' | 'password' | 'email' | 'number';
+  type: 'text' | 'password' | 'email' | 'number' | 'file';
   helperText?: string;
 } & FieldConfig;
 
@@ -38,7 +38,7 @@ const FormInput: FC<FormInputProps> = ({
 				{inputIcon && (
 					<InputLeftElement pointerEvents="none" children={inputIcon} />
 				)}
-				{type !== 'number' && (
+				{type !== 'number' && type !== 'file'  && (
 					<Input
 						id={inputId}
 						{...field}
@@ -47,6 +47,23 @@ const FormInput: FC<FormInputProps> = ({
 						border="1px"
 						borderColor="gray.400"
 					/>
+				)}
+				{type === 'file'  && (
+					<>
+						<FormLabel id={inputId} >Select a File:</FormLabel>
+
+						<Input
+							accept="image/*"
+							alignItems={'center'}
+							id={inputId}
+							{...field}
+							placeholder={placeholder}
+							type={type}
+							border="1px"
+							borderColor="gray.400"
+						/>
+
+					</>
 				)}
 				{type === 'number' && (
 					<NumberFormat

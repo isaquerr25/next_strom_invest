@@ -70,7 +70,6 @@ export function RegisterBody() {
 					validationSchema={validationRegister}
 
 					onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
-						console.log('entrio');
 						setSubmitting(true);
 						const result = await createAccount({variables:values});
 						setSubmitting(false);

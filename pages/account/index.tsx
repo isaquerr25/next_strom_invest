@@ -12,7 +12,7 @@ import { BodyAccount } from './body';
 const Account = () =>{
 	return(
 		<>
-			<HeaderMod title='Funds Deposit' />
+			<HeaderMod title='Account' />
 			<NavLogin children={undefined}/>
 			<BodyAccount/>
 			{/* <FooterModify/> */}

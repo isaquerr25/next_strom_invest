@@ -12,7 +12,7 @@ import { BodyWithdraw } from './body';
 const Withdraw = () =>{
 	return(
 		<>
-			<HeaderMod title='Funds Deposit' />
+			<HeaderMod title='Requests' />
 			<NavLogin children={undefined}/>
 			<BodyWithdraw/>
 			{/* <FooterModify/> */}

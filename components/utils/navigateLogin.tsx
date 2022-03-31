@@ -57,12 +57,12 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-	{ href: '#' , label: 'Home', icon: FiHome },
-	{ href: '#' , label: 'Fund Account', icon: FaMoneyBill },
-	{ href: '#' , label: 'Transactions', icon: FaChartLine },
+	{ href: '/user' , label: 'Home', icon: FiHome },
+	{ href: '/funds' , label: 'Fund Account', icon: FaMoneyBill },
 	{ href: '#' , label: 'Cycles', icon: FaCompass },
-	{ href: '#' , label: 'Requests', icon: FaVoteYea },
-	{ href: '#' , label: 'Account Settings', icon: FaUserAlt },
+	{ href: '/transactions' , label: 'Transactions', icon: FaChartLine },
+	{ href: '/withdraw' , label: 'Requests', icon: FaVoteYea },
+	{ href: '/account' , label: 'Account Settings', icon: FaUserAlt },
 
 ];
 

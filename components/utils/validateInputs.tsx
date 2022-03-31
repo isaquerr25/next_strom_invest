@@ -77,3 +77,37 @@ export const validationRegister = yup.object({
 		.required('This field is required')
 		.oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
+
+
+export const validationWallet = yup.object({
+	wallet: yup.string().required('This field is required'),
+});
+
+export const validationNewPassword = yup.object({
+	oldPassword: yup
+		.string()
+		.required('This field is required')
+		.matches(
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			'Your password is not strong enough',
+		),
+	password: yup
+		.string()
+		.required('This field is required')
+		.notOneOf([yup.ref('oldPassword'), null], 'Old Passwords must match')
+		.matches(
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			'Your password is not strong enough',
+		),
+	confirmPassword: yup
+		.string()
+		.required('This field is required')
+		.oneOf([yup.ref('password'), null], 'Passwords must match'),
+});
+
+export const validationWithdraw = yup.object({
+	oldPassword: yup
+		.number()
+		.min(100, 'Minimum withdraw is 100 USD')
+		.required('This field is required')
+});

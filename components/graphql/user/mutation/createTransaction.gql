@@ -1,0 +1,6 @@
+mutation CreateTransaction($action: String!, $value: Int!) {
+  createTransaction(data: { action: $action, value: $value, userId: 0 }) {
+    field
+    message
+  }
+}
