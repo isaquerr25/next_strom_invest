@@ -134,22 +134,26 @@ function FormikWallet() {
 					value: '0',
 					action:'WITHDRAW'
 				}}
-				// validationSchema={validationWithdraw}
-
 				onSubmit={async (values: TypeFormikWithdraw, { setSubmitting, setErrors }) => {
 					setSubmitting(true);
-					const result = await transitionGraphql({variables:{
-						action:values.action,
-						value:Number(values.value.replace('$',''))
-					}});
-					setSubmitting(false);
-					const errors = result.data?.createTransaction[0];
-					if (errors?.field=='success') {
-						setErrorMsg('File sent for analysis');
-						setTitleShow('Success');
-						setPopShow.on();
-					} else {
-						setErrorMsg(errors?.message  ?? '');
+					if(Number(values.value.replace('$','')) >= 5000){
+						const result = await transitionGraphql({variables:{
+							action:values.action,
+							value:Number(values.value.replace('$',''))
+						}});
+						setSubmitting(false);
+						const errors = result.data?.createTransaction[0];
+						if (errors?.field=='success') {
+							setErrorMsg('File sent for analysis');
+							setTitleShow('Success');
+							setPopShow.on();
+						} else {
+							setErrorMsg(errors?.message  ?? '');
+							setTitleShow('Error');
+							setPopShow.on();
+						}
+					}else{
+						setErrorMsg('Value under 50 dollars');
 						setTitleShow('Error');
 						setPopShow.on();
 					}

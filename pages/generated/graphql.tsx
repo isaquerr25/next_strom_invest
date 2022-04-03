@@ -32,15 +32,21 @@ export type CycleAll = {
   action: Scalars['String'];
   beginDate: Scalars['DateTime'];
   createdAt?: Maybe<Scalars['DateTime']>;
-  finalValueBTC?: Maybe<Scalars['BigInt']>;
+  finalValueBTC?: Maybe<Scalars['String']>;
   finalValueUSD?: Maybe<Scalars['Int']>;
   finishDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['Int'];
   state: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
   userId?: Maybe<Scalars['Int']>;
-  valueBTC: Scalars['BigInt'];
+  valueBTC: Scalars['String'];
   valueUSD: Scalars['Int'];
+};
+
+export type DepositState = {
+  __typename?: 'DepositState';
+  field?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
 };
 
 export type DocumentAll = {
@@ -73,12 +79,11 @@ export type InputMonthlyProfit = {
 };
 
 export type InputNewCycle = {
-  action: Scalars['String'];
+  action?: InputMaybe<Scalars['String']>;
   beginDate: Scalars['DateTime'];
   finishDate: Scalars['DateTime'];
-  state: Scalars['String'];
   userId?: InputMaybe<Scalars['Int']>;
-  valueBTCbig: Scalars['String'];
+  valueBTC?: InputMaybe<Scalars['String']>;
   valueUSD: Scalars['Int'];
 };
 
@@ -87,18 +92,19 @@ export type InputNewTransaction = {
   hash?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['Int']>;
   value: Scalars['Int'];
+  valueBTC?: InputMaybe<Scalars['String']>;
   wallet?: InputMaybe<Scalars['String']>;
 };
 
 export type InputUpdateCycle = {
   action?: InputMaybe<Scalars['String']>;
   beginDate?: InputMaybe<Scalars['DateTime']>;
-  finalValueBTCbig?: InputMaybe<Scalars['String']>;
+  finalValueBTC?: InputMaybe<Scalars['String']>;
   finalValueUSD?: InputMaybe<Scalars['Int']>;
   finishDate?: InputMaybe<Scalars['DateTime']>;
   id: Scalars['Int'];
   state?: InputMaybe<Scalars['String']>;
-  valueBTC?: InputMaybe<Scalars['Int']>;
+  valueBTC?: InputMaybe<Scalars['String']>;
   valueUSD?: InputMaybe<Scalars['Int']>;
 };
 
@@ -135,6 +141,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addDocumentPicture?: Maybe<Scalars['Boolean']>;
   createCycle: Array<GraphState>;
+  createDeposit: RequestDeposit;
   createMonthlyProfit: Array<GraphState>;
   createTransaction: Array<GraphState>;
   createUserResolver: Array<GraphState>;
@@ -142,6 +149,7 @@ export type Mutation = {
   deleteMonthlyProfit: Array<GraphState>;
   deleteTransaction: Array<GraphState>;
   loginAuthUser: Array<GraphState>;
+  logout?: Maybe<Scalars['Boolean']>;
   updateAuthPassword?: Maybe<GraphState>;
   updateCycle: Array<GraphState>;
   updateMonthlyProfit: Array<GraphState>;
@@ -157,6 +165,11 @@ export type MutationAddDocumentPictureArgs = {
 
 export type MutationCreateCycleArgs = {
   data: InputNewCycle;
+};
+
+
+export type MutationCreateDepositArgs = {
+  data: InputNewTransaction;
 };
 
 
@@ -233,7 +246,14 @@ export type Query = {
   allTransactions?: Maybe<Array<TransactionAll>>;
   allTransactionsByUser?: Maybe<Array<TransactionAll>>;
   allUsers?: Maybe<Array<UserAll>>;
+  userAllMoney?: Maybe<UserCash>;
   userInfoDocument?: Maybe<UserHaveComponents>;
+};
+
+export type RequestDeposit = {
+  __typename?: 'RequestDeposit';
+  status?: Maybe<Array<DepositState>>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type TransactionAll = {
@@ -258,6 +278,13 @@ export type UserAll = {
   wallet?: Maybe<Scalars['String']>;
 };
 
+export type UserCash = {
+  __typename?: 'UserCash';
+  balance?: Maybe<Scalars['String']>;
+  profitCycle?: Maybe<Scalars['String']>;
+  profitFuture?: Maybe<Scalars['String']>;
+};
+
 export type UserHaveComponents = {
   __typename?: 'UserHaveComponents';
   document?: Maybe<Scalars['String']>;
@@ -271,12 +298,34 @@ export type WalletAlter = {
   wallet: Scalars['String'];
 };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout?: boolean | null };
+
 export type AddDocumentPictureMutationVariables = Exact<{
   picture: Scalars['Upload'];
 }>;
 
 
 export type AddDocumentPictureMutation = { __typename?: 'Mutation', addDocumentPicture?: boolean | null };
+
+export type CreateCycleMutationVariables = Exact<{
+  valueUSD: Scalars['Int'];
+  beginDate: Scalars['DateTime'];
+  finishDate: Scalars['DateTime'];
+}>;
+
+
+export type CreateCycleMutation = { __typename?: 'Mutation', createCycle: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
+
+export type CreateDepositMutationVariables = Exact<{
+  action: Scalars['String'];
+  value: Scalars['Int'];
+}>;
+
+
+export type CreateDepositMutation = { __typename?: 'Mutation', createDeposit: { __typename?: 'RequestDeposit', url?: string | null, status?: Array<{ __typename?: 'DepositState', field?: string | null, message?: string | null }> | null } };
 
 export type CreateTransactionMutationVariables = Exact<{
   action: Scalars['String'];
@@ -318,10 +367,20 @@ export type UpdateWalletMutationVariables = Exact<{
 
 export type UpdateWalletMutation = { __typename?: 'Mutation', updateWallet?: { __typename?: 'GraphState', field?: string | null, message?: string | null } | null };
 
+export type AllCycleByUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCycleByUserQuery = { __typename?: 'Query', allCycleByUser?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC: string, finalValueUSD?: number | null, finalValueBTC?: string | null, state: string, beginDate: any, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, userId?: number | null }> | null };
+
 export type AllTransactionsByUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllTransactionsByUserQuery = { __typename?: 'Query', allTransactionsByUser?: Array<{ __typename?: 'TransactionAll', id: number, action: string, value: any, state: string, hash?: string | null, createdAt?: any | null, updatedAt?: any | null, wallet?: string | null }> | null };
+
+export type UserAllMoneyQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserAllMoneyQuery = { __typename?: 'Query', userAllMoney?: { __typename?: 'UserCash', balance?: string | null, profitCycle?: string | null, profitFuture?: string | null } | null };
 
 export type UserInfoDocumentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -329,6 +388,36 @@ export type UserInfoDocumentQueryVariables = Exact<{ [key: string]: never; }>;
 export type UserInfoDocumentQuery = { __typename?: 'Query', userInfoDocument?: { __typename?: 'UserHaveComponents', email: string, name?: string | null, wallet?: string | null, valuePrice?: any | null, document?: string | null } | null };
 
 
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+
+/**
+ * __useLogoutMutation__
+ *
+ * To run a mutation, you first call `useLogoutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLogoutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [logoutMutation, { data, loading, error }] = useLogoutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
+      }
+export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
+export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
+export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const AddDocumentPictureDocument = gql`
     mutation AddDocumentPicture($picture: Upload!) {
   addDocumentPicture(picture: $picture)
@@ -360,6 +449,82 @@ export function useAddDocumentPictureMutation(baseOptions?: Apollo.MutationHookO
 export type AddDocumentPictureMutationHookResult = ReturnType<typeof useAddDocumentPictureMutation>;
 export type AddDocumentPictureMutationResult = Apollo.MutationResult<AddDocumentPictureMutation>;
 export type AddDocumentPictureMutationOptions = Apollo.BaseMutationOptions<AddDocumentPictureMutation, AddDocumentPictureMutationVariables>;
+export const CreateCycleDocument = gql`
+    mutation CreateCycle($valueUSD: Int!, $beginDate: DateTime!, $finishDate: DateTime!) {
+  createCycle(
+    data: {valueUSD: $valueUSD, beginDate: $beginDate, finishDate: $finishDate}
+  ) {
+    field
+    message
+  }
+}
+    `;
+export type CreateCycleMutationFn = Apollo.MutationFunction<CreateCycleMutation, CreateCycleMutationVariables>;
+
+/**
+ * __useCreateCycleMutation__
+ *
+ * To run a mutation, you first call `useCreateCycleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCycleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCycleMutation, { data, loading, error }] = useCreateCycleMutation({
+ *   variables: {
+ *      valueUSD: // value for 'valueUSD'
+ *      beginDate: // value for 'beginDate'
+ *      finishDate: // value for 'finishDate'
+ *   },
+ * });
+ */
+export function useCreateCycleMutation(baseOptions?: Apollo.MutationHookOptions<CreateCycleMutation, CreateCycleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCycleMutation, CreateCycleMutationVariables>(CreateCycleDocument, options);
+      }
+export type CreateCycleMutationHookResult = ReturnType<typeof useCreateCycleMutation>;
+export type CreateCycleMutationResult = Apollo.MutationResult<CreateCycleMutation>;
+export type CreateCycleMutationOptions = Apollo.BaseMutationOptions<CreateCycleMutation, CreateCycleMutationVariables>;
+export const CreateDepositDocument = gql`
+    mutation CreateDeposit($action: String!, $value: Int!) {
+  createDeposit(data: {action: $action, value: $value}) {
+    url
+    status {
+      field
+      message
+    }
+  }
+}
+    `;
+export type CreateDepositMutationFn = Apollo.MutationFunction<CreateDepositMutation, CreateDepositMutationVariables>;
+
+/**
+ * __useCreateDepositMutation__
+ *
+ * To run a mutation, you first call `useCreateDepositMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDepositMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDepositMutation, { data, loading, error }] = useCreateDepositMutation({
+ *   variables: {
+ *      action: // value for 'action'
+ *      value: // value for 'value'
+ *   },
+ * });
+ */
+export function useCreateDepositMutation(baseOptions?: Apollo.MutationHookOptions<CreateDepositMutation, CreateDepositMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateDepositMutation, CreateDepositMutationVariables>(CreateDepositDocument, options);
+      }
+export type CreateDepositMutationHookResult = ReturnType<typeof useCreateDepositMutation>;
+export type CreateDepositMutationResult = Apollo.MutationResult<CreateDepositMutation>;
+export type CreateDepositMutationOptions = Apollo.BaseMutationOptions<CreateDepositMutation, CreateDepositMutationVariables>;
 export const CreateTransactionDocument = gql`
     mutation CreateTransaction($action: String!, $value: Int!) {
   createTransaction(data: {action: $action, value: $value, userId: 0}) {
@@ -535,6 +700,51 @@ export function useUpdateWalletMutation(baseOptions?: Apollo.MutationHookOptions
 export type UpdateWalletMutationHookResult = ReturnType<typeof useUpdateWalletMutation>;
 export type UpdateWalletMutationResult = Apollo.MutationResult<UpdateWalletMutation>;
 export type UpdateWalletMutationOptions = Apollo.BaseMutationOptions<UpdateWalletMutation, UpdateWalletMutationVariables>;
+export const AllCycleByUserDocument = gql`
+    query AllCycleByUser {
+  allCycleByUser {
+    id
+    action
+    valueUSD
+    valueBTC
+    finalValueUSD
+    finalValueBTC
+    state
+    beginDate
+    finishDate
+    createdAt
+    updatedAt
+    userId
+  }
+}
+    `;
+
+/**
+ * __useAllCycleByUserQuery__
+ *
+ * To run a query within a React component, call `useAllCycleByUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCycleByUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllCycleByUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllCycleByUserQuery(baseOptions?: Apollo.QueryHookOptions<AllCycleByUserQuery, AllCycleByUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCycleByUserQuery, AllCycleByUserQueryVariables>(AllCycleByUserDocument, options);
+      }
+export function useAllCycleByUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCycleByUserQuery, AllCycleByUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCycleByUserQuery, AllCycleByUserQueryVariables>(AllCycleByUserDocument, options);
+        }
+export type AllCycleByUserQueryHookResult = ReturnType<typeof useAllCycleByUserQuery>;
+export type AllCycleByUserLazyQueryHookResult = ReturnType<typeof useAllCycleByUserLazyQuery>;
+export type AllCycleByUserQueryResult = Apollo.QueryResult<AllCycleByUserQuery, AllCycleByUserQueryVariables>;
 export const AllTransactionsByUserDocument = gql`
     query AllTransactionsByUser {
   allTransactionsByUser {
@@ -576,6 +786,42 @@ export function useAllTransactionsByUserLazyQuery(baseOptions?: Apollo.LazyQuery
 export type AllTransactionsByUserQueryHookResult = ReturnType<typeof useAllTransactionsByUserQuery>;
 export type AllTransactionsByUserLazyQueryHookResult = ReturnType<typeof useAllTransactionsByUserLazyQuery>;
 export type AllTransactionsByUserQueryResult = Apollo.QueryResult<AllTransactionsByUserQuery, AllTransactionsByUserQueryVariables>;
+export const UserAllMoneyDocument = gql`
+    query UserAllMoney {
+  userAllMoney {
+    balance
+    profitCycle
+    profitFuture
+  }
+}
+    `;
+
+/**
+ * __useUserAllMoneyQuery__
+ *
+ * To run a query within a React component, call `useUserAllMoneyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserAllMoneyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserAllMoneyQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserAllMoneyQuery(baseOptions?: Apollo.QueryHookOptions<UserAllMoneyQuery, UserAllMoneyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserAllMoneyQuery, UserAllMoneyQueryVariables>(UserAllMoneyDocument, options);
+      }
+export function useUserAllMoneyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserAllMoneyQuery, UserAllMoneyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserAllMoneyQuery, UserAllMoneyQueryVariables>(UserAllMoneyDocument, options);
+        }
+export type UserAllMoneyQueryHookResult = ReturnType<typeof useUserAllMoneyQuery>;
+export type UserAllMoneyLazyQueryHookResult = ReturnType<typeof useUserAllMoneyLazyQuery>;
+export type UserAllMoneyQueryResult = Apollo.QueryResult<UserAllMoneyQuery, UserAllMoneyQueryVariables>;
 export const UserInfoDocumentDocument = gql`
     query UserInfoDocument {
   userInfoDocument {

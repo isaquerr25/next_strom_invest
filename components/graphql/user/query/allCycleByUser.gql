@@ -1,0 +1,16 @@
+query AllCycleByUser {
+  allCycleByUser {
+    id
+    action
+    valueUSD
+    valueBTC
+    finalValueUSD
+    finalValueBTC
+    state
+    beginDate
+    finishDate
+    createdAt
+    updatedAt
+    userId
+  }
+}

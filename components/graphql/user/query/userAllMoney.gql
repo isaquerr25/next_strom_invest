@@ -1,0 +1,7 @@
+query UserAllMoney {
+  userAllMoney {
+    balance
+    profitCycle
+    profitFuture
+  }
+}

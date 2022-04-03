@@ -1,0 +1,9 @@
+mutation CreateDeposit($action: String!, $value: Int!) {
+  createDeposit(data: { action: $action, value: $value }) {
+    url
+    status {
+      field
+      message
+    }
+  }
+}

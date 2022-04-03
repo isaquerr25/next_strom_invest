@@ -13,9 +13,10 @@ import NumberFormat from 'react-number-format';
 
 type FormInputProps = {
   inputIcon?: ReactNode;
+  justRead?: boolean;
   label?: string;
   placeholder?: string;
-  type: 'text' | 'password' | 'email' | 'number' | 'file';
+  type: 'text' | 'password' | 'email' | 'numberShow' | 'number' | 'file';
   helperText?: string;
 } & FieldConfig;
 
@@ -25,6 +26,7 @@ const FormInput: FC<FormInputProps> = ({
 	placeholder,
 	type,
 	helperText,
+	justRead,
 	...props
 }) => {
 	const [field, meta] = useField(props);
@@ -38,7 +40,7 @@ const FormInput: FC<FormInputProps> = ({
 				{inputIcon && (
 					<InputLeftElement pointerEvents="none" children={inputIcon} />
 				)}
-				{type !== 'number' && type !== 'file'  && (
+				{type !== 'number' && type !== 'file' && type !== 'numberShow' && (
 					<Input
 						id={inputId}
 						{...field}
@@ -73,8 +75,23 @@ const FormInput: FC<FormInputProps> = ({
 						customInput={Input}
 						border="1px"
 						borderColor="gray.400"
-						decimalScale={2}
+						decimalScale={0}
 					/>
+
+				)}
+
+				{type === 'numberShow' && (
+					<NumberFormat
+						{...field}
+						isReadOnly
+						thousandSeparator={true}
+						prefix={'$'}
+						customInput={Input}
+						border="1px"
+						borderColor="gray.400"
+						decimalScale={0}
+					/>
+
 				)}
 			</InputGroup>
 			{!error && helperText && <FormHelperText>{helperText}</FormHelperText>}

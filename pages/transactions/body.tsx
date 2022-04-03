@@ -66,6 +66,7 @@ export const BodyTransactions = () =>{
 								<option>WITHDRAW</option>
 								<option>INVEST</option>
 								<option>COMPLETE_INVEST</option>
+								<option>CANCEL</option>
 							</Select>
 						</FormControl>
 					</Flex>
@@ -92,7 +93,6 @@ export const BodyTransactions = () =>{
 			</>
 			}
 		</Flex>
-
 	);
 };
 
@@ -138,20 +138,22 @@ const TableTransaction = ({arrayTransactions,dropValue}) => {
 				<Tbody>
 					{	(arrayTransactions!=null &&  arrayTransactions!=undefined )&&
 						arrayTransactions.map( (compose:TypesComposeTransactions) =>{
-							if(dropValue == 'DEPOSIT' || dropValue == 'WITHDRAW' || dropValue == 'INVEST' || dropValue == 'COMPLETE_INVEST'){
+							if(dropValue == 'DEPOSIT' || dropValue == 'CANCEL' || dropValue == 'WITHDRAW' || dropValue == 'INVEST' || dropValue == 'COMPLETE_INVEST'){
 								if(dropValue != compose.action){
 									return(<></>);
 								}
 							}
+							const color = compose.state == 'CANCEL' ? 'red' : 'black';
+
 							return(
-								<Tr key={compose.id}>
-									<Td>{compose.action}</Td>
-									<Td>{compose.state}</Td>
-									<Td>${compose.value}</Td>
-									<Td>{compose.hash}</Td>
-									<Td>{compose.wallet}</Td>
-									<Td>{compose.updatedAt.toString().split('T')[0]}</Td>
-									<Td>{compose.createdAt.toString().split('T')[0]}</Td>
+								<Tr color={color} key={compose.id}>
+									<Td textColor={color}>{compose.action}</Td>
+									<Td textColor={color}>{compose.state}</Td>
+									<Td textColor={color}>${compose.value}</Td>
+									<Td textColor={color}>{compose.hash}</Td>
+									<Td textColor={color}>{compose.wallet}</Td>
+									<Td textColor={color}>{compose.updatedAt.toString().split('T')[0]}</Td>
+									<Td textColor={color}>{compose.createdAt.toString().split('T')[0]}</Td>
 								</Tr>
 							);}
 						)

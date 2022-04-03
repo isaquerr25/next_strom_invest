@@ -55,11 +55,13 @@ interface NavItem {
 	href?: string;
 	icon?: IconType;
 }
-
+import { useLogoutMutation } from '../../pages/generated/graphql';
+import { roundToNearestMinutes } from 'date-fns';
+import Router from 'next/router';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/user' , label: 'Home', icon: FiHome },
 	{ href: '/funds' , label: 'Fund Account', icon: FaMoneyBill },
-	{ href: '#' , label: 'Cycles', icon: FaCompass },
+	{ href: '/cycles' , label: 'Cycles', icon: FaCompass },
 	{ href: '/transactions' , label: 'Transactions', icon: FaChartLine },
 	{ href: '/withdraw' , label: 'Requests', icon: FaVoteYea },
 	{ href: '/account' , label: 'Account Settings', icon: FaUserAlt },
@@ -71,8 +73,8 @@ const NAV_ITEMS: Array<NavItem> = [
 
 export function NavLogin() {
 	const { isOpen, onToggle } = useDisclosure();
-
-	return (
+	const [Logout,] = useLogoutMutation();
+ 	return (
 		<Box>
 			<Flex
 				bg={useColorModeValue('white', 'gray.800')}
@@ -125,7 +127,7 @@ export function NavLogin() {
 						fontSize={'sm'}
 						fontWeight={400}
 						variant={'link'}
-						href={'#'}
+						onClick={()=>{Logout;Router.push('/home');}}
 						paddingBlock={3}
 						bg='red'
 						borderRadius={50}

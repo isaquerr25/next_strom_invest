@@ -1,13 +1,47 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Text } from '@chakra-ui/react';
+import { FormatMoneyParse } from 'format-money-js';
+import Router from 'next/router';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
+import { FaPlaneArrival, FaPlaneDeparture, FaPoll, FaRegChartBar } from 'react-icons/fa';
+import { CgSandClock } from 'react-icons/cg';
+import { SiClockify } from 'react-icons/si';
+
+
+import Carousel from '../../components/utils/Carousel';
+import { convertMoney } from '../../components/utils/convertMoney';
+import { Loading } from '../../components/utils/loading';
+import { useUserAllMoneyQuery, useUserInfoDocumentQuery } from '../generated/graphql';
 
 export const BodySetOne = () =>{
+	const [dropState,SetDropState] = useState('All');
+	const userInfoGraph   = useUserInfoDocumentQuery();
+	const allMoney = useUserAllMoneyQuery();
+	const dataUser =  userInfoGraph.data?.userInfoDocument;
+	const dataAllMoney=  allMoney.data?.userAllMoney;
+
+	useEffect(()=>{
+		if (dataUser?.name! == undefined && userInfoGraph.loading == false){
+			Router.push('/login');
+			console.log(dataUser?.name!	);
+		}
+	},[userInfoGraph.loading]);
+
 	return(
+
+
 		<>
+			{(userInfoGraph.loading &&  allMoney.loading )&& <Loading/>}
+			{dataUser &&
 			<Flex
 				alignItems={'center'}
 				justifyContent={'center'}
+				flexDirection='column'
+				width={'100%'}
+
 			>
-				<Box>
+
+				<Carousel/>
+				<Box width={'100%'} p={'10px'}>
 					<Flex
 						alignItems={'center'}
 						justifyContent={'center'}
@@ -15,59 +49,61 @@ export const BodySetOne = () =>{
 						display='inline-flex'
 						flexWrap={'wrap'}
 						gap={2}
-
 					>
 						<Block
 							title={'Balance'}
-							value={'$98789,57'}
-							subTitle={ () =>(
-								<Button
-									size='md'
-									pt={4}
-									pb={4}
-									pr={8}
-									pl={8}
-									borderRadius={10}
-									bg='#358960'
-								>
-									Deposit
-								</Button>)
-							}
+							value={convertMoney(Number(dataAllMoney?.balance) ?? 0)}
+							inputIcon={FaRegChartBar}
+						/>
+						<Block
+							title={'Profit All Cycle'}
+							value={convertMoney(Number(dataAllMoney?.profitCycle) ?? 0)}
+							inputIcon={SiClockify}
+						/>
+						<Block
+							title={'Profit Future'}
+							value={convertMoney(Number(dataAllMoney?.profitFuture) ?? 0)}
+							inputIcon={CgSandClock}
 						/>
 					</Flex>
 				</Box>
 				<Box>
 				</Box>
 			</Flex>
+			}
 		</>
 	);
 };
 
 interface typeBlock{
-	value:string
+	value:string|number| FormatMoneyParse
 	title:string
-	subTitle: () => JSX.Element
+	inputIcon: any;
 };
 
-const Block = ({value,title,subTitle}:typeBlock) =>(
+const Block = ({value,title,inputIcon}:typeBlock) =>(
 
 	<Flex
-		direction={'column'}
-		align={'center'}
-		pt={2}
-		pb={2}
-		pr={75}
-		pl={75}
+		direction={'row'}
+		alignItems='center'
 		bg='#1e4cff'
 		borderRadius={5}
+		w={'400px'}
+		h={'100px'}
 	>
-		<Text color='white' fontSize='2xl' fontWeight='black' >
-			{title}
-		</Text>
-		<Text color='white' fontSize='4xl' fontWeight='black'>
-			{value}
-		</Text>
-		{subTitle}
+
+		<Box display={'flex'} w='70px' h={'100px'} justifyContent={'center'} alignItems={'center'}>
+			<Icon boxSize={'40px'} as={inputIcon} color='white' />
+		</Box>
+
+		<Flex justifyContent={'center'} alignItems={'flex-start'} flexDirection={'column'} w='250px'  h={'100%'} >
+			<Text color='white' fontSize='xl' fontWeight='black' >
+				{title}
+			</Text>
+			<Text color='white' fontSize='3xl' fontWeight='black'>
+				{value}
+			</Text>
+		</Flex>
 
 	</Flex>
 );

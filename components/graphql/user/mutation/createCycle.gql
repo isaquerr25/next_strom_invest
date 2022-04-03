@@ -1,0 +1,16 @@
+mutation CreateCycle(
+  $valueUSD: Int!
+  $beginDate: DateTime!
+  $finishDate: DateTime!
+) {
+  createCycle(
+    data: {
+      valueUSD: $valueUSD
+      beginDate: $beginDate
+      finishDate: $finishDate
+    }
+  ) {
+    field
+    message
+  }
+}

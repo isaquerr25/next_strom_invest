@@ -12,7 +12,7 @@ import { BodyCycle } from './body';
 const Cycles = () =>{
 	return(
 		<>
-			<HeaderMod title='Funds Deposit' />
+			<HeaderMod title='Cycles' />
 			<NavLogin children={undefined}/>
 			<BodyCycle/>
 			{/* <FooterModify/> */}
