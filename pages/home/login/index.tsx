@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import Head from 'next/head';
-import {FooterModify} from '../../components/utils/footerModify';
-import { HeaderMod } from '../../components/utils/headerTitle';
-import {Nav} from '../../components/utils/navigate';
+import {FooterModify} from '../../../components/utils/footerModify';
+import { HeaderMod } from '../../../components/utils/headerTitle';
+import {Nav} from '../../../components/utils/navigate';
 import {SimpleCard} from './body';
 
 

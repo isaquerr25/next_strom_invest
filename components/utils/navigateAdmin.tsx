@@ -23,48 +23,58 @@ import {
 	ChevronRightIcon,
 } from '@chakra-ui/icons';
 
+import {
+	FiHome,
+	FiTrendingUp,
+	FiCompass,
+	FiStar,
+	FiSettings,
+	FiMenu,
+	FiBox,
+	FiLogOut,
+	FiChevronDown,
+	FiBell,
+} from 'react-icons/fi';
+import {
+	FaMoneyBill,
+	FaBitcoin,
+	FaChartLine,
+	FaUserAlt,
+	FaCompass,
+	FaVoteYea
+} from 'react-icons/fa';
+import { IconType } from 'react-icons';
+import { ReactText } from 'react';
 
-import Router from 'next/router';
+
 
 interface NavItem {
 	label: string;
 	subLabel?: string;
 	children?: Array<NavItem>;
 	href?: string;
+	icon?: IconType;
 }
+import { useLogoutMutation } from '../../pages/generated/graphql';
+import { roundToNearestMinutes } from 'date-fns';
+import Router from 'next/router';
 const NAV_ITEMS: Array<NavItem> = [
-	{
-		label: 'Home',
-		href:'/home#home',
-	},
-	{
-		label: 'Contact',
-		href: '/home#contact',
-	},
-	{
-		label: 'About',
-		href: '/home#about',
-	},
-	{
-		label: 'Testimonies',
-		href: '/home#testimonies',
-	},
+	{ href: '/admin' , label: 'Home', icon: FiHome },
+	{ href: '/Funds' , label: 'Fund Account', icon: FaMoneyBill },
+	{ href: '/Cycles Create' , label: 'Cycles', icon: FaCompass },
+	{ href: '/Validate Document' , label: 'Transactions', icon: FaChartLine },
+	{ href: '/Request Withdraw' , label: 'Requests', icon: FaVoteYea },
+	{ href: '/account' , label: 'Account Settings', icon: FaUserAlt },
+
 ];
 
 
 
 
-
-
-
-import LogoFirst from '../image/logo.png';
-
-
-
-export function Nav() {
+export function NavLogin() {
 	const { isOpen, onToggle } = useDisclosure();
-
-	return (
+	const [Logout,] = useLogoutMutation();
+ 	return (
 		<Box>
 			<Flex
 				bg={useColorModeValue('white', 'gray.800')}
@@ -89,7 +99,7 @@ export function Nav() {
 						aria-label={'Toggle Navigation'}
 					/>
 				</Flex>
-				<Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+				<Flex	 flex={{ base: 1 }}  justify={{ base: 'center', md: 'start' }}>
 					{/* <Text
 						textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
 						fontFamily={'heading'}
@@ -97,11 +107,12 @@ export function Nav() {
 						Logo
 					</Text> */}
 					<Image
-						width={'100px'}
-						src={LogoFirst}
-						alt='Storm Invest'
+						width={'150px'}
+						minWidth={'150px'}
+						minHeight={'55px'}
+						src='./logo.png'
+						alt='Dan Abramov'
 					/>
-
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />
 					</Flex>
@@ -116,22 +127,21 @@ export function Nav() {
 						fontSize={'sm'}
 						fontWeight={400}
 						variant={'link'}
-
-						onClick={()=>{Router.push('/home/login');}}
+						onClick={()=>{Logout;Router.push('/home');}}
+						paddingBlock={3}
+						bg='red'
+						borderRadius={50}
+						color='white'
 					>
-						Sign In
-					</Button>
-					<Button
-						onClick={()=>{Router.push('/home/register');}}
-						display={{ base: 'none', md: 'inline-flex' }}
-						fontSize={'sm'}
-						fontWeight={600}
-						color={'white'}
-						bg={'blue.400'}
-						_hover={{
-							bg: 'blue.800',
-						}}>
-						Sign Up
+
+						<Icon
+							mr="1"
+							fontSize="16"
+							_groupHover={{
+								color: 'white',
+							}}
+							as={FiLogOut}
+						/>
 					</Button>
 				</Stack>
 			</Flex>
@@ -155,6 +165,7 @@ const DesktopNav = () => {
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
 							<Link
+								display={'inline-flex'}
 								p={2}
 								href={navItem.href ?? '#'}
 								fontSize={'sm'}
@@ -164,7 +175,17 @@ const DesktopNav = () => {
 									textDecoration: 'none',
 									color: linkHoverColor,
 								}}>
-								{navItem.label}
+								{navItem.icon && (
+									<Icon
+										mr="1"
+										fontSize="16"
+										_groupHover={{
+											color: 'white',
+										}}
+										as={navItem.icon}
+									/>
+								)}
+								 {navItem.label }
 							</Link>
 						</PopoverTrigger>
 
@@ -237,13 +258,13 @@ const MobileNav = () => {
 	);
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href,icon }: NavItem) => {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
 		<Stack spacing={4} onClick={children && onToggle}>
 			<Flex
-				py={2}
+				py={7}
 				as={Link}
 				href={href ?? '#'}
 				justify={'space-between'}
@@ -254,7 +275,17 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 				<Text
 					fontWeight={600}
 					color={useColorModeValue('gray.600', 'gray.200')}>
-					{label}
+					{icon && (
+						<Icon
+							mr="1"
+							fontSize="16"
+							_groupHover={{
+								color: 'white',
+							}}
+							as={icon}
+						/>
+					)}
+					{' '+label }
 				</Text>
 				{children && (
 					<Icon

@@ -1,0 +1,6 @@
+mutation LoginStaff($email: String!, $password: String!) {
+  loginStaff(data: { email: $email, password: $password }) {
+    field
+    message
+  }
+}

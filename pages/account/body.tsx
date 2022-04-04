@@ -24,7 +24,7 @@ export const BodyAccount = () =>{
 
 	useEffect(()=>{
 		if (dataUser?.name! == undefined && userInfoGraph.loading == false){
-			Router.push('/login');
+			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
 	},[userInfoGraph.loading]);

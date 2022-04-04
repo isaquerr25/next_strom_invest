@@ -27,7 +27,7 @@ export const BodyCycle= () =>{
 
 	useEffect(()=>{
 		if (dataUser?.name! == undefined && userInfoGraph.loading == false){
-			Router.push('/login');
+			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
 	},[userInfoGraph.loading]);
@@ -299,7 +299,8 @@ const DescriptionAndRestriction = () =>(
 			with the additional profit generated over time. <br/>
 			* The forecast value is an approximation of how much profit you will receive.
 			Since it will only be counted at the end of the cycle.<br/>
-			* Minimum time per cycle is 15 days
+			* Minimum time per cycle is 15 days.<br/>
+			* the actual start date starts from the activation of the cycle.
 		</Text>
 	</>
 

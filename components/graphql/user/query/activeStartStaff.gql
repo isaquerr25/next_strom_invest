@@ -1,0 +1,9 @@
+query ActiveStartStaff {
+  activeStartStaff {
+    cyclesStart
+    documentsValidate
+    valueEnterToday
+    withdrawAll
+    transactionPay
+  }
+}

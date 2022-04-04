@@ -23,16 +23,16 @@ import {
 	Icon,
 	useBoolean,
 } from '@chakra-ui/react';
-import { useLoginAuthUserMutation } from '../generated/graphql';
-import FormInput from '../../components/utils/formInput';
+import { useLoginAuthUserMutation } from '../../generated/graphql';
+import FormInput from '../../../components/utils/formInput';
 import { Form, Formik } from 'formik';
 import Router from 'next/router';
-import { validationLogin } from '../../components/utils/validateInputs';
+import { validationLogin } from '../../../components/utils/validateInputs';
 import { MdCreate, MdLogin } from 'react-icons/md';
 import { FaFeatherAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { VscError } from 'react-icons/vsc';
-import { PopMsg } from '../../components/utils/PopMsg';
+import { PopMsg } from '../../../components/utils/PopMsg';
 
 
 interface Values {
