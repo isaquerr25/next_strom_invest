@@ -89,7 +89,7 @@ export function FooterModify() {
 								width={'300px'}
 
 								src='./logo.png'
-								alt='Dan Abramov'
+								alt='Storm Invest'
 							/>
 						</Box>
 						<Text fontSize={'sm'}>

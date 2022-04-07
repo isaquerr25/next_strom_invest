@@ -1,0 +1,22 @@
+query AllCycleUserAdminProcess {
+  allCycleUserAdminProcess {
+    id
+    action
+    valueUSD
+    valueBTC
+    finalValueUSD
+    finalValueBTC
+    state
+    beginDate
+    finishDate
+    createdAt
+    finishDate
+    hash
+    user {
+      id
+      email
+      name
+      wallet
+    }
+  }
+}

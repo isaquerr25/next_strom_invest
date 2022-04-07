@@ -58,14 +58,13 @@ interface NavItem {
 import { useLogoutMutation } from '../../pages/generated/graphql';
 import { roundToNearestMinutes } from 'date-fns';
 import Router from 'next/router';
+import { GrDocumentUser } from 'react-icons/gr';
 const NAV_ITEMS: Array<NavItem> = [
-	{ href: '/admin' , label: 'Home', icon: FiHome },
-	{ href: '/Funds' , label: 'Fund Account', icon: FaMoneyBill },
-	{ href: '/Cycles Create' , label: 'Cycles', icon: FaCompass },
-	{ href: '/Validate Document' , label: 'Transactions', icon: FaChartLine },
-	{ href: '/Request Withdraw' , label: 'Requests', icon: FaVoteYea },
-	{ href: '/account' , label: 'Account Settings', icon: FaUserAlt },
-
+	{ href: '/admin/user' , label: 'Home', icon: FiHome },
+	{ href: '/admin/user/funds' , label: 'Fund Account', icon: FaMoneyBill },
+	{ href: '/admin/user/cycles' , label: 'Cycles Create', icon: FaCompass },
+	{ href: '/admin/user/document' , label: 'Validate Document', icon: GrDocumentUser },
+	{ href: '/admin/user/withdraw' , label: 'Requests Withdraw', icon: FaVoteYea },
 ];
 
 
@@ -111,7 +110,7 @@ export function NavLogin() {
 						minWidth={'150px'}
 						minHeight={'55px'}
 						src='./logo.png'
-						alt='Dan Abramov'
+						alt='Storm Invest'
 					/>
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />

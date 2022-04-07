@@ -1,0 +1,20 @@
+mutation UpdateCycle(
+  $id: Int!
+  $valueUSD: Int
+  $state: String
+  $beginDate: DateTime
+  $finishDate: DateTime
+) {
+  updateCycle(
+    data: {
+      id: $id
+      valueUSD: $valueUSD
+      state: $state
+      beginDate: $beginDate
+      finishDate: $finishDate
+    }
+  ) {
+    field
+    message
+  }
+}

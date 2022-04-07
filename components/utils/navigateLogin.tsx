@@ -58,13 +58,15 @@ interface NavItem {
 import { useLogoutMutation } from '../../pages/generated/graphql';
 import { roundToNearestMinutes } from 'date-fns';
 import Router from 'next/router';
+import { MdOutlineSupportAgent } from 'react-icons/md';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/user' , label: 'Home', icon: FiHome },
-	{ href: '/funds' , label: 'Fund Account', icon: FaMoneyBill },
-	{ href: '/cycles' , label: 'Cycles', icon: FaCompass },
-	{ href: '/transactions' , label: 'Transactions', icon: FaChartLine },
-	{ href: '/withdraw' , label: 'Requests', icon: FaVoteYea },
-	{ href: '/account' , label: 'Account Settings', icon: FaUserAlt },
+	{ href: '/user/funds' , label: 'Fund Account', icon: FaMoneyBill },
+	{ href: '/user/cycles' , label: 'Cycles', icon: FaCompass },
+	{ href: '/user/transactions' , label: 'Transactions', icon: FaChartLine },
+	{ href: '/user/withdraw' , label: 'Requests', icon: FaVoteYea },
+	{ href: '/user/account' , label: 'Account Settings', icon: FaUserAlt },
+	// { href: '/user/support' , label: 'Account Settings', icon: MdOutlineSupportAgent },
 
 ];
 
@@ -110,8 +112,8 @@ export function NavLogin() {
 						width={'150px'}
 						minWidth={'150px'}
 						minHeight={'55px'}
-						src='./logo.png'
-						alt='Dan Abramov'
+						src={'../logo.png' ?? './logo.png'}
+						alt='Storm Invest'
 					/>
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />

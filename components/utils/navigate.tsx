@@ -98,7 +98,7 @@ export function Nav() {
 					</Text> */}
 					<Image
 						width={'100px'}
-						src={LogoFirst}
+						src={'../logo.png'??'./logo.png'}
 						alt='Storm Invest'
 					/>
 

@@ -1,0 +1,19 @@
+mutation GetTypeTransaction($action: String!, $state: String!) {
+  getTypeTransaction(data: { action: $action, state: $state }) {
+    id
+    action
+    value
+    state
+    hash
+    createdAt
+    updatedAt
+    wallet
+    userId
+    user {
+      id
+      email
+      name
+      wallet
+    }
+  }
+}

@@ -49,22 +49,22 @@ export const BodySetOne = () =>{
 					>
 						<Block
 							title={'Cycles Requests'}
-							value={convertMoney(dataUser?.cyclesStart ?? 0)}
+							value={dataUser?.cyclesStart ?? 0}
 							inputIcon={FaRegChartBar}
 						/>
 						<Block
 							title={'Withdrawal Requests'}
-							value={convertMoney(dataUser?.withdrawAll ?? 0)}
+							value={dataUser?.withdrawAll ?? 0}
 							inputIcon={SiClockify}
 						/>
 						<Block
 							title={'Documents Validate Requests'}
-							value={convertMoney(dataUser?.documentsValidate ?? 0)}
+							value={dataUser?.documentsValidate ?? 0}
 							inputIcon={CgSandClock}
 						/>
 						<Block
 							title={'Deposit valid today'}
-							value={convertMoney(dataUser?.transactionPay ?? 0)}
+							value={dataUser?.transactionPay ?? 0}
 							inputIcon={CgSandClock}
 						/>
 						<Block

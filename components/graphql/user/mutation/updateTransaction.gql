@@ -1,0 +1,22 @@
+mutation UpdateTransaction(
+  $id: Int!
+  $state: String
+  $action: String
+  $value: Int
+  $hash: String
+  $wallet: String
+) {
+  updateTransaction(
+    data: {
+      id: $id
+      state: $state
+      action: $action
+      value: $value
+      hash: $hash
+      wallet: $wallet
+    }
+  ) {
+    field
+    message
+  }
+}

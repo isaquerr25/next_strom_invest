@@ -1,0 +1,14 @@
+query AllDocumentsValidation {
+  allDocumentsValidation {
+    id
+    state
+    fileName
+    userId
+    user {
+      id
+      name
+      email
+      wallet
+    }
+  }
+}

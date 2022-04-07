@@ -75,7 +75,7 @@ const FormInput: FC<FormInputProps> = ({
 						customInput={Input}
 						border="1px"
 						borderColor="gray.400"
-						decimalScale={0}
+						decimalScale={2}
 					/>
 
 				)}

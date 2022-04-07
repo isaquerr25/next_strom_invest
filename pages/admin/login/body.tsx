@@ -53,7 +53,7 @@ export function SimpleCard() {
 			minH={'100vh'}
 			align={'center'}
 			justify={'center'}
-			backgroundImage={'./background_login.jpg'}
+			backgroundImage={'../background_login.jpg'}
 			backgroundPosition='center'
 			backgroundSize='cover'
 			width='100%'

@@ -21,7 +21,7 @@ export const BodySetOne = () =>{
 
 	useEffect(()=>{
 		if (dataUser?.name! == undefined && userInfoGraph.loading == false){
-			Router.push('/login');
+			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
 	},[userInfoGraph.loading]);
@@ -52,17 +52,17 @@ export const BodySetOne = () =>{
 					>
 						<Block
 							title={'Balance'}
-							value={convertMoney(Number(dataAllMoney?.balance) ?? 0)}
+							value={convertMoney(Number(dataAllMoney?.balance)/100 ?? 0)}
 							inputIcon={FaRegChartBar}
 						/>
 						<Block
 							title={'Profit All Cycle'}
-							value={convertMoney(Number(dataAllMoney?.profitCycle) ?? 0)}
+							value={convertMoney(Number(dataAllMoney?.profitCycle)/100 ?? 0)}
 							inputIcon={SiClockify}
 						/>
 						<Block
 							title={'Profit Future'}
-							value={convertMoney(Number(dataAllMoney?.profitFuture) ?? 0)}
+							value={convertMoney(Number(dataAllMoney?.profitFuture)/100 ?? 0)}
 							inputIcon={CgSandClock}
 						/>
 					</Flex>

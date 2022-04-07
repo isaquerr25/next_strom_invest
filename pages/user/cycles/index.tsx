@@ -3,19 +3,21 @@ import Head from 'next/head';
 import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
-import {SimpleCard} from './body';
+import { NavLogin } from '../../../components/utils/navigateLogin';
+import { BodyCycle } from './body';
 
 
 
-const AdminLogin = () =>{
+
+const Cycles = () =>{
 	return(
 		<>
-			<HeaderMod title='Admin Login' />
-			<Nav/>
-			<SimpleCard/>
-			<FooterModify/>
+			<HeaderMod title='Cycles' />
+			<NavLogin children={undefined}/>
+			<BodyCycle/>
+			{/* <FooterModify/> */}
 		</>
 	);
 };
 
-export default AdminLogin;
+export default Cycles;

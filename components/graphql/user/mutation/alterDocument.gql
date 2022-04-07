@@ -1,0 +1,3 @@
+mutation AlterDocument($id: Int!, $state: String!) {
+  alterDocument(data: { id: $id, state: $state })
+}
