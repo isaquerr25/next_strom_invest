@@ -1,0 +1,13 @@
+query AllTransactions {
+  allTransactions {
+    id
+    value
+    hash
+    action
+    wallet
+    createdAt
+    updatedAt
+    state
+    userId
+  }
+}

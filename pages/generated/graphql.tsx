@@ -35,6 +35,7 @@ export type CycleAll = {
   finalValueBTC?: Maybe<Scalars['String']>;
   finalValueUSD?: Maybe<Scalars['Int']>;
   finishDate?: Maybe<Scalars['DateTime']>;
+  hash?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   state: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -502,6 +503,11 @@ export type ActiveStartStaffQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ActiveStartStaffQuery = { __typename?: 'Query', activeStartStaff?: { __typename?: 'StaffActivity', cyclesStart: number, documentsValidate: number, valueEnterToday: number, withdrawAll: number, transactionPay: number } | null };
 
+export type AllCycleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCycleQuery = { __typename?: 'Query', allCycle?: Array<{ __typename?: 'CycleAll', action: string, id: number, createdAt?: any | null, beginDate: any, finishDate?: any | null, valueBTC: string, valueUSD: number, finalValueUSD?: number | null, finalValueBTC?: string | null, hash?: string | null, state: string, userId?: number | null }> | null };
+
 export type AllCycleByUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -517,10 +523,20 @@ export type AllDocumentsValidationQueryVariables = Exact<{ [key: string]: never;
 
 export type AllDocumentsValidationQuery = { __typename?: 'Query', allDocumentsValidation: Array<{ __typename?: 'DocumentAllUser', id: number, state: string, fileName: string, userId: number, user: { __typename?: 'UserAll', id: number, name?: string | null, email: string, wallet?: string | null } }> };
 
+export type AllTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTransactionsQuery = { __typename?: 'Query', allTransactions?: Array<{ __typename?: 'TransactionAll', id: number, value: any, hash?: string | null, action: string, wallet?: string | null, createdAt?: any | null, updatedAt?: any | null, state: string, userId?: number | null }> | null };
+
 export type AllTransactionsByUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllTransactionsByUserQuery = { __typename?: 'Query', allTransactionsByUser?: Array<{ __typename?: 'TransactionAll', id: number, action: string, value: any, state: string, hash?: string | null, createdAt?: any | null, updatedAt?: any | null, wallet?: string | null }> | null };
+
+export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersQuery = { __typename?: 'Query', allUsers?: Array<{ __typename?: 'UserAll', id: number, email: string, name?: string | null, wallet?: string | null }> | null };
 
 export type UserAllMoneyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1079,6 +1095,52 @@ export function useActiveStartStaffLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type ActiveStartStaffQueryHookResult = ReturnType<typeof useActiveStartStaffQuery>;
 export type ActiveStartStaffLazyQueryHookResult = ReturnType<typeof useActiveStartStaffLazyQuery>;
 export type ActiveStartStaffQueryResult = Apollo.QueryResult<ActiveStartStaffQuery, ActiveStartStaffQueryVariables>;
+export const AllCycleDocument = gql`
+    query AllCycle {
+  allCycle {
+    action
+    id
+    createdAt
+    beginDate
+    finishDate
+    valueBTC
+    valueUSD
+    finalValueUSD
+    finalValueBTC
+    hash
+    state
+    beginDate
+    userId
+  }
+}
+    `;
+
+/**
+ * __useAllCycleQuery__
+ *
+ * To run a query within a React component, call `useAllCycleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCycleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllCycleQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllCycleQuery(baseOptions?: Apollo.QueryHookOptions<AllCycleQuery, AllCycleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCycleQuery, AllCycleQueryVariables>(AllCycleDocument, options);
+      }
+export function useAllCycleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCycleQuery, AllCycleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCycleQuery, AllCycleQueryVariables>(AllCycleDocument, options);
+        }
+export type AllCycleQueryHookResult = ReturnType<typeof useAllCycleQuery>;
+export type AllCycleLazyQueryHookResult = ReturnType<typeof useAllCycleLazyQuery>;
+export type AllCycleQueryResult = Apollo.QueryResult<AllCycleQuery, AllCycleQueryVariables>;
 export const AllCycleByUserDocument = gql`
     query AllCycleByUser {
   allCycleByUser {
@@ -1218,6 +1280,48 @@ export function useAllDocumentsValidationLazyQuery(baseOptions?: Apollo.LazyQuer
 export type AllDocumentsValidationQueryHookResult = ReturnType<typeof useAllDocumentsValidationQuery>;
 export type AllDocumentsValidationLazyQueryHookResult = ReturnType<typeof useAllDocumentsValidationLazyQuery>;
 export type AllDocumentsValidationQueryResult = Apollo.QueryResult<AllDocumentsValidationQuery, AllDocumentsValidationQueryVariables>;
+export const AllTransactionsDocument = gql`
+    query AllTransactions {
+  allTransactions {
+    id
+    value
+    hash
+    action
+    wallet
+    createdAt
+    updatedAt
+    state
+    userId
+  }
+}
+    `;
+
+/**
+ * __useAllTransactionsQuery__
+ *
+ * To run a query within a React component, call `useAllTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTransactionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTransactionsQuery(baseOptions?: Apollo.QueryHookOptions<AllTransactionsQuery, AllTransactionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTransactionsQuery, AllTransactionsQueryVariables>(AllTransactionsDocument, options);
+      }
+export function useAllTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTransactionsQuery, AllTransactionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTransactionsQuery, AllTransactionsQueryVariables>(AllTransactionsDocument, options);
+        }
+export type AllTransactionsQueryHookResult = ReturnType<typeof useAllTransactionsQuery>;
+export type AllTransactionsLazyQueryHookResult = ReturnType<typeof useAllTransactionsLazyQuery>;
+export type AllTransactionsQueryResult = Apollo.QueryResult<AllTransactionsQuery, AllTransactionsQueryVariables>;
 export const AllTransactionsByUserDocument = gql`
     query AllTransactionsByUser {
   allTransactionsByUser {
@@ -1259,6 +1363,43 @@ export function useAllTransactionsByUserLazyQuery(baseOptions?: Apollo.LazyQuery
 export type AllTransactionsByUserQueryHookResult = ReturnType<typeof useAllTransactionsByUserQuery>;
 export type AllTransactionsByUserLazyQueryHookResult = ReturnType<typeof useAllTransactionsByUserLazyQuery>;
 export type AllTransactionsByUserQueryResult = Apollo.QueryResult<AllTransactionsByUserQuery, AllTransactionsByUserQueryVariables>;
+export const AllUsersDocument = gql`
+    query AllUsers {
+  allUsers {
+    id
+    email
+    name
+    wallet
+  }
+}
+    `;
+
+/**
+ * __useAllUsersQuery__
+ *
+ * To run a query within a React component, call `useAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<AllUsersQuery, AllUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllUsersQuery, AllUsersQueryVariables>(AllUsersDocument, options);
+      }
+export function useAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUsersQuery, AllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllUsersQuery, AllUsersQueryVariables>(AllUsersDocument, options);
+        }
+export type AllUsersQueryHookResult = ReturnType<typeof useAllUsersQuery>;
+export type AllUsersLazyQueryHookResult = ReturnType<typeof useAllUsersLazyQuery>;
+export type AllUsersQueryResult = Apollo.QueryResult<AllUsersQuery, AllUsersQueryVariables>;
 export const UserAllMoneyDocument = gql`
     query UserAllMoney {
   userAllMoney {

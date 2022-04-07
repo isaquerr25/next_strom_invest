@@ -10,11 +10,12 @@ import { SiClockify } from 'react-icons/si';
 import Carousel from '../../../../components/utils/Carousel';
 import { convertMoney } from '../../../../components/utils/convertMoney';
 import { Loading } from '../../../../components/utils/loading';
-import { useActiveStartStaffQuery, useAllDocumentsValidationQuery , useAlterDocumentMutation,useGetTypeTransactionMutation, useUpdateTransactionMutation} from '../../../generated/graphql';
+import { useActiveStartStaffQuery, useAllCycleQuery, useAllDocumentsValidationQuery , useAllTransactionsQuery, useAllUsersQuery, useAlterDocumentMutation,useGetTypeTransactionMutation, useUpdateTransactionMutation} from '../../../generated/graphql';
 import { photo } from './api';
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
 import { PopMsg } from '../../../../components/utils/PopMsg';
 import { useRouter } from 'next/router';
+import { calculatorDays } from '../../../user/cycles/process/utils';
 
 
 export const BodySetOne = () =>{
@@ -72,10 +73,20 @@ export const BodySetOne = () =>{
 						flexWrap={'wrap'}
 						gap={2}
 						alignItems={'flex-start'}
+						flexDirection='column'
 					>
 						<Text color='black' fontSize='xl' fontWeight='black' >
-							Usuários
+								Todos os Usuários
 						</Text>
+						<TableUser/>
+						<Text color='black' fontSize='xl' fontWeight='black' >
+								Todas as Transações
+						</Text>
+						<TableTransfer/>
+						<Text color='black' fontSize='xl' fontWeight='black' >
+								Todos os Cyclos
+						</Text>
+						<TableCycle/>
 					</Flex>
 
 				</Box>
@@ -105,90 +116,11 @@ interface typeBlock{
 
 
 
+const TableUser = () => {
 
-const Block = ({
-	action,
-	value,
-	state,
-	hash,
-	updatedAt,
-	wallet,
-	userId,
-	user_id,
-	user_name,
-	user_wallet,
-	email,
-	id,
-}:typeBlock) =>{
+	const allUserGraph = useAllUsersQuery();
+	const dataUser = allUserGraph.data?.allUsers;
 
-	const [alterTransaction, ]   = useUpdateTransactionMutation();
-	const router = useRouter();
-
-
-	const send = async(id:number,state:string) =>{
-		const result = (await alterTransaction({variables:{id,state}})).data;
-		if(result){
-			alert('save');
-			router.reload(window.location.pathname);
-		}else{
-			alert('não salvo');
-			router.reload(window.location.pathname);
-		}
-	};
-
-
-	return (
-		<Flex
-			direction={'row'}
-			alignItems='center'
-			justifyContent={'center'}
-			bg='#1e4cff'
-			borderRadius={5}
-			w={'500px'}
-			h={'500px'}
-			pb={'10px'}
-			pt={'10px'}
-			p={'40px'}
-		>
-
-			<Flex  justifyContent={'center'} alignItems={'flex-end'} width={'450px'} flexDirection={'column'} gap={3} h={'100%'} >
-
-				<Text  color='white' fontSize='lg' fontWeight='black' >
-					ID da Transação: {id}<br/>
-					TIPO: {action}<br/>
-					VALOR: {convertMoney(value/100 ?? 0)}<br/>
-					Estado Atual: {state}<br/>
-					Hash: {hash}<br/>
-					Data de Atualização: {updatedAt}<br/>
-					Carteira: {wallet}<br/>
-					ID Usuário: {userId}<br/>
-					Nome: {user_name}<br/>
-					Carteira Atual: {user_wallet}<br/>
-					Email: {email}<br/>
-				</Text>
-				<Flex
-					alignItems='flex-end'
-					justifyContent={'center'}
-					width={'100%'}
-				>
-					<Button leftIcon={<FaNotEqual />} onClick={async()=>{await send(id,'CANCEL');}} colorScheme='teal' variant='solid'>
-						CANCEL
-					</Button>
-					<Button rightIcon={<ArrowForwardIcon />} onClick={async()=>{await send(id,'COMPLETE');}} colorScheme='teal' variant='outline'>
-					COMPLETE
-					</Button>
-				</Flex>
-			</Flex>
-		</Flex>
-	);
-};
-
-
-
-
-
-
-const TableCycle = ({arrayTransactions,dropValue}) => {
 	return (
 		<Box
 			overflowY="auto"
@@ -216,6 +148,158 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 				<TableCaption></TableCaption>
 				<Thead>
 					<Tr>
+						<Th>id</Th>
+						<Th>email</Th>
+						<Th>name</Th>
+						<Th>wallet</Th>
+					</Tr>
+				</Thead>
+				<Tbody>
+					{	(dataUser!=null &&  dataUser!=undefined )&&
+						dataUser.map( (compose) =>{
+
+							let color = 'black';
+
+							return(
+								<Tr color={color} key={compose.id}>
+									<Td textColor={color}>{compose.id}</Td>
+									<Td textColor={color}>{compose.email}</Td>
+									<Td textColor={color}>{compose.name}</Td>
+									<Td textColor={color}>{compose.wallet}</Td>
+								</Tr>
+							);}
+						)
+					}
+				</Tbody>
+
+			</Table>
+		</Box>
+	);
+};
+
+
+const TableTransfer = () => {
+
+	const allTransferGraph = useAllTransactionsQuery();
+	const dataTransfer = allTransferGraph.data?.allTransactions;
+
+	return (
+		<Box
+			overflowY="auto"
+
+			css={{
+				'&::-webkit-scrollbar': {
+					width: '4px',
+					height: '8px',
+				},
+				'&::-webkit-scrollbar-track': {
+					width: '6px',
+					height: '2px',
+				},
+				'&::-webkit-scrollbar-thumb': {
+					background: 'gray',
+					borderRadius: '14px',
+				},
+			}}
+		>
+			<Table
+				variant='striped'
+				colorScheme='teal'
+				display={''}
+			>
+				<TableCaption></TableCaption>
+				<Thead>
+					<Tr>
+						<Th>id</Th>
+						<Th>value</Th>
+						<Th>hash</Th>
+						<Th>action</Th>
+						<Th>wallet</Th>
+						<Th>createdAt</Th>
+						<Th>updatedAt</Th>
+						<Th>state</Th>
+						<Th>userId</Th>
+					</Tr>
+				</Thead>
+				<Tbody>
+					{	(dataTransfer!=null &&  dataTransfer!=undefined )&&
+						dataTransfer.map( (compose) =>{
+
+							let color = 'black';
+
+
+							if (compose.state == 'CANCEL'){
+								color = 'red';
+							}else if (compose.state == 'COMPLETE'){
+								color = 'green';
+							}
+
+
+							let finalValue:any ='';
+
+							if (compose.state == 'CANCEL'){
+								finalValue ='CANCEL';
+
+							}else{
+								finalValue =compose.value ?? calculatorDays(new Date(),compose.finishDate)+' Days';
+								if(typeof(finalValue) == typeof Number()){
+									finalValue = convertMoney(finalValue/100);
+								}
+							}
+							return(
+								<Tr color={color} key={compose.id}>
+									<Td textColor={color}>{compose.id}</Td>
+									<Td textColor={color}>{finalValue}</Td>
+									<Td textColor={color}>{compose.hash}</Td>
+									<Td textColor={color}>{compose.action}</Td>
+									<Td textColor={color}>{compose.wallet}</Td>
+									<Td textColor={color}>{compose.createdAt}</Td>
+									<Td textColor={color}>{compose.updatedAt}</Td>
+									<Td textColor={color}>{compose.state}</Td>
+									<Td textColor={color}>{compose.userId}</Td>
+								</Tr>
+							);}
+						)
+					}
+				</Tbody>
+
+			</Table>
+		</Box>
+	);
+};
+
+
+const TableCycle = () => {
+	const allCycleGraph = useAllCycleQuery();
+	const dataCycle = allCycleGraph.data?.allCycle;
+	return (
+		<Box
+			overflowY="auto"
+
+			css={{
+				'&::-webkit-scrollbar': {
+					width: '4px',
+					height: '8px',
+				},
+				'&::-webkit-scrollbar-track': {
+					width: '6px',
+					height: '2px',
+				},
+				'&::-webkit-scrollbar-thumb': {
+					background: 'gray',
+					borderRadius: '14px',
+				},
+			}}
+		>
+			<Table
+				variant='striped'
+				colorScheme='teal'
+				display={''}
+			>
+				<TableCaption></TableCaption>
+				<Thead>
+					<Tr>
+						<Th>ID</Th>
 						<Th>action</Th>
 						<Th>VALUE INVEST USD</Th>
 						<Th>Finish Value USD</Th>
@@ -225,13 +309,9 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{	(arrayTransactions!=null &&  arrayTransactions!=undefined )&&
-						arrayTransactions.map( (compose:TypesComposeCycleProcess) =>{
-							if(dropValue == 'PROCESS' || dropValue == 'CANCEL' || dropValue == 'ACTIVE' || dropValue == 'COMPLETE'){
-								if(dropValue != compose.state){
-									return(<></>);
-								}
-							}
+					{	(dataCycle!=null &&  dataCycle!=undefined )&&
+						dataCycle.map( (compose) =>{
+
 							let color = 'black';
 
 
@@ -255,6 +335,7 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 							}
 							return(
 								<Tr color={color} key={compose.id}>
+									<Td textColor={color}>{compose.id}</Td>
 									<Td textColor={color}>{compose.action?.toUpperCase()}</Td>
 									<Td textColor={color}>{convertMoney(((compose.valueUSD)/100 )?? 0)}</Td>
 									<Td textColor={color}>{finalValue}</Td>

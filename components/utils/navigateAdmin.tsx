@@ -59,12 +59,14 @@ import { useLogoutMutation } from '../../pages/generated/graphql';
 import { roundToNearestMinutes } from 'date-fns';
 import Router from 'next/router';
 import { GrDocumentUser } from 'react-icons/gr';
+import { GiMammoth } from 'react-icons/gi';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/admin/user' , label: 'Home', icon: FiHome },
-	{ href: '/admin/user/funds' , label: 'Fund Account', icon: FaMoneyBill },
+	{ href: '/admin/user/planilha' , label: 'Planilhas', icon: FaMoneyBill },
 	{ href: '/admin/user/cycles' , label: 'Cycles Create', icon: FaCompass },
 	{ href: '/admin/user/document' , label: 'Validate Document', icon: GrDocumentUser },
 	{ href: '/admin/user/withdraw' , label: 'Requests Withdraw', icon: FaVoteYea },
+	{ href: '/admin/user/moth' , label: 'Moth Profit', icon: GiMammoth },
 ];
 
 
