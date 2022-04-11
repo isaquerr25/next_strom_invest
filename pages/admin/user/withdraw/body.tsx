@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Image, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr, useBoolean } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Image, Text, useBoolean } from '@chakra-ui/react';
 import { FormatMoneyParse } from 'format-money-js';
 import Router from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
@@ -73,9 +73,30 @@ export const BodySetOne = () =>{
 						gap={2}
 						alignItems={'flex-start'}
 					>
-						<Text color='black' fontSize='xl' fontWeight='black' >
-							Usuários
-						</Text>
+						{stateTransaction!=null && stateTransaction.map((number) =>
+
+							<Block
+								key={number.id}
+								action={number.action}
+								value={number.value}
+								state={number.state}
+								hash={number.hash}
+								updatedAt={number.updatedAt}
+								wallet={number.wallet}
+								userId={number.userId}
+								user_name={number.user.name}
+								user_wallet={number.user.wallet}
+								id={number.id}
+								email={number.user.email}
+							/>
+
+						)}
+						{
+							stateTransaction==null &&
+							<Text color='black' fontSize='xl' fontWeight='black' >
+								Não existe saques para avaliar
+							</Text>
+						}
 					</Flex>
 
 				</Box>
@@ -180,94 +201,5 @@ const Block = ({
 				</Flex>
 			</Flex>
 		</Flex>
-	);
-};
-
-
-
-
-
-
-const TableCycle = ({arrayTransactions,dropValue}) => {
-	return (
-		<Box
-			overflowY="auto"
-
-			css={{
-				'&::-webkit-scrollbar': {
-					width: '4px',
-					height: '8px',
-				},
-				'&::-webkit-scrollbar-track': {
-					width: '6px',
-					height: '2px',
-				},
-				'&::-webkit-scrollbar-thumb': {
-					background: 'gray',
-					borderRadius: '14px',
-				},
-			}}
-		>
-			<Table
-				variant='striped'
-				colorScheme='teal'
-				display={''}
-			>
-				<TableCaption></TableCaption>
-				<Thead>
-					<Tr>
-						<Th>action</Th>
-						<Th>VALUE INVEST USD</Th>
-						<Th>Finish Value USD</Th>
-						<Th >state</Th>
-						<Th>beginDate</Th>
-						<Th>finishDate</Th>
-					</Tr>
-				</Thead>
-				<Tbody>
-					{	(arrayTransactions!=null &&  arrayTransactions!=undefined )&&
-						arrayTransactions.map( (compose:TypesComposeCycleProcess) =>{
-							if(dropValue == 'PROCESS' || dropValue == 'CANCEL' || dropValue == 'ACTIVE' || dropValue == 'COMPLETE'){
-								if(dropValue != compose.state){
-									return(<></>);
-								}
-							}
-							let color = 'black';
-
-
-							if (compose.state == 'CANCEL'){
-								color = 'red';
-							}else if (compose.state == 'COMPLETE'){
-								color = 'green';
-							}
-
-
-							let finalValue:any ='';
-
-							if (compose.state == 'CANCEL'){
-								finalValue ='CANCEL';
-
-							}else{
-								finalValue =compose.finalValueUSD ?? calculatorDays(new Date(),compose.finishDate)+' Days';
-								if(typeof(finalValue) == typeof Number()){
-									finalValue = convertMoney(finalValue/100);
-								}
-							}
-							return(
-								<Tr color={color} key={compose.id}>
-									<Td textColor={color}>{compose.action?.toUpperCase()}</Td>
-									<Td textColor={color}>{convertMoney(((compose.valueUSD)/100 )?? 0)}</Td>
-									<Td textColor={color}>{finalValue}</Td>
-									<Td textColor={color}>{compose.state}</Td>
-									<Td textColor={color}>{compose.beginDate.toString().split('T')[0]}</Td>
-									<Td textColor={color}>{compose.finishDate.toString().split('T')[0]}</Td>
-								</Tr>
-							);}
-						)
-					}
-				</Tbody>
-
-			</Table>
-		</Box>
 	);
 };

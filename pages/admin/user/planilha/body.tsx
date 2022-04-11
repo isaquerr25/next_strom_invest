@@ -11,7 +11,6 @@ import Carousel from '../../../../components/utils/Carousel';
 import { convertMoney } from '../../../../components/utils/convertMoney';
 import { Loading } from '../../../../components/utils/loading';
 import { useActiveStartStaffQuery, useAllCycleQuery, useAllDocumentsValidationQuery , useAllTransactionsQuery, useAllUsersQuery, useAlterDocumentMutation,useGetTypeTransactionMutation, useUpdateTransactionMutation} from '../../../generated/graphql';
-import { photo } from './api';
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
 import { PopMsg } from '../../../../components/utils/PopMsg';
 import { useRouter } from 'next/router';
@@ -30,6 +29,8 @@ export const BodySetOne = () =>{
 
 	const [errorMsg, setErrorMsg] = useState('');
 
+
+	
 	useEffect(() => {
 		async function fetchData() {
 
@@ -81,12 +82,18 @@ export const BodySetOne = () =>{
 						<TableUser/>
 						<Text color='black' fontSize='xl' fontWeight='black' >
 								Todas as Transações
-						</Text>
-						<TableTransfer/>
+						</Text>						
+						<Box overflow={'scroll'} w='100%' h='600px'>
+
+							<TableTransfer/>
+						</Box>
 						<Text color='black' fontSize='xl' fontWeight='black' >
 								Todos os Cyclos
 						</Text>
-						<TableCycle/>
+						<Box overflow={'scroll'} w='100%' h='600px'>
+
+							<TableCycle/>
+						</Box>
 					</Flex>
 
 				</Box>
@@ -274,7 +281,7 @@ const TableCycle = () => {
 	const dataCycle = allCycleGraph.data?.allCycle;
 	return (
 		<Box
-			overflowY="auto"
+			
 
 			css={{
 				'&::-webkit-scrollbar': {

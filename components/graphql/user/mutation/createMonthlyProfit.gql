@@ -1,0 +1,6 @@
+mutation CreateMonthlyProfit($profit: Int!, $finishDate: DateTime!) {
+  createMonthlyProfit(data: { profit: $profit, finishDate: $finishDate }) {
+    field
+    message
+  }
+}

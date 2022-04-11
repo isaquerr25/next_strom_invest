@@ -54,9 +54,9 @@ export const validationLogin = yup.object({
 		.string()
 		.required('This field is required')
 		.matches(
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 			'Your password is not strong enough',
-		),
+		)
 });
 
 export const validationRegister = yup.object({
@@ -69,7 +69,7 @@ export const validationRegister = yup.object({
 		.string()
 		.required('This field is required')
 		.matches(
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 			'Your password is not strong enough',
 		),
 	confirmPassword: yup
@@ -96,7 +96,7 @@ export const validationNewPassword = yup.object({
 		.required('This field is required')
 		.notOneOf([yup.ref('oldPassword'), null], 'Old Passwords must match')
 		.matches(
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 			'Your password is not strong enough',
 		),
 	confirmPassword: yup

@@ -1,0 +1,9 @@
+query AllMonthlyProfit {
+  allMonthlyProfit {
+    id
+    finishDate
+    createdAt
+    updatedAt
+    profit
+  }
+}

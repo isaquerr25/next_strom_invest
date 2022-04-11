@@ -1,0 +1,7 @@
+mutation IdMonthlyProfit($id: Int!) {
+  idMonthlyProfit(data: { id: $id }) {
+    id
+    profit
+    finishDate
+  }
+}

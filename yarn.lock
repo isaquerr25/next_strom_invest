@@ -4797,6 +4797,11 @@ foreach@^2.0.5:
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
   integrity sha1-C+4AUBiusmDQo6865ljdATbsG5k=
 
+forexy@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/forexy/-/forexy-2.0.14.tgz#9a0f14403fbb0da503b2113dd7fdc196ff604f00"
+  integrity sha512-21/Oar18Sq4GjLFyaVhbOf+6+Bn5YN45RTnxXH3pVlCAm8h9DmIt2kTMEL8Djzr/lTXfXZfjs71S6JnHsT7O5Q==
+
 form-data-encoder@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/form-data-encoder/-/form-data-encoder-1.7.1.tgz#ac80660e4f87ee0d3d3c3638b7da8278ddb8ec96"

@@ -1,0 +1,12 @@
+mutation AllTransactionsByUserStaff($id: Int!) {
+  allTransactionsByUserStaff(data: { id: $id }) {
+    id
+    action
+    value
+    state
+    hash
+    createdAt
+    updatedAt
+    wallet
+  }
+}

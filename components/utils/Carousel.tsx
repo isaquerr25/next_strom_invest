@@ -40,6 +40,11 @@ export default function CaptionCarousel() {
 	// This can be static or loaded from a server
 	const cards = [
 		{
+			title: 'Earnings per fortnight',
+			text:
+        'Get fortnightly earnings of up to 2%+',
+		},
+		{
 			title: 'Transaction',
 			text:
         'Keep your wallet up to date as the money is sent to the registered wallet when withdrawing',
@@ -103,7 +108,7 @@ export default function CaptionCarousel() {
 						backgroundPosition="center"
 						backgroundRepeat="no-repeat"
 						backgroundSize="cover"
-						background={'teal.300'}>
+						background={'teal.500'}>
 						{/* This is the block you need to change, to customize the caption */}
 						<Container size="container.lg" height="600px" position="relative">
 							<Stack
@@ -117,7 +122,7 @@ export default function CaptionCarousel() {
 								<Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
 									{card.title}
 								</Heading>
-								<Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">
+								<Text fontSize={{ base: 'md', lg: 'lg' }} color="blackAlpha.500">
 									{card.text}
 								</Text>
 							</Stack>

@@ -78,6 +78,7 @@ export function SimpleCard() {
 						onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
 
 							setSubmitting(true);
+							console.log('login');
 							const result = await loginAuthUser({variables:values});
 							setSubmitting(false);
 							const errors = result.data?.loginAuthUser[0];

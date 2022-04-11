@@ -67,7 +67,6 @@ const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/user/withdraw' , label: 'Requests', icon: FaVoteYea },
 	{ href: '/user/account' , label: 'Account Settings', icon: FaUserAlt },
 	// { href: '/user/support' , label: 'Account Settings', icon: MdOutlineSupportAgent },
-
 ];
 
 
@@ -76,10 +75,10 @@ const NAV_ITEMS: Array<NavItem> = [
 export function NavLogin() {
 	const { isOpen, onToggle } = useDisclosure();
 	const [Logout,] = useLogoutMutation();
- 	return (
+	return (
 		<Box>
 			<Flex
-				bg={useColorModeValue('white', 'gray.800')}
+				bg={useColorModeValue('black', 'gray.800')}
 				color={useColorModeValue('gray.600', 'white')}
 				minH={'60px'}
 				py={{ base: 2 }}
@@ -134,8 +133,8 @@ export function NavLogin() {
 						bg='red'
 						borderRadius={50}
 						color='white'
+						cursor={'pointer'}
 					>
-
 						<Icon
 							mr="1"
 							fontSize="16"
@@ -156,9 +155,9 @@ export function NavLogin() {
 }
 
 const DesktopNav = () => {
-	const linkColor = useColorModeValue('gray.600', 'gray.200');
-	const linkHoverColor = useColorModeValue('gray.800', 'white');
-	const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+	const linkColor = useColorModeValue('teal', 'gray.200');
+	const linkHoverColor = useColorModeValue('teal', 'white');
+	const popoverContentBgColor = useColorModeValue('teal', 'gray.800');
 
 	return (
 		<Stack direction={'row'} spacing={4}>

@@ -98,6 +98,10 @@ export type InputDeleteCycle = {
   id: Scalars['Int'];
 };
 
+export type InputDeleteMonthlyProfit = {
+  id: Scalars['Int'];
+};
+
 export type InputDeleteTransaction = {
   id: Scalars['Int'];
 };
@@ -105,6 +109,10 @@ export type InputDeleteTransaction = {
 export type InputDocumentAlter = {
   id: Scalars['Int'];
   state: Scalars['String'];
+};
+
+export type InputIdUser = {
+  id: Scalars['Int'];
 };
 
 export type InputMonthlyProfit = {
@@ -180,6 +188,8 @@ export type MonthlyProfitAll = {
 export type Mutation = {
   __typename?: 'Mutation';
   addDocumentPicture?: Maybe<Scalars['Boolean']>;
+  allCycleByUserStaff?: Maybe<Array<CycleAll>>;
+  allTransactionsByUserStaff?: Maybe<Array<TransactionAll>>;
   alterDocument?: Maybe<Scalars['Boolean']>;
   createCycle: Array<GraphState>;
   createDeposit: RequestDeposit;
@@ -190,6 +200,7 @@ export type Mutation = {
   deleteMonthlyProfit: Array<GraphState>;
   deleteTransaction: Array<GraphState>;
   getTypeTransaction: Array<TransactionUser>;
+  idMonthlyProfit?: Maybe<MonthlyProfitAll>;
   loginAuthUser: Array<GraphState>;
   loginStaff: Array<GraphState>;
   logout?: Maybe<Scalars['Boolean']>;
@@ -198,11 +209,22 @@ export type Mutation = {
   updateMonthlyProfit: Array<GraphState>;
   updateTransaction: Array<GraphState>;
   updateWallet?: Maybe<GraphState>;
+  userInfoIdStaff?: Maybe<StaffInfoUserComponents>;
 };
 
 
 export type MutationAddDocumentPictureArgs = {
   picture: Scalars['Upload'];
+};
+
+
+export type MutationAllCycleByUserStaffArgs = {
+  data: InputIdUser;
+};
+
+
+export type MutationAllTransactionsByUserStaffArgs = {
+  data: InputIdUser;
 };
 
 
@@ -256,6 +278,11 @@ export type MutationGetTypeTransactionArgs = {
 };
 
 
+export type MutationIdMonthlyProfitArgs = {
+  data: InputDeleteMonthlyProfit;
+};
+
+
 export type MutationLoginAuthUserArgs = {
   data: LoginUser;
 };
@@ -288,6 +315,11 @@ export type MutationUpdateTransactionArgs = {
 
 export type MutationUpdateWalletArgs = {
   data: WalletAlter;
+};
+
+
+export type MutationUserInfoIdStaffArgs = {
+  data: InputIdUser;
 };
 
 export type PasswordAlter = {
@@ -324,6 +356,29 @@ export type StaffActivity = {
   transactionPay: Scalars['Int'];
   valueEnterToday: Scalars['Int'];
   withdrawAll: Scalars['Int'];
+};
+
+export type StaffInfoUserComponents = {
+  __typename?: 'StaffInfoUserComponents';
+  allCompleteInvest?: Maybe<Scalars['String']>;
+  allCycleActive?: Maybe<Scalars['String']>;
+  allCycleComplete?: Maybe<Scalars['String']>;
+  allCycleProcess?: Maybe<Scalars['String']>;
+  allDeposit?: Maybe<Scalars['String']>;
+  allInvest?: Maybe<Scalars['String']>;
+  allWithdraw?: Maybe<Scalars['String']>;
+  cash?: Maybe<Scalars['String']>;
+  document?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  qCompleteInvest?: Maybe<Scalars['String']>;
+  qCycleActive?: Maybe<Scalars['String']>;
+  qCycleComplete?: Maybe<Scalars['String']>;
+  qCycleProcess?: Maybe<Scalars['String']>;
+  qDeposit?: Maybe<Scalars['String']>;
+  qInvest?: Maybe<Scalars['String']>;
+  qWithdraw?: Maybe<Scalars['String']>;
+  wallet?: Maybe<Scalars['String']>;
 };
 
 export type TransactionAll = {
@@ -394,6 +449,20 @@ export type AddDocumentPictureMutationVariables = Exact<{
 
 export type AddDocumentPictureMutation = { __typename?: 'Mutation', addDocumentPicture?: boolean | null };
 
+export type AllCycleByUserStaffMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type AllCycleByUserStaffMutation = { __typename?: 'Mutation', allCycleByUserStaff?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC: string, finalValueUSD?: number | null, finalValueBTC?: string | null, state: string, beginDate: any, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, hash?: string | null }> | null };
+
+export type AllTransactionsByUserStaffMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type AllTransactionsByUserStaffMutation = { __typename?: 'Mutation', allTransactionsByUserStaff?: Array<{ __typename?: 'TransactionAll', id: number, action: string, value: any, state: string, hash?: string | null, createdAt?: any | null, updatedAt?: any | null, wallet?: string | null }> | null };
+
 export type AlterDocumentMutationVariables = Exact<{
   id: Scalars['Int'];
   state: Scalars['String'];
@@ -419,6 +488,14 @@ export type CreateDepositMutationVariables = Exact<{
 
 export type CreateDepositMutation = { __typename?: 'Mutation', createDeposit: { __typename?: 'RequestDeposit', url?: string | null, status?: Array<{ __typename?: 'DepositState', field?: string | null, message?: string | null }> | null } };
 
+export type CreateMonthlyProfitMutationVariables = Exact<{
+  profit: Scalars['Int'];
+  finishDate: Scalars['DateTime'];
+}>;
+
+
+export type CreateMonthlyProfitMutation = { __typename?: 'Mutation', createMonthlyProfit: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
+
 export type CreateTransactionMutationVariables = Exact<{
   action: Scalars['String'];
   value: Scalars['Int'];
@@ -443,6 +520,13 @@ export type GetTypeTransactionMutationVariables = Exact<{
 
 
 export type GetTypeTransactionMutation = { __typename?: 'Mutation', getTypeTransaction: Array<{ __typename?: 'TransactionUser', id: number, action: string, value: any, state: string, hash?: string | null, createdAt?: any | null, updatedAt?: any | null, wallet?: string | null, userId?: number | null, user: { __typename?: 'UserAll', id: number, email: string, name?: string | null, wallet?: string | null } }> };
+
+export type IdMonthlyProfitMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type IdMonthlyProfitMutation = { __typename?: 'Mutation', idMonthlyProfit?: { __typename?: 'MonthlyProfitAll', id: number, profit?: number | null, finishDate?: any | null } | null };
 
 export type LoginAuthUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -479,6 +563,15 @@ export type UpdateCycleMutationVariables = Exact<{
 
 export type UpdateCycleMutation = { __typename?: 'Mutation', updateCycle: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
 
+export type UpdateMonthlyProfitMutationVariables = Exact<{
+  id: Scalars['Int'];
+  profit?: InputMaybe<Scalars['Int']>;
+  finishDate?: InputMaybe<Scalars['DateTime']>;
+}>;
+
+
+export type UpdateMonthlyProfitMutation = { __typename?: 'Mutation', updateMonthlyProfit: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
+
 export type UpdateTransactionMutationVariables = Exact<{
   id: Scalars['Int'];
   state?: InputMaybe<Scalars['String']>;
@@ -497,6 +590,13 @@ export type UpdateWalletMutationVariables = Exact<{
 
 
 export type UpdateWalletMutation = { __typename?: 'Mutation', updateWallet?: { __typename?: 'GraphState', field?: string | null, message?: string | null } | null };
+
+export type UserInfoIdStaffMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type UserInfoIdStaffMutation = { __typename?: 'Mutation', userInfoIdStaff?: { __typename?: 'StaffInfoUserComponents', name?: string | null, email: string, wallet?: string | null, document?: string | null, qDeposit?: string | null, allDeposit?: string | null, qWithdraw?: string | null, allWithdraw?: string | null, qInvest?: string | null, allInvest?: string | null, qCompleteInvest?: string | null, allCompleteInvest?: string | null, qCycleProcess?: string | null, allCycleProcess?: string | null, qCycleActive?: string | null, allCycleActive?: string | null, qCycleComplete?: string | null, allCycleComplete?: string | null, cash?: string | null } | null };
 
 export type ActiveStartStaffQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -522,6 +622,11 @@ export type AllDocumentsValidationQueryVariables = Exact<{ [key: string]: never;
 
 
 export type AllDocumentsValidationQuery = { __typename?: 'Query', allDocumentsValidation: Array<{ __typename?: 'DocumentAllUser', id: number, state: string, fileName: string, userId: number, user: { __typename?: 'UserAll', id: number, name?: string | null, email: string, wallet?: string | null } }> };
+
+export type AllMonthlyProfitQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllMonthlyProfitQuery = { __typename?: 'Query', allMonthlyProfit?: Array<{ __typename?: 'MonthlyProfitAll', id: number, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, profit?: number | null }> | null };
 
 export type AllTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -610,6 +715,90 @@ export function useAddDocumentPictureMutation(baseOptions?: Apollo.MutationHookO
 export type AddDocumentPictureMutationHookResult = ReturnType<typeof useAddDocumentPictureMutation>;
 export type AddDocumentPictureMutationResult = Apollo.MutationResult<AddDocumentPictureMutation>;
 export type AddDocumentPictureMutationOptions = Apollo.BaseMutationOptions<AddDocumentPictureMutation, AddDocumentPictureMutationVariables>;
+export const AllCycleByUserStaffDocument = gql`
+    mutation allCycleByUserStaff($id: Int!) {
+  allCycleByUserStaff(data: {id: $id}) {
+    id
+    action
+    valueUSD
+    valueBTC
+    finalValueUSD
+    finalValueBTC
+    state
+    beginDate
+    finishDate
+    createdAt
+    updatedAt
+    hash
+  }
+}
+    `;
+export type AllCycleByUserStaffMutationFn = Apollo.MutationFunction<AllCycleByUserStaffMutation, AllCycleByUserStaffMutationVariables>;
+
+/**
+ * __useAllCycleByUserStaffMutation__
+ *
+ * To run a mutation, you first call `useAllCycleByUserStaffMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAllCycleByUserStaffMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [allCycleByUserStaffMutation, { data, loading, error }] = useAllCycleByUserStaffMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAllCycleByUserStaffMutation(baseOptions?: Apollo.MutationHookOptions<AllCycleByUserStaffMutation, AllCycleByUserStaffMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AllCycleByUserStaffMutation, AllCycleByUserStaffMutationVariables>(AllCycleByUserStaffDocument, options);
+      }
+export type AllCycleByUserStaffMutationHookResult = ReturnType<typeof useAllCycleByUserStaffMutation>;
+export type AllCycleByUserStaffMutationResult = Apollo.MutationResult<AllCycleByUserStaffMutation>;
+export type AllCycleByUserStaffMutationOptions = Apollo.BaseMutationOptions<AllCycleByUserStaffMutation, AllCycleByUserStaffMutationVariables>;
+export const AllTransactionsByUserStaffDocument = gql`
+    mutation AllTransactionsByUserStaff($id: Int!) {
+  allTransactionsByUserStaff(data: {id: $id}) {
+    id
+    action
+    value
+    state
+    hash
+    createdAt
+    updatedAt
+    wallet
+  }
+}
+    `;
+export type AllTransactionsByUserStaffMutationFn = Apollo.MutationFunction<AllTransactionsByUserStaffMutation, AllTransactionsByUserStaffMutationVariables>;
+
+/**
+ * __useAllTransactionsByUserStaffMutation__
+ *
+ * To run a mutation, you first call `useAllTransactionsByUserStaffMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAllTransactionsByUserStaffMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [allTransactionsByUserStaffMutation, { data, loading, error }] = useAllTransactionsByUserStaffMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAllTransactionsByUserStaffMutation(baseOptions?: Apollo.MutationHookOptions<AllTransactionsByUserStaffMutation, AllTransactionsByUserStaffMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AllTransactionsByUserStaffMutation, AllTransactionsByUserStaffMutationVariables>(AllTransactionsByUserStaffDocument, options);
+      }
+export type AllTransactionsByUserStaffMutationHookResult = ReturnType<typeof useAllTransactionsByUserStaffMutation>;
+export type AllTransactionsByUserStaffMutationResult = Apollo.MutationResult<AllTransactionsByUserStaffMutation>;
+export type AllTransactionsByUserStaffMutationOptions = Apollo.BaseMutationOptions<AllTransactionsByUserStaffMutation, AllTransactionsByUserStaffMutationVariables>;
 export const AlterDocumentDocument = gql`
     mutation AlterDocument($id: Int!, $state: String!) {
   alterDocument(data: {id: $id, state: $state})
@@ -718,6 +907,41 @@ export function useCreateDepositMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateDepositMutationHookResult = ReturnType<typeof useCreateDepositMutation>;
 export type CreateDepositMutationResult = Apollo.MutationResult<CreateDepositMutation>;
 export type CreateDepositMutationOptions = Apollo.BaseMutationOptions<CreateDepositMutation, CreateDepositMutationVariables>;
+export const CreateMonthlyProfitDocument = gql`
+    mutation CreateMonthlyProfit($profit: Int!, $finishDate: DateTime!) {
+  createMonthlyProfit(data: {profit: $profit, finishDate: $finishDate}) {
+    field
+    message
+  }
+}
+    `;
+export type CreateMonthlyProfitMutationFn = Apollo.MutationFunction<CreateMonthlyProfitMutation, CreateMonthlyProfitMutationVariables>;
+
+/**
+ * __useCreateMonthlyProfitMutation__
+ *
+ * To run a mutation, you first call `useCreateMonthlyProfitMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMonthlyProfitMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMonthlyProfitMutation, { data, loading, error }] = useCreateMonthlyProfitMutation({
+ *   variables: {
+ *      profit: // value for 'profit'
+ *      finishDate: // value for 'finishDate'
+ *   },
+ * });
+ */
+export function useCreateMonthlyProfitMutation(baseOptions?: Apollo.MutationHookOptions<CreateMonthlyProfitMutation, CreateMonthlyProfitMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateMonthlyProfitMutation, CreateMonthlyProfitMutationVariables>(CreateMonthlyProfitDocument, options);
+      }
+export type CreateMonthlyProfitMutationHookResult = ReturnType<typeof useCreateMonthlyProfitMutation>;
+export type CreateMonthlyProfitMutationResult = Apollo.MutationResult<CreateMonthlyProfitMutation>;
+export type CreateMonthlyProfitMutationOptions = Apollo.BaseMutationOptions<CreateMonthlyProfitMutation, CreateMonthlyProfitMutationVariables>;
 export const CreateTransactionDocument = gql`
     mutation CreateTransaction($action: String!, $value: Int!) {
   createTransaction(data: {action: $action, value: $value, userId: 0}) {
@@ -837,6 +1061,41 @@ export function useGetTypeTransactionMutation(baseOptions?: Apollo.MutationHookO
 export type GetTypeTransactionMutationHookResult = ReturnType<typeof useGetTypeTransactionMutation>;
 export type GetTypeTransactionMutationResult = Apollo.MutationResult<GetTypeTransactionMutation>;
 export type GetTypeTransactionMutationOptions = Apollo.BaseMutationOptions<GetTypeTransactionMutation, GetTypeTransactionMutationVariables>;
+export const IdMonthlyProfitDocument = gql`
+    mutation IdMonthlyProfit($id: Int!) {
+  idMonthlyProfit(data: {id: $id}) {
+    id
+    profit
+    finishDate
+  }
+}
+    `;
+export type IdMonthlyProfitMutationFn = Apollo.MutationFunction<IdMonthlyProfitMutation, IdMonthlyProfitMutationVariables>;
+
+/**
+ * __useIdMonthlyProfitMutation__
+ *
+ * To run a mutation, you first call `useIdMonthlyProfitMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useIdMonthlyProfitMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [idMonthlyProfitMutation, { data, loading, error }] = useIdMonthlyProfitMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useIdMonthlyProfitMutation(baseOptions?: Apollo.MutationHookOptions<IdMonthlyProfitMutation, IdMonthlyProfitMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<IdMonthlyProfitMutation, IdMonthlyProfitMutationVariables>(IdMonthlyProfitDocument, options);
+      }
+export type IdMonthlyProfitMutationHookResult = ReturnType<typeof useIdMonthlyProfitMutation>;
+export type IdMonthlyProfitMutationResult = Apollo.MutationResult<IdMonthlyProfitMutation>;
+export type IdMonthlyProfitMutationOptions = Apollo.BaseMutationOptions<IdMonthlyProfitMutation, IdMonthlyProfitMutationVariables>;
 export const LoginAuthUserDocument = gql`
     mutation LoginAuthUser($email: String!, $password: String!) {
   loginAuthUser(data: {email: $email, password: $password}) {
@@ -982,6 +1241,42 @@ export function useUpdateCycleMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateCycleMutationHookResult = ReturnType<typeof useUpdateCycleMutation>;
 export type UpdateCycleMutationResult = Apollo.MutationResult<UpdateCycleMutation>;
 export type UpdateCycleMutationOptions = Apollo.BaseMutationOptions<UpdateCycleMutation, UpdateCycleMutationVariables>;
+export const UpdateMonthlyProfitDocument = gql`
+    mutation UpdateMonthlyProfit($id: Int!, $profit: Int, $finishDate: DateTime) {
+  updateMonthlyProfit(data: {id: $id, profit: $profit, finishDate: $finishDate}) {
+    field
+    message
+  }
+}
+    `;
+export type UpdateMonthlyProfitMutationFn = Apollo.MutationFunction<UpdateMonthlyProfitMutation, UpdateMonthlyProfitMutationVariables>;
+
+/**
+ * __useUpdateMonthlyProfitMutation__
+ *
+ * To run a mutation, you first call `useUpdateMonthlyProfitMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMonthlyProfitMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMonthlyProfitMutation, { data, loading, error }] = useUpdateMonthlyProfitMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      profit: // value for 'profit'
+ *      finishDate: // value for 'finishDate'
+ *   },
+ * });
+ */
+export function useUpdateMonthlyProfitMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMonthlyProfitMutation, UpdateMonthlyProfitMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMonthlyProfitMutation, UpdateMonthlyProfitMutationVariables>(UpdateMonthlyProfitDocument, options);
+      }
+export type UpdateMonthlyProfitMutationHookResult = ReturnType<typeof useUpdateMonthlyProfitMutation>;
+export type UpdateMonthlyProfitMutationResult = Apollo.MutationResult<UpdateMonthlyProfitMutation>;
+export type UpdateMonthlyProfitMutationOptions = Apollo.BaseMutationOptions<UpdateMonthlyProfitMutation, UpdateMonthlyProfitMutationVariables>;
 export const UpdateTransactionDocument = gql`
     mutation UpdateTransaction($id: Int!, $state: String, $action: String, $value: Int, $hash: String, $wallet: String) {
   updateTransaction(
@@ -1057,6 +1352,57 @@ export function useUpdateWalletMutation(baseOptions?: Apollo.MutationHookOptions
 export type UpdateWalletMutationHookResult = ReturnType<typeof useUpdateWalletMutation>;
 export type UpdateWalletMutationResult = Apollo.MutationResult<UpdateWalletMutation>;
 export type UpdateWalletMutationOptions = Apollo.BaseMutationOptions<UpdateWalletMutation, UpdateWalletMutationVariables>;
+export const UserInfoIdStaffDocument = gql`
+    mutation UserInfoIdStaff($id: Int!) {
+  userInfoIdStaff(data: {id: $id}) {
+    name
+    email
+    wallet
+    document
+    qDeposit
+    allDeposit
+    qWithdraw
+    allWithdraw
+    qInvest
+    allInvest
+    qCompleteInvest
+    allCompleteInvest
+    qCycleProcess
+    allCycleProcess
+    qCycleActive
+    allCycleActive
+    qCycleComplete
+    allCycleComplete
+    cash
+  }
+}
+    `;
+export type UserInfoIdStaffMutationFn = Apollo.MutationFunction<UserInfoIdStaffMutation, UserInfoIdStaffMutationVariables>;
+
+/**
+ * __useUserInfoIdStaffMutation__
+ *
+ * To run a mutation, you first call `useUserInfoIdStaffMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUserInfoIdStaffMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [userInfoIdStaffMutation, { data, loading, error }] = useUserInfoIdStaffMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUserInfoIdStaffMutation(baseOptions?: Apollo.MutationHookOptions<UserInfoIdStaffMutation, UserInfoIdStaffMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UserInfoIdStaffMutation, UserInfoIdStaffMutationVariables>(UserInfoIdStaffDocument, options);
+      }
+export type UserInfoIdStaffMutationHookResult = ReturnType<typeof useUserInfoIdStaffMutation>;
+export type UserInfoIdStaffMutationResult = Apollo.MutationResult<UserInfoIdStaffMutation>;
+export type UserInfoIdStaffMutationOptions = Apollo.BaseMutationOptions<UserInfoIdStaffMutation, UserInfoIdStaffMutationVariables>;
 export const ActiveStartStaffDocument = gql`
     query ActiveStartStaff {
   activeStartStaff {
@@ -1280,6 +1626,44 @@ export function useAllDocumentsValidationLazyQuery(baseOptions?: Apollo.LazyQuer
 export type AllDocumentsValidationQueryHookResult = ReturnType<typeof useAllDocumentsValidationQuery>;
 export type AllDocumentsValidationLazyQueryHookResult = ReturnType<typeof useAllDocumentsValidationLazyQuery>;
 export type AllDocumentsValidationQueryResult = Apollo.QueryResult<AllDocumentsValidationQuery, AllDocumentsValidationQueryVariables>;
+export const AllMonthlyProfitDocument = gql`
+    query AllMonthlyProfit {
+  allMonthlyProfit {
+    id
+    finishDate
+    createdAt
+    updatedAt
+    profit
+  }
+}
+    `;
+
+/**
+ * __useAllMonthlyProfitQuery__
+ *
+ * To run a query within a React component, call `useAllMonthlyProfitQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllMonthlyProfitQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllMonthlyProfitQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllMonthlyProfitQuery(baseOptions?: Apollo.QueryHookOptions<AllMonthlyProfitQuery, AllMonthlyProfitQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllMonthlyProfitQuery, AllMonthlyProfitQueryVariables>(AllMonthlyProfitDocument, options);
+      }
+export function useAllMonthlyProfitLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllMonthlyProfitQuery, AllMonthlyProfitQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllMonthlyProfitQuery, AllMonthlyProfitQueryVariables>(AllMonthlyProfitDocument, options);
+        }
+export type AllMonthlyProfitQueryHookResult = ReturnType<typeof useAllMonthlyProfitQuery>;
+export type AllMonthlyProfitLazyQueryHookResult = ReturnType<typeof useAllMonthlyProfitLazyQuery>;
+export type AllMonthlyProfitQueryResult = Apollo.QueryResult<AllMonthlyProfitQuery, AllMonthlyProfitQueryVariables>;
 export const AllTransactionsDocument = gql`
     query AllTransactions {
   allTransactions {

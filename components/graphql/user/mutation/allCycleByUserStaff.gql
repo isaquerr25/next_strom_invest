@@ -1,0 +1,16 @@
+mutation allCycleByUserStaff($id: Int!) {
+  allCycleByUserStaff(data: { id: $id }) {
+    id
+    action
+    valueUSD
+    valueBTC
+    finalValueUSD
+    finalValueBTC
+    state
+    beginDate
+    finishDate
+    createdAt
+    updatedAt
+    hash
+  }
+}

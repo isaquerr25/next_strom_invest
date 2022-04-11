@@ -1,0 +1,8 @@
+mutation UpdateMonthlyProfit($id: Int!, $profit: Int, $finishDate: DateTime) {
+  updateMonthlyProfit(
+    data: { id: $id, profit: $profit, finishDate: $finishDate }
+  ) {
+    field
+    message
+  }
+}

@@ -41,7 +41,8 @@ import {
 	FaChartLine,
 	FaUserAlt,
 	FaCompass,
-	FaVoteYea
+	FaVoteYea,
+	FaStreetView
 } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
@@ -63,10 +64,11 @@ import { GiMammoth } from 'react-icons/gi';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/admin/user' , label: 'Home', icon: FiHome },
 	{ href: '/admin/user/planilha' , label: 'Planilhas', icon: FaMoneyBill },
-	{ href: '/admin/user/cycles' , label: 'Cycles Create', icon: FaCompass },
+	{ href: '/admin/user/cycles' , label: 'Validate Cycles', icon: FaCompass },
 	{ href: '/admin/user/document' , label: 'Validate Document', icon: GrDocumentUser },
 	{ href: '/admin/user/withdraw' , label: 'Requests Withdraw', icon: FaVoteYea },
 	{ href: '/admin/user/moth' , label: 'Moth Profit', icon: GiMammoth },
+	{ href: '/admin/user/alone' , label: 'Info User', icon: FaStreetView },
 ];
 
 
@@ -133,9 +135,11 @@ export function NavLogin() {
 						bg='red'
 						borderRadius={50}
 						color='white'
+						cursor={'pointer'}
 					>
 
 						<Icon
+							
 							mr="1"
 							fontSize="16"
 							_groupHover={{
