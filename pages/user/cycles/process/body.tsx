@@ -48,7 +48,7 @@ export const BodyCycleProcess = () =>{
 			<>
 				<Flex
 					boxShadow='xl'
-					minW={'500px'}
+
 
 					flexDirection="column"
 					gap={5}
@@ -58,8 +58,8 @@ export const BodyCycleProcess = () =>{
 
 				>
 					<Flex justifyContent={'flex-start'} w='100%'>
-						<Text fontSize={'2xl'}>
-					Account Transactions Activity
+						<Text fontSize={'2xl'}  color='teal'>
+							Account Transactions Activity
 						</Text>
 					</Flex>
 					<Flex
@@ -69,11 +69,11 @@ export const BodyCycleProcess = () =>{
 						gap={2}
 					>
 
-						<Text textAlign={'right'}>
+						<Text textAlign={'right'}  color='teal'>
 							Transaction type:
 						</Text>
 						<FormControl w='200px'>
-							<Select id='country' placeholder='All' onChange={e => SetDropState(e.target.value)} >
+							<Select   variant='flushed' bg='transparent' color='teal' id='country' placeholder='All' onChange={e => SetDropState(e.target.value)} >
 								<option>PROCESS</option>
 								<option>ACTIVE</option>
 								<option>COMPLETE</option>
@@ -87,7 +87,7 @@ export const BodyCycleProcess = () =>{
 					boxShadow='xl'
 					flexDirection={'column'}
 					w='auto'
-					bg='gray.200'
+					bg='transparent'
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
@@ -123,7 +123,7 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 					height: '2px',
 				},
 				'&::-webkit-scrollbar-thumb': {
-					background: 'gray',
+					background: 'black',
 					borderRadius: '14px',
 				},
 			}}
@@ -152,13 +152,13 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 									return(<></>);
 								}
 							}
-							let color = 'black';
+							let color = 'white';
 
 
 							if (compose.state == 'CANCEL'){
 								color = 'red';
 							}else if (compose.state == 'COMPLETE'){
-								color = 'green';
+								color = 'green.300';
 							}
 
 

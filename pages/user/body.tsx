@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Icon, Text } from '@chakra-ui/react';
 import { FormatMoneyParse } from 'format-money-js';
 import Router from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ import { ForexShow } from './forexGraph';
 import axios from 'axios';
 
 import Forexy from 'forexy';
+import { ForexRow } from './forextoRow';
 
 export const BodySetOne = () =>{
 
@@ -84,10 +85,17 @@ export const BodySetOne = () =>{
 				flexDirection='column'
 				width={'100%'}
 				h='auto'
+				bg='#171717'
 			>
+				<Box className='forexShowcss' w={'full'} cursor={'none'} pointerEvents='none' >
+					<ForexRow/>
+
+				</Box>
 				<Carousel/>
 				<Box width={'100%'} p={'20px'}>
 				</Box>
+				<Divider w={'80%'} mb='15px' p='2px'  color={'teal'} style={{ background: 'teal' }}  borderRadius={5}/>
+				<Text fontSize={'2xl'} color='teal'>INFORMATION</Text>
 				<Box width={'100%'} p={'10px'}>
 					<Flex
 						alignItems={'center'}
@@ -114,7 +122,7 @@ export const BodySetOne = () =>{
 						/>
 					</Flex>
 				</Box>
-				
+				<Divider w={'80%'} mb='15px' p='2px'  color={'teal'} style={{ background: 'teal' }}  borderRadius={5}/>
 				{	usePar != null && usePar != undefined  &&
 					<>
 						<Flex flexDirection={'row'} gap={3} flexWrap='wrap' justifyContent='center'>

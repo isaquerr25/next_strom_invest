@@ -30,7 +30,7 @@ export function Contact() {
 	return (
 		<Container
 			id="contact"
-			bg="white"
+
 			maxW="full"
 			mt={0}
 			centerContent

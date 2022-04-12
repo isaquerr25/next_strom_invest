@@ -17,6 +17,6 @@
      "typeRoots" : ["node_modules/@types", "components/types"]
 
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/user/forextoRowtsx"],
   "exclude": ["node_modules"]
 }

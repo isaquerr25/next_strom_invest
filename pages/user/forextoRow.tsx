@@ -1,7 +1,28 @@
 import { AspectRatio, Box, Text } from '@chakra-ui/react';
-import { SymbolOverview, TechnicalAnalysis } from 'react-ts-tradingview-widgets';
-export const ForexShow = () =>{
-
+import { SymbolOverview, TechnicalAnalysis , TickerTape} from 'react-ts-tradingview-widgets';
+export const ForexRow = () =>{
+	const aa =[
+		{
+			'proName': 'FOREXCOM:SPXUSD',
+			'title': 'S&P 500'
+		},
+		{
+			'proName': 'FOREXCOM:NSXUSD',
+			'title': 'Nasdaq 100'
+		},
+		{
+			'proName': 'FX_IDC:EURUSD',
+			'title': 'EUR/USD'
+		},
+		{
+			'proName': 'BITSTAMP:BTCUSD',
+			'title': 'BTC/USD'
+		},
+		{
+			'proName': 'BITSTAMP:ETHUSD',
+			'title': 'ETH/USD'
+		}
+	];
 	return (
 
 	// <AspectRatio w='full' h={'full'}>
@@ -27,17 +48,7 @@ export const ForexShow = () =>{
 	// 	%20%20%20%20utm_campaign=symbol-overview"
 	// 	/>
 	// </AspectRatio>
-		
-		<SymbolOverview colorTheme="dark"
-			autosize
-			isTransparent
-			chartType="candlesticks"
-			downColor="#800080"
-			borderDownColor="#800080"
-			width={'100%'}
-			wickDownColor="#800080" />
+
+		<TickerTape symbols={aa} colorTheme="dark"></TickerTape>	
 	);
 };
-
-
-export default ForexShow;

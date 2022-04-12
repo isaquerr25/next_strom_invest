@@ -15,6 +15,8 @@ import { useCreateCycleMutation, useUserInfoDocumentQuery } from '../../generate
 import { daysInMonth } from './utils';
 import { FormatMoney } from 'format-money-js';
 import { BsCashCoin } from 'react-icons/bs';
+import { ForexRow } from '../forextoRow';
+import { convertMoney } from '../../../components/utils/convertMoney';
 
 export const BodyCycle= () =>{
 
@@ -42,6 +44,7 @@ export const BodyCycle= () =>{
 			gap={2}
 			p={2}
 		>
+			
 			{userInfoGraph.loading && <Loading/>}
 			{dataUser &&
 			<>
@@ -52,24 +55,24 @@ export const BodyCycle= () =>{
 
 					flexDirection="column"
 					gap={5}
-					bg='gray.200'
+					bg='black'
 					borderRadius={10}
 					paddingInline={'15px'}
 					paddingBlock={'15px'}
 				>
-					<Text fontSize={'2xl'}>
+					<Text color='teal' fontSize={'2xl'}>
 						Create Cycle Invest
 					</Text>
-					<Text>
+					<Text color='teal'>
 					All fields below are mandatory
 					</Text>
 
 
 
 					<Box>
-						<Flex alignItems={'center'}>
-							<FormLabel htmlFor='name'>Trading Amount:</FormLabel>
-							<FormLabel fontSize={'xl'}>{dataUser.valuePrice}(USD)</FormLabel>
+						<Flex alignItems={'center'} gap={1}>
+							<Text color='teal'>Trading Amount:</Text>
+							<Text color='green.300' fontSize={'xl'}>{convertMoney(dataUser.valuePrice/100)}</Text>
 						</Flex>
 						<FormikInputs/>
 					</Box>
@@ -82,7 +85,7 @@ export const BodyCycle= () =>{
 					boxShadow='xl'
 					flexDirection={'column'}
 					w='auto'
-					bg='gray.200'
+					bg='black'
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
@@ -164,12 +167,12 @@ function FormikInputs() {
 						<Flex flexDirection={'column'} gap={3}>
 
 							<Box>
-								<FormLabel>Amount</FormLabel>
+								<Text color='teal'>Amount</Text>
 								<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 							</Box>
 							<Flex h={'100px'} gap={3}>
 								<Box>
-									<FormLabel  htmlFor='datePicker'>Date Close Cycle</FormLabel>
+									<Text  color='teal' htmlFor='datePicker'>Date Close Cycle</Text>
 									<DatePicker
 										wrapperClassName="datePicker"
 										name='finishDateInput'
@@ -182,20 +185,17 @@ function FormikInputs() {
 									/>
 								</Box>
 								<Box height={'100%'} alignItems='center' justifyContent={'center'}>
-									<Text fontSize={'lg'} >Profit finish Cycle:</Text>
+									<Text color='teal' fontSize={'lg'} >Profit Finish Cycle:</Text>
 
-									<Text display={'flex'} alignItems='center'  h={'50px'} fontSize={'xl'} >{calculator(values.beginDate,finishDate,values.value)}</Text>
+									<Text color='teal' display={'flex'} alignItems='center'  h={'50px'} fontSize={'xl'} >{calculator(values.beginDate,finishDate,values.value)}</Text>
 
 								</Box>
 							</Flex>
-							<Flex justifyContent={'space-between'}>
+							<Flex justifyContent={'space-between'} gap={1}>
 								<Button
-									w={'70%'}
-									bg={'blue.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+									variant='outline'
+									colorScheme='teal'
+									w={{Base:'50%',sm:'70%'}}
 									onClick={()=>{console.log('das');}}
 									type="submit"
 									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
@@ -204,16 +204,16 @@ function FormikInputs() {
 								Cycle Invest
 								</Button>
 								<Button
-									bg={'green.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+									variant='outline'
+									colorScheme='orange'
+									
 									onClick={()=>{Router.push('/user/cycles/process');}}
 									type="button"
 									leftIcon={<Icon as={BsCashCoin} />}
 								>
-								See all Cycles in Process
+									<Text fontSize={'12px'}>
+										See all Cycles in Process
+									</Text>
 								</Button>
 							</Flex>
 						</Flex>
@@ -282,19 +282,19 @@ const calculator= (beginDate:Date|null,finishDate:Date|null| undefined, valueUSD
 
 const DescriptionAndRestriction = () =>(
 	<>
-		<Text fontSize={'xl'}>
+		<Text fontSize={'xl'} color='teal'>
 			Important Information
 		</Text>
-		<Text >
+		<Text  color='teal'>
 			Please fill in the required fields below
 		</Text>
-		<Text>
+		<Text color='teal'>
 			Minimum in account is 50 USD
 		</Text>
-		<Text>
+		<Text color='teal'>
 			To make a new investment cycle, the money must already be in account
 		</Text>
-		<Text>
+		<Text color='teal'>
 			* After the end of each cycle, the money will return to your account
 			with the additional profit generated over time. <br/>
 			* The forecast value is an approximation of how much profit you will receive.
@@ -320,11 +320,12 @@ const CalenderCustomInput:FC<Props> = ({ value, onClick }) => (
 		placeholder='00/00/0000'
 		onClick={onClick}
 		colorScheme='transparent'
-		color='black'
+		color='white'
 		alignItems='center'
-		bg='white'
+		bg='black'
 		borderRadius={10}
-		borderColor='blackAlpha.500'
+		borderColor='teal.500'
+		
 	/>
 
 );

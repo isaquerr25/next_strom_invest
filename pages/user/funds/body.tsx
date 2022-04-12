@@ -13,6 +13,10 @@ import FormInput from '../../../components/utils/formInput';
 import { Loading } from '../../../components/utils/loading';
 import { PopMsg } from '../../../components/utils/PopMsg';
 import { useCreateDepositMutation, useCreateTransactionMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import { ForexRow } from '../forextoRow';
+import { Ticker, Timeline } from 'react-ts-tradingview-widgets';
+import { styled } from '@chakra-ui/react';
+
 
 export const BodyFunds = () =>{
 
@@ -29,83 +33,91 @@ export const BodyFunds = () =>{
 	return(
 
 		<>
+		
 			<Box>
 				{userInfoGraph.loading && <Loading/>}
 			</Box>
-			<Flex>
+			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
+				<ForexRow/>
+
+			</Box>
+			<Flex justifyContent={'center'}>
 
 
 				{dataUser &&
-					<>
+					
+						
+					<Flex
+						className='au'
+						flexWrap={'wrap'}
+						justifyContent={'center'}
+						w='full'
+						gap={2}
+						p={1.5}
+						
+					>
+
+
 						<Flex
-							flexWrap={'wrap'}
-							justifyContent={'center'}
-							gap={2}
-							p={2}
+							boxShadow='xl'
+							width={{base:'full',lg:'50%'}}
+							// minW={'500px'}
+							flexDirection="column"
+							gap={5}
+							bg='black'
+							borderRadius={10}
+							paddingInline={'15px'}
+							paddingBlock={'15px'}
 
 						>
+							<Text color={'teal.300'} fontSize={'2xl'}>
+								Deposit using Bitcoin
+							</Text>
 
-
-							<Flex
-								boxShadow='xl'
-								width={{base:'full',md:'65%'}}
-								minW={'500px'}
-								flexDirection="column"
-								gap={5}
-								bg='gray.200'
-								borderRadius={10}
-								paddingInline={'15px'}
-								paddingBlock={'15px'}
-
-							>
-								<Text fontSize={'2xl'}>
-									Deposit using Bitcoin
-								</Text>
-
-								<Text>
-									All fields below are mandatory
-								</Text>
-								<Image
-									width={'100px'}
-									src='./icon_bitcoin.png'
-									alt='Storm Invest'
-								/>
-								<Box>
-									<Flex alignItems={'center'}>
-										<FormLabel htmlFor='name'>Trading Amount:</FormLabel>
-										<FormLabel fontSize={'xl'}>{convertMoney(Number(dataUser.valuePrice)/100)}</FormLabel>
-									</Flex>
-									<FormikWallet/>
-								</Box>
-
-							</Flex>
-
-
-
-							<Flex
-								boxShadow='xl'
-								flexDirection={'column'}
-								w='auto'
-								bg='gray.200'
-								borderRadius={10}
-								minW={'275px'}
-								p={5}
-
-								gap={5}
-								flex={1}
-							>
-								<DescriptionAndRestriction/>
-
-							</Flex>
-
-
-
-
+							<Text color={'teal.300'} >
+								All fields below are mandatory
+							</Text>
+							<Image
+								width={'100px'}
+								src='../icon_bitcoin.png'
+								alt='Storm Invest'
+							/>
+							<Box>
+								<Flex alignItems={'center'} gap={5}>
+									<Text color={'teal.300'}>Trading Amount:</Text>
+									<Text color={'teal.300'} fontSize={'xl'}>{convertMoney(Number(dataUser.valuePrice)/100)}</Text>
+								</Flex>
+								<FormikWallet/>
+							</Box>
 
 						</Flex>
-					</>
+
+						<Flex
+							boxShadow='xl'
+							flexDirection={'column'}
+							w='auto'
+							bg='black'
+							borderRadius={10}
+							minW={'275px'}
+							p={5}
+
+							gap={5}
+							flex={1}
+						>
+							<DescriptionAndRestriction/>
+
+						</Flex>
+						<Box w={{base:'full',sm:'auto'}} className='forexShowcss' borderColor={'teal.300'} borderStyle='solid' borderWidth='2px' bg='black' borderRadius={10}>
+							<Timeline style={{pointerEvent:'none'}} isTransparent colorTheme="dark" feedMode="market" market="crypto" height={400} width="100%"></Timeline>
+
+						</Box>
+					</Flex>
+					
 				}
 			</Flex>
+			<Box className='forexShowcss' w={'full'} cursor={'none'} pointerEvents='none' display='flex' alignItems={'flex-end'} cursor='none'>
+				<Ticker colorTheme="dark"></Ticker>
+			</Box>
 		</>
 
 	);
@@ -115,16 +127,16 @@ export const BodyFunds = () =>{
 
 const DescriptionAndRestriction = () =>(
 	<>
-		<Text fontSize={'xl'}>
+		<Text fontSize={'xl'} color='teal.300' >
       Important Information
 		</Text>
-		<Text >
+		<Text color='teal.300' >
       Please fill in the required fields below
 		</Text>
-		<Text>
+		<Text color='teal.300' >
       Minimum Deposit is 50 USD
 		</Text>
-		<Text>
+		<Text color='teal.300' >
       Every transfer transaction is made in BTC and converted into USD for us to operate.
 		</Text>
 	</>
@@ -206,16 +218,11 @@ function FormikWallet() {
 					<Form >
 						<Stack spacing={4}>
 							<Box>
-								<FormLabel>Amount</FormLabel>
+								<Text color='teal.300' >Amount</Text>
 								<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 							</Box>
 							<Stack spacing={10}>
-								<Button
-									bg={'blue.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+								<Button colorScheme='teal' variant='outline'
 									onClick={()=>{console.log('das');}}
 									type="submit"
 									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}

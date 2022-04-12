@@ -4,7 +4,9 @@ import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
 import { NavLogin } from '../../../components/utils/navigateLogin';
+import { ForexRow } from '../forextoRow';
 import { BodyTransactions } from './body';
+
 
 
 
@@ -14,6 +16,9 @@ const Transactions = () =>{
 		<>
 			<HeaderMod title='Transactions' />
 			<NavLogin children={undefined}/>
+			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
+				<ForexRow/>
+			</Box>
 			<BodyTransactions/>
 			{/* <FooterModify/> */}
 		</>

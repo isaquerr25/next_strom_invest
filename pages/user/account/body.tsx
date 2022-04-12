@@ -15,6 +15,8 @@ import { MdCreate } from 'react-icons/md';
 import { ImageFile } from 'react-dropzone';
 import { UploadFile } from './UploadFile';
 import { GiWallet } from 'react-icons/gi';
+import { MdOutlinePassword } from 'react-icons/md';
+import { BiWallet } from 'react-icons/bi';
 
 
 export const BodyAccount = () =>{
@@ -75,26 +77,32 @@ const InfoUser = ({name,email,wallet,document}:typeInfoUser) =>(
 		paddingInline={'15px'}
 		paddingBlock={'15px'}
 		flexDirection="column"
-		bg='gray.200'
+		bg='black'
 	>
-		<Badge  bg='gray.200' color={document === 'VALID' && wallet !='' ? 'green' : 'red'}>{(document != 'VALID' && wallet !='') ? 'NOT VALID' : 'VALID' }</Badge>
-		<Text fontSize={'2xl'}>
+		<Badge  bg='black' color={document === 'VALID' && wallet !='' ? 'green' : 'red'}>{(document != 'VALID' && wallet !='') ? 'NOT VALID' : 'VALID' }</Badge>
+		<Text color='teal' fontSize={'2xl'}>
 					Account
 		</Text>
 
-		<Text>
+		<Text color='teal'>
 			Name: {name}
 		</Text>
-		<Text>
+		<Text color='teal'>
 			Email: {email}
 		</Text>
-		<Text>
+		<Text color='teal'>
 			Wallet BTC: {wallet}
 		</Text>
-		<Text>
-			Document ID: {document}
-		</Text>
-		<Text>
+		<Flex gap={2}>
+			<Text color='teal'> 
+				Document ID:
+			</Text>
+			<Text color={document == 'VALID' ? 'green.500' :'red'}> 
+				{document}
+			</Text>
+		</Flex>
+		
+		<Text color='teal'>
 			Account: Validated
 		</Text>
 	</Flex>
@@ -107,12 +115,12 @@ const DescriptionAndRestriction = () =>(
 		`}
 		boxShadow='xl'
 		flexDirection={'column'}
-		bg='gray.200'
+		bg='black'
 	>
-		<Text fontSize={'xl'}>
+		<Text fontSize={'xl'} color='teal'>
 			Important Information
 		</Text>
-		<Text >
+		<Text color='teal'>
 			Both the wallet and document fields must
 			be validated for the account to be active
 		</Text>
@@ -132,9 +140,9 @@ const ValidateDocument = ( {statusDocument = '' }) =>{
 			flexDirection="column"
 			paddingInline={'15px'}
 			paddingBlock={'15px'}
-			bg='gray.200'
+			bg='black'
 		>
-			<Text fontSize={'2xl'}>
+			<Text fontSize={'2xl'} color='teal'>
 			Document
 			</Text>
 			{ statusDocument != '' &&
@@ -157,12 +165,12 @@ const NewPassword = () =>(
 
 		flexDirection="column"
 		gap={5}
-		bg='gray.200'
+		bg='black'
 		borderRadius={10}
 		paddingInline={'15px'}
 		paddingBlock={'15px'}
 	>
-		<Text fontSize={'2xl'}>
+		<Text fontSize={'2xl'} color='teal' >
 			Change Password
 		</Text>
 		<FormikPassword/>
@@ -214,30 +222,27 @@ function FormikPassword() {
 					<Form >
 						<Stack spacing={4}>
 							<Box>
-								<FormLabel>Old Password</FormLabel>
+								<Text color='teal'>Old Password</Text>
 								<FormInput type="password" placeholder="Old Password" name="oldPassword" />
 							</Box>
 							<Box>
-								<FormLabel>Password</FormLabel>
+								<Text color='teal'>Password</Text>
 								<FormInput type="password" placeholder="Password" name="password" />
 							</Box>
 							<Box>
-								<FormLabel>Confirm Password</FormLabel>
+								<Text color='teal'>Confirm Password</Text>
 								<FormInput type="password" placeholder="Confirm Password" name="confirmPassword" />
 							</Box>
 							<Stack spacing={10}>
 								<Button
-									bg={'blue.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+									variant='outline'
+									colorScheme='teal'
 									onClick={()=>{console.log('das');}}
 									type="submit"
-									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
+									leftIcon={isSubmitting ? <Spinner /> : <Icon as={MdOutlinePassword} />}
 									disabled={isSubmitting}
 								>
-											Register
+									New Password
 								</Button>
 							</Stack>
 						</Stack>
@@ -260,13 +265,13 @@ const ChangeWallet = () =>(
 
 		flexDirection="column"
 		gap={5}
-		bg='gray.200'
+		bg='black'
 		borderRadius={10}
 		paddingInline={'15px'}
 		paddingBlock={'15px'}
 
 	>
-		<Text fontSize={'2xl'}>
+		<Text fontSize={'2xl'} color='teal'>
 			Change Wallet
 		</Text>
 		<FormikWallet/>
@@ -312,19 +317,16 @@ function FormikWallet() {
 					<Form >
 						<Stack spacing={4}>
 							<Box>
-								<FormLabel>Wallet</FormLabel>
+								<Text color={'teal'}>Wallet</Text>
 								<FormInput type="text" placeholder="Wallet" name="wallet" />
 							</Box>
 							<Stack spacing={10}>
 								<Button
-									bg={'blue.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+									variant='outline'
+									colorScheme='teal'
 									onClick={()=>{console.log('das');}}
 									type="submit"
-									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
+									leftIcon={isSubmitting ? <Spinner /> : <Icon as={BiWallet} />}
 									disabled={isSubmitting}
 								>
 											Register

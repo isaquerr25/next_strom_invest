@@ -15,7 +15,6 @@ const FundsDeposit = () =>{
 			<HeaderMod title='Funds Deposit' />
 			<NavLogin children={undefined}/>
 			<BodyFunds/>
-			{/* <FooterModify/> */}
 		</>
 	);
 };

@@ -1,11 +1,10 @@
-
+import { ThemeProvider } from 'next-themes';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, from } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import DotEnvUtil from '../components/utils/DotEnvUtil';
-
 
 
 export const client  = new ApolloClient({
@@ -23,7 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return(
 		<ApolloProvider client={client} >
 			<ChakraProvider>
-				<Component {...pageProps} />
+				<ThemeProvider>
+					<Component {...pageProps} />
+				</ThemeProvider>
 			</ChakraProvider>
 		</ApolloProvider>
 	);

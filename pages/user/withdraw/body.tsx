@@ -42,31 +42,31 @@ export const BodyWithdraw = () =>{
 				<Flex
 					boxShadow='xl'
 					width={{base:'full',md:'65%'}}
-					minW={'500px'}
+					h='350px'
 
 					flexDirection="column"
 					gap={5}
-					bg='gray.200'
+					bg='black'
 					borderRadius={10}
 					paddingInline={'15px'}
 					paddingBlock={'15px'}
-
+					justifyContent='space-around'
 				>
 
-					<Text fontSize={'2xl'}>
+					<Text color='teal' fontSize={'2xl'}>
           Withdraw
 					</Text>
 
-					<Text>
+					<Text color={'teal'}>
             All fields below are mandatory
 					</Text>
-					<Box>
-						<Flex alignItems={'center'}>
-							<FormLabel htmlFor='name'>Trading Amount:</FormLabel>
-							<FormLabel fontSize={'xl'}>{convertMoney(Number(dataUser.valuePrice)/100)}</FormLabel>
-						</Flex>
-						<FormikWallet/>
-					</Box>
+					
+					<Flex alignItems={'center'} gap={1}>
+						<Text color='teal'>Trading Amount:</Text>
+						<Text color='green.500' fontSize={'xl'}>{convertMoney(Number(dataUser.valuePrice)/100)}</Text>
+					</Flex>
+					<FormikWallet/>
+					
 
 				</Flex>
 
@@ -76,7 +76,7 @@ export const BodyWithdraw = () =>{
 					boxShadow='xl'
 					flexDirection={'column'}
 					w='auto'
-					bg='gray.200'
+					bg='black'
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
@@ -96,16 +96,16 @@ export const BodyWithdraw = () =>{
 
 const DescriptionAndRestriction = () =>(
 	<>
-		<Text fontSize={'xl'}>
+		<Text fontSize={'xl'} color='teal'>
       Important Information
 		</Text>
-		<Text >
+		<Text color='teal'>
       Please fill in the required fields below
 		</Text>
-		<Text>
+		<Text color='teal'>
       Minimum withdraw is 50 USD
 		</Text>
-		<Text>
+		<Text color='teal'>
       All withdrawals will be converted from USD to BTC.<br/>
 			Remember, withdrawals can take up to 5 business days.<br/>
 			After the withdrawal request, confirm the information in the email.
@@ -165,18 +165,16 @@ function FormikWallet() {
 			>
 				{({ isSubmitting }) => (
 					<Form >
-						<Stack spacing={4}>
+						<Stack spacing={9}>
 							<Box>
-								<FormLabel>Amount</FormLabel>
+								<Text color={'teal'}>Amount:</Text>
 								<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 							</Box>
 							<Stack spacing={10}>
 								<Button
-									bg={'blue.400'}
-									color={'white'}
-									_hover={{
-										bg: 'blue.500',
-									}}
+									variant='outline'
+									colorScheme='teal'
+									
 									onClick={()=>{console.log('das');}}
 									type="submit"
 									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
@@ -190,7 +188,7 @@ function FormikWallet() {
 				)}
 			</Formik>
 			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={setPopShow.off}/>
-
+			
 		</>
 	);
 }

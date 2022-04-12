@@ -46,8 +46,6 @@ export const BodyTransactions = () =>{
 			<>
 				<Flex
 					boxShadow='xl'
-					minW={'500px'}
-
 					flexDirection="column"
 					gap={5}
 					borderRadius={10}
@@ -56,8 +54,8 @@ export const BodyTransactions = () =>{
 
 				>
 					<Flex justifyContent={'flex-start'} w='100%'>
-						<Text fontSize={'2xl'}>
-					Account Transactions Activity
+						<Text color='teal.300' fontSize={'2xl'}>
+							Account Transactions Activity
 						</Text>
 					</Flex>
 					<Flex
@@ -67,11 +65,11 @@ export const BodyTransactions = () =>{
 						gap={2}
 					>
 
-						<Text textAlign={'right'}>
+						<Text textAlign={'right'} color='teal'>
 							Transaction type:
 						</Text>
 						<FormControl w='200px'>
-							<Select id='country' placeholder='All' onChange={e => SetDropState(e.target.value)} >
+							<Select id='country' variant='flushed' bg='transparent' color='teal'  placeholder='All' onChange={e => SetDropState(e.target.value)} >
 								<option>DEPOSIT</option>
 								<option>WITHDRAW</option>
 								<option>INVEST</option>
@@ -86,7 +84,7 @@ export const BodyTransactions = () =>{
 					boxShadow='xl'
 					flexDirection={'column'}
 					w='auto'
-					bg='gray.200'
+					bg='transparent'
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
@@ -153,7 +151,8 @@ const TableTransaction = ({arrayTransactions,dropValue}) => {
 									return(<></>);
 								}
 							}
-							const color = compose.state == 'CANCEL' ? 'red' : 'black';
+							let color = compose.state == 'CANCEL' ? 'red' : 'white';
+							color = compose.state == 'COMPLETE' ? 'green.300' : color;
 
 							return(
 								<Tr color={color} key={compose.id}>

@@ -111,7 +111,7 @@ export function NavLogin() {
 						width={'150px'}
 						minWidth={'150px'}
 						minHeight={'55px'}
-						src={'../logo.png' ?? './logo.png'}
+						src={'../../logo.png' ?? './logo.png'}
 						alt='Storm Invest'
 					/>
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
