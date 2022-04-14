@@ -2,9 +2,10 @@ mutation CreateUserResolver(
   $email: String!
   $password: String!
   $name: String!
+  $numberTelephone: String!
 ) {
   createUserResolver(
-    data: { email: $email, password: $password, name: $name }
+    data: { email: $email, password: $password, name: $name, numberTelephone:$numberTelephone }
   ) {
     field
     message

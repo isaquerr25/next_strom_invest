@@ -1,17 +1,17 @@
 import { Badge, Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Icon, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Spinner, Stack, styled, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr, useBoolean } from '@chakra-ui/react';
 import { Field,  Form, Formik } from 'formik';
 import { FaImages } from 'react-icons/fa';
-import { validateEmail, validationDocument, validationNewPassword, validationRegister, validationWallet } from '../../../components/utils/validateInputs';
+import { validateEmail, validationDocument, validationNewPassword, validationNumber, validationRegister, validationWallet } from '../../../components/utils/validateInputs';
 import { jsx, css } from '@emotion/react';
 import { containerEqual } from './style';
-import { useAddDocumentPictureMutation, useUpdateAuthPasswordMutation, useUpdateWalletMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import { useAddDocumentPictureMutation, useUpdateAuthPasswordMutation, useUpdateNumberTelephoneMutation, useUpdateWalletMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
 import Router  from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { Console } from 'console';
 import { Loading } from '../../../components/utils/loading';
 import FormInput from '../../../components/utils/formInput';
 import { PopMsg } from '../../../components/utils/PopMsg';
-import { MdCreate } from 'react-icons/md';
+import { MdCreate, MdPhonelinkSetup } from 'react-icons/md';
 import { ImageFile } from 'react-dropzone';
 import { UploadFile } from './UploadFile';
 import { GiWallet } from 'react-icons/gi';
@@ -49,11 +49,12 @@ export const BodyAccount = () =>{
 					email={dataUser?.email!}
 					wallet={dataUser?.wallet!}
 					document={dataUser?.document!}
+					numberTelephone={dataUser?.numberTelephone!}
 				/>
 
 				<DescriptionAndRestriction/>
 				<ValidateDocument statusDocument={dataUser?.document!}/>
-				<ChangeWallet/>
+				<ChangeSingleInfoUser/>
 				<NewPassword/>
 			</>
 			}
@@ -67,8 +68,9 @@ interface typeInfoUser{
 	wallet:string
 	email:string
 	document:string
+	numberTelephone:string|null
 }
-const InfoUser = ({name,email,wallet,document}:typeInfoUser) =>(
+const InfoUser = ({name,email,wallet,document,numberTelephone}:typeInfoUser) =>(
 	<Flex
 		css={css`
 			${containerEqual};
@@ -103,7 +105,7 @@ const InfoUser = ({name,email,wallet,document}:typeInfoUser) =>(
 		</Flex>
 		
 		<Text color='teal'>
-			Account: Validated
+			Phone Number: {numberTelephone ?? '+0'}
 		</Text>
 	</Flex>
 );
@@ -255,7 +257,7 @@ function FormikPassword() {
 	);
 }
 
-const ChangeWallet = () =>(
+const ChangeSingleInfoUser = () =>(
 	<Flex
 
 		flex={1}
@@ -275,6 +277,10 @@ const ChangeWallet = () =>(
 			Change Wallet
 		</Text>
 		<FormikWallet/>
+		<Text fontSize={'2xl'} color='teal'>
+			Change Phone Number
+		</Text>
+		<FormikPhoneNumber/>
 	</Flex>
 );
 interface ValuesFormikWallet{
@@ -327,6 +333,72 @@ function FormikWallet() {
 									onClick={()=>{console.log('das');}}
 									type="submit"
 									leftIcon={isSubmitting ? <Spinner /> : <Icon as={BiWallet} />}
+									disabled={isSubmitting}
+								>
+											Register
+								</Button>
+							</Stack>
+						</Stack>
+					</Form>
+				)}
+			</Formik>
+			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={setPopShow.off}/>
+
+		</>
+	);
+}
+
+
+interface TypeFormikPhoneNumber{
+	numberTelephone:string
+}
+function FormikPhoneNumber() {
+	const [UserPhoneMutation, ] = useUpdateNumberTelephoneMutation();
+	const [errorMsg, setErrorMsg] = useState('');
+	const [popShow, setPopShow] = useBoolean(false);
+	const [titleShow, setTitleShow] = useState('Error');
+
+
+	return (
+		<>
+			<Formik
+				initialValues={{
+					numberTelephone: '',
+				}}
+
+				validationSchema={validationNumber}
+
+				onSubmit={async (values: TypeFormikPhoneNumber, { setSubmitting, setErrors }) => {
+					console.log('enter');
+					setSubmitting(true);
+					const result = await UserPhoneMutation({variables:values});
+					setSubmitting(false);
+					const errors = result.data?.updateNumberTelephone;
+					if (errors?.field=='success') {
+						setErrorMsg('File Phone Number  Alter');
+						setTitleShow('Success');
+						setPopShow.on();
+					} else {
+						setErrorMsg(errors?.message  ?? '');
+						setTitleShow('Error');
+						setPopShow.on();
+					}
+				}}
+			>
+				{({ isSubmitting }) => (
+					<Form >
+						<Stack spacing={4}>
+							<Box>
+								<Text color={'teal'}>Phone Number</Text>
+								<FormInput type="phoneNumber" placeholder="+xxxxxxxxxxxxx" name="numberTelephone" />
+							</Box>
+							<Stack spacing={10}>
+								<Button
+									variant='outline'
+									colorScheme='teal'
+									onClick={()=>{console.log('das');}}
+									type="submit"
+									leftIcon={isSubmitting ? <Spinner /> : <Icon as={MdPhonelinkSetup} />}
 									disabled={isSubmitting}
 								>
 											Register

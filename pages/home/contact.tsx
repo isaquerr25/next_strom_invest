@@ -16,6 +16,9 @@ import {
 	InputGroup,
 	InputLeftElement,
 	Textarea,
+	useBoolean,
+	Spinner,
+	Icon,
 } from '@chakra-ui/react';
 import {
 	MdPhone,
@@ -25,12 +28,29 @@ import {
 	MdOutlineEmail,
 } from 'react-icons/md';
 import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
+import { useCreateEmailBackMutation } from '../generated/graphql';
+import { Formik,Field, Form } from 'formik';
+import { PopMsg } from '../../components/utils/PopMsg';
+import { useState } from 'react';
+import FormInput from '../../components/utils/formInput';
+import { FiSend } from 'react-icons/fi';
+
+interface typesEmail{
+	name:string
+	email:string
+	message:string
+}
 
 export function Contact() {
+	const [UseCreateEmailBack,] = useCreateEmailBackMutation();
+
+	const [errorMsg, setErrorMsg] = useState('');
+	const [popShow, setPopShow] = useBoolean(false);
+	const [titleShow, setTitleShow] = useState('Error');
+
 	return (
 		<Container
 			id="contact"
-
 			maxW="full"
 			mt={0}
 			centerContent
@@ -49,48 +69,62 @@ export function Contact() {
 								<Box>
 									<Heading>Contact</Heading>
 									<Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
-                    Fill up the form below to contact
+                    Please contact us if you have any <br/> 
+										questions or if we can improve our platform.
 									</Text>
 								</Box>
 							</WrapItem>
 							<WrapItem>
 								<Box bg="white" borderRadius="lg">
 									<Box m={8} color="#0B0E3F">
-										<VStack spacing={5}>
-											<FormControl id="name">
-												<FormLabel>Your Name</FormLabel>
-												<InputGroup borderColor="#E0E1E7">
+										<Formik
+											initialValues={{name:'',email:'',message:''}}
+											onSubmit={async (values: typesEmail, { setSubmitting, setErrors }) => {
+												setSubmitting(true);
+												const result = await UseCreateEmailBack({variables:values});
+												setSubmitting(false);
+												if(result.data?.createEmailBack.message =='success'){
+													setErrorMsg('File sent for process');
+													setTitleShow('Success');
+													setPopShow.on();
+												}else{
+													setErrorMsg(result.data?.createEmailBack.message ?? '');
+													setTitleShow('Error');
+													setPopShow.on();
+												}
+											}}>
+											{({ values,isSubmitting })  => (
+										
+												<Form>
+													<VStack spacing={5}>
 
-													<Input type="text" size="md" />
-												</InputGroup>
-											</FormControl>
-											<FormControl id="name">
-												<FormLabel>Mail</FormLabel>
-												<InputGroup borderColor="#E0E1E7">
-
-													<Input type="text" size="md" />
-												</InputGroup>
-											</FormControl>
-											<FormControl id="name">
-												<FormLabel>Message</FormLabel>
-												<Textarea
-													borderColor="gray.300"
-													_hover={{
-														borderRadius: 'gray.300',
-													}}
-													placeholder="message"
-												/>
-											</FormControl>
-											<FormControl id="name" float="right">
-												<Button
-													variant="solid"
-													bg="#0D74FF"
-													color="white"
-													_hover={{}}>
-                          Send Message
-												</Button>
-											</FormControl>
-										</VStack>
+														<Box>
+															<Text color='black'>Your Name</Text>
+															<FormInput type="text" placeholder='Name' name="name"/>
+														</Box>
+														<Box>
+															<Text color='black'>Your Email</Text>
+															<FormInput type="text" placeholder='Email' name="email"/>
+														</Box>
+														<Box>
+															<Text color='black'>Your Message</Text>
+															<FormInput type="text" placeholder='Message' name="message"/>
+														</Box>
+														<Button
+															variant='outline'
+															colorScheme='black'
+															w={{Base:'50%',sm:'70%'}}
+															onClick={()=>{console.log('das');}}
+															type="submit"
+															leftIcon={isSubmitting ? <Spinner /> : <Icon as={FiSend} />}
+															disabled={isSubmitting}
+														>
+															Send Message
+														</Button>
+													</VStack>
+												</Form>
+											)}
+										</Formik>
 									</Box>
 								</Box>
 							</WrapItem>
@@ -98,6 +132,10 @@ export function Contact() {
 					</Box>
 				</Box>
 			</Flex>
+			<PopMsg
+				nameButton={'Ok!'} title={titleShow} msg={errorMsg}
+				display={popShow} hide={()=>{setPopShow.off();}}
+			/>
 		</Container>
 	);
 }

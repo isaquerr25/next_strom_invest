@@ -8,7 +8,7 @@ import {useEffect} from 'react';
 
 
 const Home = () => {
-	useEffect(()=>{Router.push('/home');},[]);
+	useEffect(()=>{Router.push('/admin/login');},[]);
 	
 	return (<></>);
 };

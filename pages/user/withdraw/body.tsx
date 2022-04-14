@@ -148,7 +148,7 @@ function FormikWallet() {
 						setSubmitting(false);
 						const errors = result.data?.createTransaction[0];
 						if (errors?.field=='success') {
-							setErrorMsg('File sent for analysis');
+							setErrorMsg('An email has been sent click the link in the email to confirm');
 							setTitleShow('Success');
 							setPopShow.on();
 						} else {

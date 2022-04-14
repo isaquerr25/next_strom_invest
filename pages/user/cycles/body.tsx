@@ -222,7 +222,7 @@ function FormikInputs() {
 
 			</Formik>
 			<PopMsg
-				nameButton={'popNameButton'} title={titleShow} msg={errorMsg}
+				nameButton={'Ok!'} title={titleShow} msg={errorMsg}
 				display={popShow} hide={()=>{setPopShow.off();popFunction;}}
 			/>
 

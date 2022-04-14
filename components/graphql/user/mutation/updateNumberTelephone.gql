@@ -1,0 +1,10 @@
+mutation UpdateNumberTelephone($numberTelephone: String!) {
+	updateNumberTelephone(
+		data: {
+			numberTelephone:$numberTelephone
+		}
+	) {
+		field
+		message
+	}
+}

@@ -37,7 +37,7 @@ export default function CallToActionWithIllustration() {
 					of action for greater profitability.
 				</Text>
 				<Stack spacing={6} direction={'row'}>
-					<Button
+					{/* <Button
 						rounded={'full'}
 						px={6}
 						colorScheme={'orange'}
@@ -47,7 +47,7 @@ export default function CallToActionWithIllustration() {
 					</Button>
 					<Button rounded={'full'} px={6}>
             Learn more
-					</Button>
+					</Button> */}
 				</Stack>
 				<Flex w={'full'}>
 					<Illustration

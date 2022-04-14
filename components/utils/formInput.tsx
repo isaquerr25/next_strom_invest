@@ -16,7 +16,7 @@ type FormInputProps = {
   justRead?: boolean;
   label?: string;
   placeholder?: string;
-  type: 'text' | 'password' | 'email' | 'numberShow' | 'number' | 'file';
+  type: 'text' | 'password' | 'email' | 'numberShow' | 'number' | 'file'| 'phoneNumber';
   helperText?: string;
 } & FieldConfig;
 
@@ -40,7 +40,7 @@ const FormInput: FC<FormInputProps> = ({
 				{inputIcon && (
 					<InputLeftElement pointerEvents="none" children={inputIcon} />
 				)}
-				{type !== 'number' && type !== 'file' && type !== 'numberShow' && (
+				{type !== 'number' && type !== 'file' && type !== 'numberShow' && type !== 'phoneNumber' && (
 					<Input
 						id={inputId}
 						{...field}
@@ -67,6 +67,17 @@ const FormInput: FC<FormInputProps> = ({
 
 					</>
 				)}
+				{type === 'phoneNumber' && (
+					<NumberFormat
+						{...field}
+						prefix={'+'}
+						customInput={Input}
+						border="1px"
+						borderColor="gray.400"
+						decimalScale={2}
+					/>
+
+				)}
 				{type === 'number' && (
 					<NumberFormat
 						{...field}
@@ -79,7 +90,6 @@ const FormInput: FC<FormInputProps> = ({
 					/>
 
 				)}
-
 				{type === 'numberShow' && (
 					<NumberFormat
 						{...field}

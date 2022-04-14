@@ -1,0 +1,10 @@
+mutation CreateEmailBack($name:String!,$email:String!,$message:String!){
+  createEmailBack(data:{
+    name:$name
+    email:$email
+    message:$message
+  }){
+    field
+    message
+  }
+}

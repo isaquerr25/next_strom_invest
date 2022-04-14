@@ -24,6 +24,7 @@ export type Scalars = {
 export type CreateUser = {
   email: Scalars['String'];
   name: Scalars['String'];
+  numberTelephone?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
 };
 
@@ -88,6 +89,23 @@ export type DocumentAllUser = {
   userId: Scalars['Int'];
 };
 
+export type EmailAll = {
+  __typename?: 'EmailAll';
+  email: Scalars['Int'];
+  id: Scalars['Int'];
+  message: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type ForgetPasswordAlter = {
+  email: Scalars['String'];
+};
+
+export type ForgetPasswordNewAlter = {
+  password: Scalars['String'];
+  token: Scalars['String'];
+};
+
 export type GraphState = {
   __typename?: 'GraphState';
   field?: Maybe<Scalars['String']>;
@@ -95,6 +113,10 @@ export type GraphState = {
 };
 
 export type InputDeleteCycle = {
+  id: Scalars['Int'];
+};
+
+export type InputDeleteEmailBack = {
   id: Scalars['Int'];
 };
 
@@ -109,6 +131,12 @@ export type InputDeleteTransaction = {
 export type InputDocumentAlter = {
   id: Scalars['Int'];
   state: Scalars['String'];
+};
+
+export type InputEmailBack = {
+  email: Scalars['String'];
+  message: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type InputIdUser = {
@@ -156,6 +184,13 @@ export type InputUpdateCycle = {
   valueUSD?: InputMaybe<Scalars['Int']>;
 };
 
+export type InputUpdateEmailBack = {
+  email?: InputMaybe<Scalars['String']>;
+  id: Scalars['Int'];
+  message?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type InputUpdateMonthlyProfit = {
   finishDate?: InputMaybe<Scalars['DateTime']>;
   id: Scalars['Int'];
@@ -193,10 +228,12 @@ export type Mutation = {
   alterDocument?: Maybe<Scalars['Boolean']>;
   createCycle: Array<GraphState>;
   createDeposit: RequestDeposit;
+  createEmailBack: GraphState;
   createMonthlyProfit: Array<GraphState>;
   createTransaction: Array<GraphState>;
   createUserResolver: Array<GraphState>;
   deleteCycle: Array<GraphState>;
+  deleteEmail: Array<GraphState>;
   deleteMonthlyProfit: Array<GraphState>;
   deleteTransaction: Array<GraphState>;
   getTypeTransaction: Array<TransactionUser>;
@@ -204,9 +241,13 @@ export type Mutation = {
   loginAuthUser: Array<GraphState>;
   loginStaff: Array<GraphState>;
   logout?: Maybe<Scalars['Boolean']>;
+  newPassword?: Maybe<GraphState>;
+  resolverForgetPassword?: Maybe<GraphState>;
   updateAuthPassword?: Maybe<GraphState>;
   updateCycle: Array<GraphState>;
+  updateEmail: GraphState;
   updateMonthlyProfit: Array<GraphState>;
+  updateNumberTelephone?: Maybe<GraphState>;
   updateTransaction: Array<GraphState>;
   updateWallet?: Maybe<GraphState>;
   userInfoIdStaff?: Maybe<StaffInfoUserComponents>;
@@ -243,6 +284,11 @@ export type MutationCreateDepositArgs = {
 };
 
 
+export type MutationCreateEmailBackArgs = {
+  data: InputEmailBack;
+};
+
+
 export type MutationCreateMonthlyProfitArgs = {
   data: InputMonthlyProfit;
 };
@@ -260,6 +306,11 @@ export type MutationCreateUserResolverArgs = {
 
 export type MutationDeleteCycleArgs = {
   data: InputDeleteCycle;
+};
+
+
+export type MutationDeleteEmailArgs = {
+  data: InputDeleteEmailBack;
 };
 
 
@@ -293,6 +344,16 @@ export type MutationLoginStaffArgs = {
 };
 
 
+export type MutationNewPasswordArgs = {
+  data: ForgetPasswordNewAlter;
+};
+
+
+export type MutationResolverForgetPasswordArgs = {
+  data: ForgetPasswordAlter;
+};
+
+
 export type MutationUpdateAuthPasswordArgs = {
   data: PasswordAlter;
 };
@@ -303,8 +364,18 @@ export type MutationUpdateCycleArgs = {
 };
 
 
+export type MutationUpdateEmailArgs = {
+  data: InputUpdateEmailBack;
+};
+
+
 export type MutationUpdateMonthlyProfitArgs = {
   data: InputUpdateMonthlyProfit;
+};
+
+
+export type MutationUpdateNumberTelephoneArgs = {
+  data: NumberTelephoneAlter;
 };
 
 
@@ -322,6 +393,10 @@ export type MutationUserInfoIdStaffArgs = {
   data: InputIdUser;
 };
 
+export type NumberTelephoneAlter = {
+  numberTelephone: Scalars['String'];
+};
+
 export type PasswordAlter = {
   oldPassword: Scalars['String'];
   password: Scalars['String'];
@@ -335,6 +410,7 @@ export type Query = {
   allCycleUserAdminProcess?: Maybe<Array<CycleAllUser>>;
   allDocuments: Array<DocumentAll>;
   allDocumentsValidation: Array<DocumentAllUser>;
+  allEmail?: Maybe<Array<EmailAll>>;
   allMonthlyProfit?: Maybe<Array<MonthlyProfitAll>>;
   allTransactions?: Maybe<Array<TransactionAll>>;
   allTransactionsByUser?: Maybe<Array<TransactionAll>>;
@@ -414,6 +490,7 @@ export type UserAll = {
   email: Scalars['String'];
   id: Scalars['Int'];
   name?: Maybe<Scalars['String']>;
+  numberTelephone?: Maybe<Scalars['String']>;
   wallet?: Maybe<Scalars['String']>;
 };
 
@@ -429,6 +506,7 @@ export type UserHaveComponents = {
   document?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  numberTelephone?: Maybe<Scalars['String']>;
   valuePrice?: Maybe<Scalars['BigInt']>;
   wallet?: Maybe<Scalars['String']>;
 };
@@ -488,6 +566,15 @@ export type CreateDepositMutationVariables = Exact<{
 
 export type CreateDepositMutation = { __typename?: 'Mutation', createDeposit: { __typename?: 'RequestDeposit', url?: string | null, status?: Array<{ __typename?: 'DepositState', field?: string | null, message?: string | null }> | null } };
 
+export type CreateEmailBackMutationVariables = Exact<{
+  name: Scalars['String'];
+  email: Scalars['String'];
+  message: Scalars['String'];
+}>;
+
+
+export type CreateEmailBackMutation = { __typename?: 'Mutation', createEmailBack: { __typename?: 'GraphState', field?: string | null, message?: string | null } };
+
 export type CreateMonthlyProfitMutationVariables = Exact<{
   profit: Scalars['Int'];
   finishDate: Scalars['DateTime'];
@@ -508,6 +595,7 @@ export type CreateUserResolverMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
   name: Scalars['String'];
+  numberTelephone: Scalars['String'];
 }>;
 
 
@@ -544,6 +632,21 @@ export type LoginStaffMutationVariables = Exact<{
 
 export type LoginStaffMutation = { __typename?: 'Mutation', loginStaff: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
 
+export type NewPasswordMutationVariables = Exact<{
+  token: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type NewPasswordMutation = { __typename?: 'Mutation', newPassword?: { __typename?: 'GraphState', field?: string | null, message?: string | null } | null };
+
+export type ResolverForgetPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ResolverForgetPasswordMutation = { __typename?: 'Mutation', resolverForgetPassword?: { __typename?: 'GraphState', field?: string | null, message?: string | null } | null };
+
 export type UpdateAuthPasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
   password: Scalars['String'];
@@ -571,6 +674,13 @@ export type UpdateMonthlyProfitMutationVariables = Exact<{
 
 
 export type UpdateMonthlyProfitMutation = { __typename?: 'Mutation', updateMonthlyProfit: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
+
+export type UpdateNumberTelephoneMutationVariables = Exact<{
+  numberTelephone: Scalars['String'];
+}>;
+
+
+export type UpdateNumberTelephoneMutation = { __typename?: 'Mutation', updateNumberTelephone?: { __typename?: 'GraphState', field?: string | null, message?: string | null } | null };
 
 export type UpdateTransactionMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -651,7 +761,7 @@ export type UserAllMoneyQuery = { __typename?: 'Query', userAllMoney?: { __typen
 export type UserInfoDocumentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UserInfoDocumentQuery = { __typename?: 'Query', userInfoDocument?: { __typename?: 'UserHaveComponents', email: string, name?: string | null, wallet?: string | null, valuePrice?: any | null, document?: string | null } | null };
+export type UserInfoDocumentQuery = { __typename?: 'Query', userInfoDocument?: { __typename?: 'UserHaveComponents', email: string, name?: string | null, wallet?: string | null, valuePrice?: any | null, document?: string | null, numberTelephone?: string | null } | null };
 
 
 export const LogoutDocument = gql`
@@ -907,6 +1017,42 @@ export function useCreateDepositMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateDepositMutationHookResult = ReturnType<typeof useCreateDepositMutation>;
 export type CreateDepositMutationResult = Apollo.MutationResult<CreateDepositMutation>;
 export type CreateDepositMutationOptions = Apollo.BaseMutationOptions<CreateDepositMutation, CreateDepositMutationVariables>;
+export const CreateEmailBackDocument = gql`
+    mutation CreateEmailBack($name: String!, $email: String!, $message: String!) {
+  createEmailBack(data: {name: $name, email: $email, message: $message}) {
+    field
+    message
+  }
+}
+    `;
+export type CreateEmailBackMutationFn = Apollo.MutationFunction<CreateEmailBackMutation, CreateEmailBackMutationVariables>;
+
+/**
+ * __useCreateEmailBackMutation__
+ *
+ * To run a mutation, you first call `useCreateEmailBackMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEmailBackMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEmailBackMutation, { data, loading, error }] = useCreateEmailBackMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *      message: // value for 'message'
+ *   },
+ * });
+ */
+export function useCreateEmailBackMutation(baseOptions?: Apollo.MutationHookOptions<CreateEmailBackMutation, CreateEmailBackMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateEmailBackMutation, CreateEmailBackMutationVariables>(CreateEmailBackDocument, options);
+      }
+export type CreateEmailBackMutationHookResult = ReturnType<typeof useCreateEmailBackMutation>;
+export type CreateEmailBackMutationResult = Apollo.MutationResult<CreateEmailBackMutation>;
+export type CreateEmailBackMutationOptions = Apollo.BaseMutationOptions<CreateEmailBackMutation, CreateEmailBackMutationVariables>;
 export const CreateMonthlyProfitDocument = gql`
     mutation CreateMonthlyProfit($profit: Int!, $finishDate: DateTime!) {
   createMonthlyProfit(data: {profit: $profit, finishDate: $finishDate}) {
@@ -978,8 +1124,10 @@ export type CreateTransactionMutationHookResult = ReturnType<typeof useCreateTra
 export type CreateTransactionMutationResult = Apollo.MutationResult<CreateTransactionMutation>;
 export type CreateTransactionMutationOptions = Apollo.BaseMutationOptions<CreateTransactionMutation, CreateTransactionMutationVariables>;
 export const CreateUserResolverDocument = gql`
-    mutation CreateUserResolver($email: String!, $password: String!, $name: String!) {
-  createUserResolver(data: {email: $email, password: $password, name: $name}) {
+    mutation CreateUserResolver($email: String!, $password: String!, $name: String!, $numberTelephone: String!) {
+  createUserResolver(
+    data: {email: $email, password: $password, name: $name, numberTelephone: $numberTelephone}
+  ) {
     field
     message
   }
@@ -1003,6 +1151,7 @@ export type CreateUserResolverMutationFn = Apollo.MutationFunction<CreateUserRes
  *      email: // value for 'email'
  *      password: // value for 'password'
  *      name: // value for 'name'
+ *      numberTelephone: // value for 'numberTelephone'
  *   },
  * });
  */
@@ -1166,6 +1315,75 @@ export function useLoginStaffMutation(baseOptions?: Apollo.MutationHookOptions<L
 export type LoginStaffMutationHookResult = ReturnType<typeof useLoginStaffMutation>;
 export type LoginStaffMutationResult = Apollo.MutationResult<LoginStaffMutation>;
 export type LoginStaffMutationOptions = Apollo.BaseMutationOptions<LoginStaffMutation, LoginStaffMutationVariables>;
+export const NewPasswordDocument = gql`
+    mutation NewPassword($token: String!, $password: String!) {
+  newPassword(data: {token: $token, password: $password}) {
+    field
+    message
+  }
+}
+    `;
+export type NewPasswordMutationFn = Apollo.MutationFunction<NewPasswordMutation, NewPasswordMutationVariables>;
+
+/**
+ * __useNewPasswordMutation__
+ *
+ * To run a mutation, you first call `useNewPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useNewPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [newPasswordMutation, { data, loading, error }] = useNewPasswordMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useNewPasswordMutation(baseOptions?: Apollo.MutationHookOptions<NewPasswordMutation, NewPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<NewPasswordMutation, NewPasswordMutationVariables>(NewPasswordDocument, options);
+      }
+export type NewPasswordMutationHookResult = ReturnType<typeof useNewPasswordMutation>;
+export type NewPasswordMutationResult = Apollo.MutationResult<NewPasswordMutation>;
+export type NewPasswordMutationOptions = Apollo.BaseMutationOptions<NewPasswordMutation, NewPasswordMutationVariables>;
+export const ResolverForgetPasswordDocument = gql`
+    mutation ResolverForgetPassword($email: String!) {
+  resolverForgetPassword(data: {email: $email}) {
+    field
+    message
+  }
+}
+    `;
+export type ResolverForgetPasswordMutationFn = Apollo.MutationFunction<ResolverForgetPasswordMutation, ResolverForgetPasswordMutationVariables>;
+
+/**
+ * __useResolverForgetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResolverForgetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResolverForgetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resolverForgetPasswordMutation, { data, loading, error }] = useResolverForgetPasswordMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useResolverForgetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ResolverForgetPasswordMutation, ResolverForgetPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResolverForgetPasswordMutation, ResolverForgetPasswordMutationVariables>(ResolverForgetPasswordDocument, options);
+      }
+export type ResolverForgetPasswordMutationHookResult = ReturnType<typeof useResolverForgetPasswordMutation>;
+export type ResolverForgetPasswordMutationResult = Apollo.MutationResult<ResolverForgetPasswordMutation>;
+export type ResolverForgetPasswordMutationOptions = Apollo.BaseMutationOptions<ResolverForgetPasswordMutation, ResolverForgetPasswordMutationVariables>;
 export const UpdateAuthPasswordDocument = gql`
     mutation UpdateAuthPassword($oldPassword: String!, $password: String!) {
   updateAuthPassword(data: {oldPassword: $oldPassword, password: $password}) {
@@ -1277,6 +1495,40 @@ export function useUpdateMonthlyProfitMutation(baseOptions?: Apollo.MutationHook
 export type UpdateMonthlyProfitMutationHookResult = ReturnType<typeof useUpdateMonthlyProfitMutation>;
 export type UpdateMonthlyProfitMutationResult = Apollo.MutationResult<UpdateMonthlyProfitMutation>;
 export type UpdateMonthlyProfitMutationOptions = Apollo.BaseMutationOptions<UpdateMonthlyProfitMutation, UpdateMonthlyProfitMutationVariables>;
+export const UpdateNumberTelephoneDocument = gql`
+    mutation UpdateNumberTelephone($numberTelephone: String!) {
+  updateNumberTelephone(data: {numberTelephone: $numberTelephone}) {
+    field
+    message
+  }
+}
+    `;
+export type UpdateNumberTelephoneMutationFn = Apollo.MutationFunction<UpdateNumberTelephoneMutation, UpdateNumberTelephoneMutationVariables>;
+
+/**
+ * __useUpdateNumberTelephoneMutation__
+ *
+ * To run a mutation, you first call `useUpdateNumberTelephoneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateNumberTelephoneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateNumberTelephoneMutation, { data, loading, error }] = useUpdateNumberTelephoneMutation({
+ *   variables: {
+ *      numberTelephone: // value for 'numberTelephone'
+ *   },
+ * });
+ */
+export function useUpdateNumberTelephoneMutation(baseOptions?: Apollo.MutationHookOptions<UpdateNumberTelephoneMutation, UpdateNumberTelephoneMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateNumberTelephoneMutation, UpdateNumberTelephoneMutationVariables>(UpdateNumberTelephoneDocument, options);
+      }
+export type UpdateNumberTelephoneMutationHookResult = ReturnType<typeof useUpdateNumberTelephoneMutation>;
+export type UpdateNumberTelephoneMutationResult = Apollo.MutationResult<UpdateNumberTelephoneMutation>;
+export type UpdateNumberTelephoneMutationOptions = Apollo.BaseMutationOptions<UpdateNumberTelephoneMutation, UpdateNumberTelephoneMutationVariables>;
 export const UpdateTransactionDocument = gql`
     mutation UpdateTransaction($id: Int!, $state: String, $action: String, $value: Int, $hash: String, $wallet: String) {
   updateTransaction(
@@ -1828,6 +2080,7 @@ export const UserInfoDocumentDocument = gql`
     wallet
     valuePrice
     document
+    numberTelephone
   }
 }
     `;

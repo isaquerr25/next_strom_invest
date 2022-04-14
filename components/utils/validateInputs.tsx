@@ -44,7 +44,12 @@ export const validateEmail = (value:string) => {
 	return error;
 
 };
-
+export const validateEmailYup  = yup.object({
+	email: yup
+		.string()
+		.required('This field is required')
+		.email('The email is invalid'),
+});
 export const validationLogin = yup.object({
 	email: yup
 		.string()
@@ -110,4 +115,19 @@ export const validationWithdraw = yup.object({
 		.number()
 		.min(100, 'Minimum withdraw is 100 USD')
 		.required('This field is required')
+});
+
+export const validationPassword = yup.object({
+	password: yup
+		.string()
+		.required('This field is required')
+		.notOneOf([yup.ref('oldPassword'), null], 'Old Passwords must match')
+		.matches(
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+			'Your password is not strong enough',
+		),
+	confirmPassword: yup
+		.string()
+		.required('This field is required')
+		.oneOf([yup.ref('password'), null], 'Passwords must match'),
 });

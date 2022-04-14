@@ -21,27 +21,27 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
-import FormInput from '../../../components/utils/formInput';
+
 import { MdCreate } from 'react-icons/md';
 import Router  from 'next/router';
-import { useCreateUserResolverMutation } from '../../generated/graphql';
-import { validationRegister } from '../../../components/utils/validateInputs';
-import { PopMsg } from '../../../components/utils/PopMsg';
-
+import FormInput from '../../components/utils/formInput';
+import { PopMsg } from '../../components/utils/PopMsg';
+import { validationPassword, validationRegister } from '../../components/utils/validateInputs';
+import {useNewPasswordMutation } from '../generated/graphql';
 
 
 interface Values{
-		email: ''
-		password:''
-		confirmPassword: ''
-		name: ''
-		numberTelephone: ''
+		token: string
+		password:string
+		confirmPassword:string
+	}
+interface RegisterBodyType{
+		props:any
 	}
 
+export function RegisterBody({props}:RegisterBodyType) {
 
-export function RegisterBody() {
-
-	const [createAccount,] = useCreateUserResolverMutation();
+	const [UseNewPassword,] = useNewPasswordMutation();
 	const [errorMsg, setErrorMsg] = useState('');
 	const [popShow, setPopShow] = useBoolean(false);
 	const [titleShow, setTitleShow] = useState('Error');
@@ -64,22 +64,23 @@ export function RegisterBody() {
 
 				<Formik
 					initialValues={{
-						email: '',
-						password: '',
-						confirmPassword: '',
-						name: '',
-						numberTelephone: ''
+						token: props,
+						password:'',
+						confirmPassword:''
 					}}
-					validationSchema={validationRegister}
+					validationSchema={validationPassword}
 
 					onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
-						setSubmitting(true);
-						const result = await createAccount({variables:values});
+						setSubmitting(true); 
+						const result = await UseNewPassword({variables:{
+							token:props,
+							password:values.password
+						}});
 						setSubmitting(false);
-						const errors = result.data?.createUserResolver[0];
-						if (errors?.message=='success') {
-							setErrorMsg('An email has been sent. Click on the link to confirm.');
-							setTitleShow('Success');
+						const errors = result.data?.newPassword;
+						if (errors?.field=='success') {
+							setErrorMsg('Changed Password ');
+							setTitleShow('success');
 							setPopShow.on();
 						} else {
 							setErrorMsg(errors?.message  ?? '');
@@ -91,18 +92,6 @@ export function RegisterBody() {
 					{({ isSubmitting }) => (
 						<Form >
 							<Stack spacing={4}>
-								<Box>
-									<FormLabel>Name</FormLabel>
-									<FormInput type="text" placeholder="Name" name="name" />
-								</Box>
-								<Box>
-									<FormLabel>Email</FormLabel>
-									<FormInput type="text" placeholder="email" name="email" />
-								</Box>
-								<Box>
-									<FormLabel>Number Telephone</FormLabel>
-									<FormInput type="text" placeholder="+xxxxxxxxxxxxx" name="numberTelephone" />
-								</Box>
 								<Box>
 									<FormLabel>Password</FormLabel>
 									<FormInput type="password" placeholder="Password" name="password" />
@@ -133,7 +122,8 @@ export function RegisterBody() {
 			</Box>
 			<PopMsg 
 				title={titleShow} msg={errorMsg} display={popShow} 
-				hide={ ()=>{ setPopShow.off ; Router.push('/home/login'); }  } nameButton={'Ok!'}
+				hide={ ()=>{ titleShow == 'success' ? Router.push('/home/login') : setPopShow.off;} 	} 
+				nameButton={'Ok!'}
 			/>
 
 		</Flex>

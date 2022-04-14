@@ -23,12 +23,12 @@ import {
 	Icon,
 	useBoolean,
 } from '@chakra-ui/react';
-import { useLoginAuthUserMutation } from '../../generated/graphql';
+import { useLoginAuthUserMutation, useResolverForgetPasswordMutation } from '../../generated/graphql';
 import FormInput from '../../../components/utils/formInput';
 import { Form, Formik } from 'formik';
 import Router from 'next/router';
-import { validationLogin } from '../../../components/utils/validateInputs';
-import { MdCreate, MdLogin } from 'react-icons/md';
+import { validateEmailYup, validationLogin } from '../../../components/utils/validateInputs';
+import { MdCreate, MdLogin, MdOutlinePassword } from 'react-icons/md';
 import { FaFeatherAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { VscError } from 'react-icons/vsc';
@@ -37,16 +37,16 @@ import { PopMsg } from '../../../components/utils/PopMsg';
 
 interface Values {
   email: string;
-  password: string;
 }
 
 
 export function SimpleCard() {
 
 
-	const [loginAuthUser, ] = useLoginAuthUserMutation();
+	const [resolverPassword, ] = useResolverForgetPasswordMutation();
 	const [errorMsg, setErrorMsg] = useState('');
 	const [popShow, setPopShow] = useBoolean(false);
+	const [titleShow, setTitleShow] = useState('Error');
 
 	return (
 		<Flex
@@ -60,7 +60,7 @@ export function SimpleCard() {
 		>
 			<Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
 				<Stack align={'center'}>
-					<Heading color='white' fontSize={'4xl'}>Sign in to your account</Heading>
+					<Heading color='white' fontSize={'4xl'}>Forgot password</Heading>
 				</Stack>
 				<Box
 					rounded={'lg'}
@@ -71,21 +71,23 @@ export function SimpleCard() {
 					<Formik
 					 	initialValues={{
 							email: '',
-							password: '',
 						}}
-						validationSchema={validationLogin}
+						validationSchema={validateEmailYup}
 
 						onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
 
 							setSubmitting(true);
 							console.log('login');
-							const result = await loginAuthUser({variables:values});
+							const result = await resolverPassword({variables:values});
 							setSubmitting(false);
-							const errors = result.data?.loginAuthUser[0];
+							const errors = result.data?.resolverForgetPassword;
 							if (errors?.field=='success') {
-								Router.push('/user');
+								setErrorMsg('An email has been sent.');
+								setTitleShow('Success');
+								setPopShow.on();
 							} else {
 								setErrorMsg(errors?.message  ?? '');
+								setTitleShow('Error');
 								setPopShow.on();
 							}
 
@@ -97,17 +99,7 @@ export function SimpleCard() {
 								<Stack spacing={4}>
 									<FormLabel>Email</FormLabel>
 									<FormInput type="text" placeholder="email" name="email" />
-									<FormLabel>Password</FormLabel>
-									<FormInput type="password" placeholder="Password" name="password" />
-
 									<Stack spacing={10}>
-										<Stack
-											direction={{ base: 'column', sm: 'row' }}
-											align={'start'}
-											justify={'space-between'}>
-											<Checkbox>Remember me</Checkbox>
-											<Link onClick={()=>{Router.push('/home/forgetPassword');}} color={'blue.400'}>Forgot password?</Link>
-										</Stack>
 										<Button
 											bg={'blue.400'}
 											color={'white'}
@@ -116,10 +108,10 @@ export function SimpleCard() {
 											}}
 											onClick={()=>{console.log('das');}}
 											type="submit"
-											leftIcon={isSubmitting ? <Spinner /> : <Icon as={FaFeatherAlt} />}
+											leftIcon={isSubmitting ? <Spinner /> : <Icon as={MdOutlinePassword} />}
 											disabled={isSubmitting}
 										>
-											Sign in
+											Send Email
 										</Button>
 
 									</Stack>
@@ -130,7 +122,11 @@ export function SimpleCard() {
 
 				</Box>
 			</Stack>
-			<PopMsg title={'Error'} msg={errorMsg} display={popShow} hide={setPopShow.off}/>
+			<PopMsg 
+				title={titleShow} msg={errorMsg} display={popShow} 
+				hide={ ()=>{ setPopShow.off;}  } 
+				nameButton={'Ok!'}
+			/>
 		</Flex>
 	);
 }
