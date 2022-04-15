@@ -123,16 +123,17 @@ function FormikInputs() {
 
 		value:'',
 		beginDate:(addDays(new Date(),+1)),
-		finishDateInput:(addDays(new Date(),+15)),
+		finishDateInput:(addDays(new Date(),+17)),
 	});
 
 	return (
 		<>
+
 			<Formik
 				initialValues={cycleGraph}
 				onSubmit={async (values: typesCycle, { setSubmitting, setErrors }) => {
 					setSubmitting(true);
-					const valuePrice = Number(values.value.replace(/[\$]|[,]/g,''));
+					const valuePrice = Number(values.value.replace(/[\$]|[,]/g,''))*100;
 
 					if(valuePrice >= 5000){
 						const result = await cycleGraphql({variables:{
@@ -178,7 +179,7 @@ function FormikInputs() {
 										name='finishDateInput'
 										selected={finishDate}
 										onChange={(date) => setFinishDate(date)}
-										minDate={addDays(new Date(),+15)}
+										minDate={addDays(new Date(),+17)}
 										maxDate={addMonths(new Date(), 12)}
 										withPortal
 										customInput={<CalenderCustomInput />}
@@ -275,11 +276,6 @@ const calculator= (beginDate:Date|null,finishDate:Date|null| undefined, valueUSD
 };
 
 
-
-
-
-
-
 const DescriptionAndRestriction = () =>(
 	<>
 		<Text fontSize={'xl'} color='teal'>
@@ -299,7 +295,7 @@ const DescriptionAndRestriction = () =>(
 			with the additional profit generated over time. <br/>
 			* The forecast value is an approximation of how much profit you will receive.
 			Since it will only be counted at the end of the cycle.<br/>
-			* Minimum time per cycle is 15 days.<br/>
+			* Minimum time per cycle is 17 days.<br/>
 			* the actual start date starts from the activation of the cycle.
 		</Text>
 	</>

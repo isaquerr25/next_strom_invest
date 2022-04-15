@@ -153,7 +153,7 @@ const ValidateDocument = ( {statusDocument = '' }) =>{
 				</Text>
 			}
 
-			{(statusDocument === 'INVALID' || statusDocument === '') &&
+			{(statusDocument != 'VALID') &&
 			<UploadFile/>}
 		</Flex>
 	);};
@@ -309,7 +309,7 @@ function FormikWallet() {
 					setSubmitting(false);
 					const errors = result.data?.updateWallet;
 					if (errors?.field=='success') {
-						setErrorMsg('File sent for analysis');
+						setErrorMsg('Resgister');
 						setTitleShow('Success');
 						setPopShow.on();
 					} else {

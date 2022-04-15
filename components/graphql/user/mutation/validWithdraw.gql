@@ -1,0 +1,8 @@
+mutation ValidWithdraw($token:String!){
+  validWithdraw(data:{
+    token:$token
+  }){
+    field
+    message
+  }
+}

@@ -206,6 +206,10 @@ export type InputUpdateTransaction = {
   wallet?: InputMaybe<Scalars['String']>;
 };
 
+export type InputValidateWithdrawTransaction = {
+  token: Scalars['String'];
+};
+
 export type LoginUser = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -251,6 +255,7 @@ export type Mutation = {
   updateTransaction: Array<GraphState>;
   updateWallet?: Maybe<GraphState>;
   userInfoIdStaff?: Maybe<StaffInfoUserComponents>;
+  validWithdraw: GraphState;
 };
 
 
@@ -391,6 +396,11 @@ export type MutationUpdateWalletArgs = {
 
 export type MutationUserInfoIdStaffArgs = {
   data: InputIdUser;
+};
+
+
+export type MutationValidWithdrawArgs = {
+  data: InputValidateWithdrawTransaction;
 };
 
 export type NumberTelephoneAlter = {
@@ -707,6 +717,13 @@ export type UserInfoIdStaffMutationVariables = Exact<{
 
 
 export type UserInfoIdStaffMutation = { __typename?: 'Mutation', userInfoIdStaff?: { __typename?: 'StaffInfoUserComponents', name?: string | null, email: string, wallet?: string | null, document?: string | null, qDeposit?: string | null, allDeposit?: string | null, qWithdraw?: string | null, allWithdraw?: string | null, qInvest?: string | null, allInvest?: string | null, qCompleteInvest?: string | null, allCompleteInvest?: string | null, qCycleProcess?: string | null, allCycleProcess?: string | null, qCycleActive?: string | null, allCycleActive?: string | null, qCycleComplete?: string | null, allCycleComplete?: string | null, cash?: string | null } | null };
+
+export type ValidWithdrawMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type ValidWithdrawMutation = { __typename?: 'Mutation', validWithdraw: { __typename?: 'GraphState', field?: string | null, message?: string | null } };
 
 export type ActiveStartStaffQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1655,6 +1672,40 @@ export function useUserInfoIdStaffMutation(baseOptions?: Apollo.MutationHookOpti
 export type UserInfoIdStaffMutationHookResult = ReturnType<typeof useUserInfoIdStaffMutation>;
 export type UserInfoIdStaffMutationResult = Apollo.MutationResult<UserInfoIdStaffMutation>;
 export type UserInfoIdStaffMutationOptions = Apollo.BaseMutationOptions<UserInfoIdStaffMutation, UserInfoIdStaffMutationVariables>;
+export const ValidWithdrawDocument = gql`
+    mutation ValidWithdraw($token: String!) {
+  validWithdraw(data: {token: $token}) {
+    field
+    message
+  }
+}
+    `;
+export type ValidWithdrawMutationFn = Apollo.MutationFunction<ValidWithdrawMutation, ValidWithdrawMutationVariables>;
+
+/**
+ * __useValidWithdrawMutation__
+ *
+ * To run a mutation, you first call `useValidWithdrawMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useValidWithdrawMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [validWithdrawMutation, { data, loading, error }] = useValidWithdrawMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useValidWithdrawMutation(baseOptions?: Apollo.MutationHookOptions<ValidWithdrawMutation, ValidWithdrawMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ValidWithdrawMutation, ValidWithdrawMutationVariables>(ValidWithdrawDocument, options);
+      }
+export type ValidWithdrawMutationHookResult = ReturnType<typeof useValidWithdrawMutation>;
+export type ValidWithdrawMutationResult = Apollo.MutationResult<ValidWithdrawMutation>;
+export type ValidWithdrawMutationOptions = Apollo.BaseMutationOptions<ValidWithdrawMutation, ValidWithdrawMutationVariables>;
 export const ActiveStartStaffDocument = gql`
     query ActiveStartStaff {
   activeStartStaff {

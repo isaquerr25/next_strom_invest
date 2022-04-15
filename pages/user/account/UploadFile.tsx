@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { PopMsg } from '../../../components/utils/PopMsg';
 import { useAddDocumentPictureMutation } from '../../generated/graphql';
 import Router from 'next/router';
+import { DocumentAll } from '../../../../back/src/dto/document';
 
 
 
@@ -52,7 +53,7 @@ export function UploadFile() {
 	return(
 		<div>
 			<Button colorScheme='teal' variant='outline' onClick={() => fileRef.current.click()}>
-         Custom File Input Button
+        Send Document ID 
 			</Button>
 
 			<input
