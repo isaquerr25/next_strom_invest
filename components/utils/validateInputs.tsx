@@ -50,6 +50,7 @@ export const validateEmailYup  = yup.object({
 		.required('This field is required')
 		.email('The email is invalid'),
 });
+
 export const validationLogin = yup.object({
 	email: yup
 		.string()
@@ -87,6 +88,17 @@ export const validationRegister = yup.object({
 export const validationWallet = yup.object({
 	wallet: yup.string().required('This field is required'),
 });
+
+export const validationNumber = yup.object({
+	numberTelephone: yup
+		.string()
+		.required('This field is required')
+		.matches(
+			/^\+?[0-9]{3}-?[0-9]{6,12}$/,
+			'number not Valid',
+		),
+});
+
 
 export const validationNewPassword = yup.object({
 	oldPassword: yup
