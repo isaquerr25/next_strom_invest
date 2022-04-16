@@ -255,6 +255,7 @@ const TableTransfer = () => {
 									<Td textColor={color}>{compose.state}</Td>
 									<Td textColor={color}>{compose.userId}</Td>
 								</Tr>
+								
 							);}
 						)
 					}
