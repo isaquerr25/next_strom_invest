@@ -103,7 +103,7 @@ interface typeBlock{
 	action?:string
 	value?:number|string|undefined
 	state:string
-	hash?:string
+	hash?:string | null | undefined
 	beginDate?:string
 	finishDate?:string
 	userId?:string|number
