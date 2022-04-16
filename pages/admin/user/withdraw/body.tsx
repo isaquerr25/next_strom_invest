@@ -78,7 +78,7 @@ export const BodySetOne = () =>{
 							<Block
 								key={number.id}
 								action={number.action}
-								value={number.value}
+								value={number.value != undefined ? number.value : 0}
 								state={number.state}
 								hash={number.hash}
 								updatedAt={number.updatedAt}
@@ -111,7 +111,7 @@ export const BodySetOne = () =>{
 
 interface typeBlock{
 	action?:string
-	value?:number
+	value:number
 	state:string
 	hash?:string
 	createdAt?:string
@@ -176,7 +176,7 @@ const Block = ({
 				<Text  color='white' fontSize='lg' fontWeight='black' >
 					ID da Transação: {id}<br/>
 					TIPO: {action}<br/>
-					VALOR: {convertMoney(value/100 ?? 0)}<br/>
+					VALOR: {convertMoney(value/100)}<br/>
 					Estado Atual: {state}<br/>
 					Hash: {hash}<br/>
 					Data de Atualização: {updatedAt}<br/>
