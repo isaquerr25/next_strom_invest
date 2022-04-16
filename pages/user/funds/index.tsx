@@ -13,7 +13,7 @@ const FundsDeposit = () =>{
 	return(
 		<>
 			<HeaderMod title='Funds Deposit' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<BodyFunds/>
 		</>
 	);

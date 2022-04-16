@@ -15,7 +15,7 @@ const Withdraw = () =>{
 	return(
 		<>
 			<HeaderMod title='Requests' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>

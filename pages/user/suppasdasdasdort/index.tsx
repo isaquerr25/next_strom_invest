@@ -13,7 +13,7 @@ const Support = () =>{
 	return(
 		<>
 			<HeaderMod title='Support' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<BodyAccount/>
 			{/* <FooterModify/> */}
 		</>

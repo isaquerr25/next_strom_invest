@@ -12,7 +12,7 @@ const DashboardAdmin = () =>{
 	return(
 		<>
 			<HeaderMod title='Dashboard Admin' />
-			<NavLogin children={undefined}/>
+			<NavLogin/>
 			<BodySetOne/>
 			{/* <FooterModify/> */}
 		</>

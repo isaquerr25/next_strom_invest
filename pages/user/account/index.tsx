@@ -13,7 +13,7 @@ const Account = () =>{
 	return(
 		<>
 			<HeaderMod title='Account' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<BodyAccount/>
 			{/* <FooterModify/> */}
 		</>

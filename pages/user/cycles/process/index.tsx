@@ -14,7 +14,7 @@ const Cycles = () =>{
 	return(
 		<>
 			<HeaderMod title='Cycles Process' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>

@@ -15,7 +15,7 @@ const Transactions = () =>{
 	return(
 		<>
 			<HeaderMod title='Transactions' />
-			<NavLogin children={undefined}/>
+			<NavLogin />
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>
