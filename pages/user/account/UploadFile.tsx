@@ -27,6 +27,11 @@ export function UploadFile() {
 			validity,
 			files: [file],
 		},
+	}:{
+		target: {
+			validity:any,
+			files: []|any,
+		},
 	}) =>
 		validity.valid &&
     sendDocument({ variables: { picture: file } }).then((back) => {
@@ -61,7 +66,7 @@ export function UploadFile() {
 				hidden
 				accept="image/*"
 			/>
-			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={() => Router.reload('/user/account')}/>
+			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={() => Router.push('/user/account')}/>
 
 		</div>
 	);
