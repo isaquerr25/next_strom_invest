@@ -539,7 +539,7 @@ const calculator= (beginDate:Date|null,finishDate:Date|null| undefined, valueUSD
 
 		valuePrice -= valueStart;
 		const fm = new FormatMoney();
-		return fm.from(valuePrice,{ symbol: '$',decimals: 2 }));
+		return fm.from(valuePrice,{ symbol: '$',decimals: 2 });
 
 	}
 };
