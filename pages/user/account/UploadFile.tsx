@@ -4,9 +4,6 @@ import { useRef, useState } from 'react';
 import { PopMsg } from '../../../components/utils/PopMsg';
 import { useAddDocumentPictureMutation } from '../../generated/graphql';
 import Router from 'next/router';
-import { DocumentAll } from '../../../../back/src/dto/document';
-
-
 
 const SINGLE_UPLOAD_MUTATION = gql`
   mutation singleUpload($file: Upload!) {
