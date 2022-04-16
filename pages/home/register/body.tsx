@@ -30,16 +30,11 @@ import { PopMsg } from '../../../components/utils/PopMsg';
 
 
 
-interface Values{
-		email: ''
-		password:''
-		confirmPassword: ''
-		name: ''
-		numberTelephone: ''
-	}
+
 
 
 export function RegisterBody() {
+	interface Values{ email: string; password: string; confirmPassword: string; name: string; numberTelephone: string; }
 
 	const [createAccount,] = useCreateUserResolverMutation();
 	const [errorMsg, setErrorMsg] = useState('');
@@ -63,20 +58,25 @@ export function RegisterBody() {
 				p={8}>
 
 				<Formik
+
 					initialValues={{
-						email: '',
-						password: '',
-						confirmPassword: '',
-						name: '',
-						numberTelephone: ''
+						email:'',
+						password:'',
+						confirmPassword:'',
+						name:'',
+						numberTelephone:'',
 					}}
+
 					validationSchema={validationRegister}
 
-					onSubmit={async (values: Values, { setSubmitting, setErrors }) => {
+					onSubmit={ async (values: Values, { setSubmitting, setErrors }) => {
+
 						setSubmitting(true);
 						const result = await createAccount({variables:values});
 						setSubmitting(false);
+
 						const errors = result.data?.createUserResolver[0];
+
 						if (errors?.message=='success') {
 							setErrorMsg('An email has been sent. Click on the link to confirm.');
 							setTitleShow('Success');
@@ -97,7 +97,7 @@ export function RegisterBody() {
 								</Box>
 								<Box>
 									<FormLabel>Email</FormLabel>
-									<FormInput type="text" placeholder="email" name="email" />
+									<FormInput type="text" placeholder="Email" name="email" />
 								</Box>
 								<Box>
 									<FormLabel>Number Telephone</FormLabel>
