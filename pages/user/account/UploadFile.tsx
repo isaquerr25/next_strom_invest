@@ -54,7 +54,7 @@ export function UploadFile() {
 	const fileRef = useRef();
 	return(
 		<div>
-			<Button colorScheme='teal' variant='outline' onClick={() => fileRef.current!.click()}>
+			<Button colorScheme='teal' variant='outline' onClick={() => fileRef.current.click()}>
         Send Document ID 
 			</Button>
 
