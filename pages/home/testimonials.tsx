@@ -136,6 +136,7 @@ export function GridBlurredBackdrop() {
 			id="testimonies"
 			textAlign={'center'}
 			pt={10}
+			paddingInline={5}
 			justifyContent={'center'}
 			direction={'column'}
 			width={'full'}>

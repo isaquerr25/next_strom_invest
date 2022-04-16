@@ -90,27 +90,27 @@ const data = [
 	}
 ];
 
-const CustomTooltip = ({ active, payload, label }) => {
-	if (active && payload && payload.length) {
-		return (
-			<div className="custom-tooltip">
-				<Box bg='white' padding={'2'} borderRadius={'md'}>
-					<p className="label">{` ${label}`}</p>
-					<Text color={'green'} fontStyle='bold'>{`Profit:${payload[0].value}%`}</Text>
-				</Box>
-			</div>
-		);
-	}
+// const CustomTooltip = ({ active, payload, label }) => {
+// 	if (active && payload && payload.length) {
+// 		return (
+// 			<div className="custom-tooltip">
+// 				<Box bg='white' padding={'2'} borderRadius={'md'}>
+// 					<p className="label">{` ${label}`}</p>
+// 					<Text color={'green'} fontStyle='bold'>{`Profit:${payload[0].value}%`}</Text>
+// 				</Box>
+// 			</div>
+// 		);
+// 	}
 
-	return null;
-};
+// 	return null;
+// };
 
 export function Graphic() {
 	return (
 		<Flex alignItems={'center'} justifyContent={'center'}>
 			<Box width='80%' height='100%'>
 				<Heading>Monthly evolution of our profitability. Making compound interest. 💸</Heading>
-				<ResponsiveContainer width='100%' maxHeight='80%' minHeight={200}>
+				<ResponsiveContainer width='100%'  minHeight={200}>
 					<AreaChart data={dataGraphic}
 						margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
 						<defs>
@@ -121,7 +121,6 @@ export function Graphic() {
 						</defs>
 						<CartesianGrid  strokeDasharray="1 1" />
 						<XAxis dataKey="name" />
-						<Tooltip content={<CustomTooltip />}/>
 						<Area type="monotone" dataKey="Capital Growth%" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
 					</AreaChart>
 				</ResponsiveContainer>
