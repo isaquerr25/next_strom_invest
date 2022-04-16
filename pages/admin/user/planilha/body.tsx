@@ -248,7 +248,7 @@ const TableTransfer = () => {
 								finalValue ='CANCEL';
 
 							}else{
-								finalValue =compose.value ?? calculatorDays(new Date(),compose.finishDate)+' Days';
+								finalValue =compose.value ?? calculatorDays(new Date(),compose.finishDate ?? new Date())+' Days';
 								if(typeof(finalValue) == typeof Number()){
 									finalValue = convertMoney(finalValue/100);
 								}
