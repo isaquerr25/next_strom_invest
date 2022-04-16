@@ -107,8 +107,10 @@ export const BodyCycleProcess = () =>{
 	);
 };
 
-
-const TableCycle = ({arrayTransactions,dropValue}) => {
+const TableCycle = ({arrayTransactions,dropValue}:{
+	dropValue:string
+	arrayTransactions:any
+}) => {
 	return (
 		<Box
 			overflowY="auto"
@@ -146,7 +148,7 @@ const TableCycle = ({arrayTransactions,dropValue}) => {
 				</Thead>
 				<Tbody>
 					{	(arrayTransactions!=null &&  arrayTransactions!=undefined )&&
-						arrayTransactions.map( (compose:TypesComposeCycleProcess) =>{
+						arrayTransactions.map( (compose) =>{
 							if(dropValue == 'PROCESS' || dropValue == 'CANCEL' || dropValue == 'ACTIVE' || dropValue == 'COMPLETE'){
 								if(dropValue != compose.state){
 									return(<></>);
@@ -211,4 +213,22 @@ interface TypesComposeCycleProcess{
 	createdAt?: Date;
 	updatedAt?: Date;
 	userId?: number;
+}
+
+interface TypesCycleProcess{
+	dropValue:string
+	arrayTransactions:{ 
+	__typename?: 'CycleAll';
+	id: number
+	action: string
+	valueUSD: number
+	valueBTC: string
+	finalValueUSD?: number | null
+	finalValueBTC?: string | null 
+	state: string
+	beginDate: any
+	finishDate?: any | null
+	createdAt?: any | null
+	updatedAt?: any | null
+	userId?: number | null }[] | null 
 }
