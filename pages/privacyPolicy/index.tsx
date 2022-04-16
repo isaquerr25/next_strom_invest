@@ -61,23 +61,23 @@ const privacy = () => (
 
     Tempest Invest follows a standard procedure of using log files. 
     These files log visitors when they visit websites. All hosting 
-    companies do this and a part of hosting services' analytics.
+    companies do this and a part of hosting services{'\''} analytics.
      The information collected by log files include internet protocol 
      (IP) addresses, browser type, Internet Service Provider (ISP),
       date and time stamp, referring/exit pages, and possibly the 
       number of clicks. These are not linked to any information 
       that is personally identifiable. The purpose of the 
       information is for analyzing trends, administering the 
-      site, tracking users' movement on the website, and gathering 
+      site, tracking users{'\''} movement on the website, and gathering 
       demographic information.<br/><br/>
     Cookies and Web Beacons<br/><br/>
 
-    Like any other website, Tempest Invest uses 'cookies'. These 
-    cookies are used to store information including visitors' 
+    Like any other website, Tempest Invest uses cookies{'\''}. These 
+    cookies are used to store information including visitors{'\''} 
     preferences, and the pages on the website that the visitor 
     accessed or visited. The information is used to optimize 
-    the users' experience by customizing our web page content 
-    based on visitors' browser type and/or other information.<br/>
+    the users{'\''} experience by customizing our web page content 
+    based on visitors{'\''} browser type and/or other information.<br/>
 
     For more general information on cookies, please read the 
     Cookies article on Generate Privacy Policy website.<br/>
@@ -89,7 +89,7 @@ const privacy = () => (
     Third-party ad servers or ad networks uses technologies 
     like cookies, JavaScript, or Web Beacons that are used 
     in their respective advertisements and links that appear
-    on Tempest Invest, which are sent directly to users' browser. 
+    on Tempest Invest, which are sent directly to users{'\''} browser. 
     They automatically receive your IP address when this occurs. 
     These technologies are used to measure the effectiveness of 
     their advertising campaigns and/or to personalize the advertising 
@@ -99,7 +99,7 @@ const privacy = () => (
     cookies that are used by third-party advertisers.<br/>
     Third Party Privacy Policies<br/>
 
-    Tempest Invest's Privacy Policy does not apply to other 
+    Tempest Invest{'\''}s Privacy Policy does not apply to other 
     advertisers or websites. Thus, we are advising you to 
     consult the respective Privacy Policies of these 
     third-party ad servers for more detailed information. 
@@ -109,20 +109,20 @@ const privacy = () => (
     You can choose to disable cookies through your individual 
     browser options. To know more detailed information about 
     cookie management with specific web browsers, it can be 
-    found at the browsers' respective websites.<br/>
+    found at the browsers{'\''} respective websites.<br/>
     CCPA Privacy Rights (Do Not Sell My Personal Information)<br/><br/>
 
     Under the CCPA, among other rights, California consumers have 
     the right to:<br/><br/>
 
-    Request that a business that collects a consumer's personal 
+    Request that a business that collects a consumer{'\''}s personal 
     data disclose the categories and specific pieces of personal data that a business has collected about consumers.
 			<br/>
     Request that a business delete any personal data about the 
     consumer that a business has collected.<br/>
 
-    Request that a business that sells a consumer's personal data, 
-    not sell the consumer's personal data.<br/><br/>
+    Request that a business that sells a consumer{'\''}s personal data, 
+    not sell the consumer{'\''}s personal data.<br/><br/>
 
     If you make a request, we have one month to respond to you. If 
     you would like to exercise any of these rights, please contact us.<br/><br/>
@@ -157,7 +157,7 @@ const privacy = () => (
     If you make a request, we have one month to respond to you. 
     If you would like to exercise any of these rights, please 
     contact us.<br/><br/>
-    Children's Information<br/><br/>
+    Children{'\''}s Information<br/><br/>
 
     Another part of our priority is adding protection for children 
     while using the internet. We encourage parents and guardians to 

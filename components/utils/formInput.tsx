@@ -38,7 +38,8 @@ const FormInput: FC<FormInputProps> = ({
 			{label && <FormLabel htmlFor={inputId}>{label}</FormLabel>}
 			<InputGroup>
 				{inputIcon && (
-					<InputLeftElement pointerEvents="none" children={inputIcon} />
+					// eslint-disable-next-line react/no-children-prop
+					<InputLeftElement pointerEvents="none"  children={ inputIcon} />
 				)}
 				{type !== 'number' && type !== 'file' && type !== 'numberShow' && type !== 'phoneNumber' && (
 					<Input

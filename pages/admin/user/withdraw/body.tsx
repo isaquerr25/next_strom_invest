@@ -37,6 +37,7 @@ export const BodySetOne = () =>{
 			SetStateTransaction(result.data?.getTypeTransaction);
 		}
 		fetchData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 
@@ -49,7 +50,7 @@ export const BodySetOne = () =>{
 
 
 
-	},[staffInfoGraph.loading]);
+	},[dataUser?.cyclesStart, staffInfoGraph.loading]);
 
 	return(
 

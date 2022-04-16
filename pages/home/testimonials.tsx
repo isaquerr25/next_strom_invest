@@ -176,6 +176,7 @@ export function GridBlurredBackdrop() {
 				mt={16}
 				mx={'auto'}>
 				{testimonials.map((cardInfo, index) => (
+					// eslint-disable-next-line react/jsx-key
 					<TestimonialCard {...cardInfo} index={index} />
 				))}
 			</SimpleGrid>

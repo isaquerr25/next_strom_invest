@@ -28,7 +28,7 @@ export const BodyFunds = () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 
 	return(
 
@@ -107,15 +107,15 @@ export const BodyFunds = () =>{
 							<DescriptionAndRestriction/>
 
 						</Flex>
-						<Box w={{base:'full',sm:'auto'}} className='forexShowcss' borderColor={'teal.300'} borderStyle='solid' borderWidth='2px' bg='black' borderRadius={10}>
-							<Timeline style={{pointerEvent:'none'}} isTransparent colorTheme="dark" feedMode="market" market="crypto" height={400} width="100%"></Timeline>
+						<Box  pointerEvents='none' w={{base:'full',sm:'auto'}} className='forexShowcss' borderColor={'teal.300'} borderStyle='solid' borderWidth='2px' bg='black' borderRadius={10}>
+							<Timeline isTransparent colorTheme="dark" feedMode="market" market="crypto" height={400}/>
 
 						</Box>
 					</Flex>
 					
 				}
 			</Flex>
-			<Box className='forexShowcss' w={'full'} cursor={'none'} pointerEvents='none' display='flex' alignItems={'flex-end'} cursor='none'>
+			<Box className='forexShowcss' w={'full'} cursor={'none'} pointerEvents='none' display='flex' alignItems={'flex-end'}>
 				<Ticker colorTheme="dark"></Ticker>
 			</Box>
 		</>
@@ -168,7 +168,7 @@ function FormikWallet() {
 					action:'DEPOSIT'
 				}}
 
-				onSubmit={async (values: TypeFormikWithdraw, { setSubmitting, setresultOpen }) => {
+				onSubmit={async (values: TypeFormikWithdraw, { setSubmitting, setErrors }) => {
 
 					let valuePrice = Number(values.value.replace(/[\$]|[,]/g,''));
 					valuePrice = valuePrice*100;

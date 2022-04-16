@@ -178,7 +178,7 @@ export const BodySetOne = () =>{
 			Router.push('/admin/login');
 			console.log(dataUser?.cyclesStart!);
 		}
-	},[staffInfoGraph.loading]);
+	},[dataUser?.cyclesStart, staffInfoGraph.loading]);
 
 	const FormikFindUser= () => {
 

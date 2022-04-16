@@ -32,7 +32,7 @@ export const BodyCycle= () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 
 
 	return(

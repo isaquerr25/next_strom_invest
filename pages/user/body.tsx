@@ -15,14 +15,12 @@ import { useUserAllMoneyQuery, useUserInfoDocumentQuery } from '../generated/gra
 import { ForexShow } from './forexGraph';
 import axios from 'axios';
 
-import Forexy from 'forexy';
 import { ForexRow } from './forextoRow';
 
 export const BodySetOne = () =>{
 
-	const currencyCheck = new Forexy();
 	const [dropState,SetDropState] = useState('All');
-	const [usePar,setPar] = useState<{}>();
+	const [usePar,setPar] = useState<any>();
 	const userInfoGraph   = useUserInfoDocumentQuery();
 	const allMoney = useUserAllMoneyQuery();
 	const dataUser =  userInfoGraph.data?.userInfoDocument;
@@ -34,12 +32,12 @@ export const BodySetOne = () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 	
 
 	useEffect(()=>{
 		const  fetchData = async () => {
-			let groupData = {};
+			let groupData:any;
 			try {
 			
 
@@ -63,7 +61,7 @@ export const BodySetOne = () =>{
 			}
 		};
 		fetchData();
-		console.log('usePar ' ,usePar);
+
 	},[]);
 
 
@@ -219,9 +217,9 @@ const Block = ({value,title,inputIcon}:typeBlock) =>(
 );
 interface typeBlockLittle{
 
-	change:string|number|null
-	price:string|number|null
-	volume:string|number|null
+	change:string
+	price:string
+	volume:string
 	title:string
 	inputIcon?: any;
 };

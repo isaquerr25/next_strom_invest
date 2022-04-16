@@ -29,7 +29,7 @@ export const BodyTransactions = () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 
 
 
@@ -106,8 +106,9 @@ export const BodyTransactions = () =>{
 
 
 
-const TableTransaction = ({arrayTransactions,dropValue}) => {
+const TableTransaction = ({arrayTransactions,dropValue}:{arrayTransactions:any,dropValue:any}) => {
 	return (
+	
 		<Box
 			overflowY="auto"
 
@@ -171,6 +172,7 @@ const TableTransaction = ({arrayTransactions,dropValue}) => {
 
 			</Table>
 		</Box>
+	
 	);
 };
 

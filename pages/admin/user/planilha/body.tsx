@@ -41,7 +41,7 @@ export const BodySetOne = () =>{
 			SetStateTransaction(result.data?.getTypeTransaction);
 		}
 		fetchData();
-	}, []);
+	});
 
 
 	useEffect(()=>{
@@ -53,7 +53,7 @@ export const BodySetOne = () =>{
 
 
 
-	},[staffInfoGraph.loading]);
+	},[dataUser?.cyclesStart, staffInfoGraph.loading]);
 
 	return(
 

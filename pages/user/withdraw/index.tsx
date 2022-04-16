@@ -21,7 +21,7 @@ const Withdraw = () =>{
 			</Box>
 			<BodyWithdraw/>
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
-				<MiniChart colorTheme="dark" isTransparent width="100%"></MiniChart>
+				<MiniChart colorTheme="dark" isTransparent></MiniChart>
 			</Box>
 			{/* <FooterModify/> */}
 		</>

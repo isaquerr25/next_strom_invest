@@ -40,7 +40,7 @@ export const BodySetOne = () =>{
 			Router.push('/admin/login');
 		}
 
-	},[staffInfoGraph.loading]);
+	},[dataUser, staffInfoGraph.loading]);
 
 	return(
 

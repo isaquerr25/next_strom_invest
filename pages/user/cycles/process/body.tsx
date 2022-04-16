@@ -33,7 +33,7 @@ export const BodyCycleProcess = () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 
 	return(
 
@@ -148,7 +148,7 @@ const TableCycle = ({arrayTransactions,dropValue}:{
 				</Thead>
 				<Tbody>
 					{	(arrayTransactions!=null &&  arrayTransactions!=undefined )&&
-						arrayTransactions.map( (compose) =>{
+						arrayTransactions.map( (compose:TypesComposeCycleProcess) =>{
 							if(dropValue == 'PROCESS' || dropValue == 'CANCEL' || dropValue == 'ACTIVE' || dropValue == 'COMPLETE'){
 								if(dropValue != compose.state){
 									return(<></>);
@@ -175,13 +175,13 @@ const TableCycle = ({arrayTransactions,dropValue}:{
 									finalValue = convertMoney(finalValue/100);
 								}
 							}
-
+							const money:number = (compose.valueUSD != undefined ? compose.valueUSD : 0);
 
 
 							return(
 								<Tr color={color} key={compose.id}>
 									<Td textColor={color}>{compose.action?.toUpperCase()}</Td>
-									<Td textColor={color}>{convertMoney(((compose.valueUSD)/100 )?? 0)}</Td>
+									<Td textColor={color}>{convertMoney(money/100)}</Td>
 									<Td textColor={color}>{finalValue}</Td>
 									<Td textColor={color}>{compose.state}</Td>
 									<Td textColor={color}>{compose.beginDate.toString().split('T')[0]}</Td>

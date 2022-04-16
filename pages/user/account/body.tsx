@@ -1,7 +1,13 @@
 import { Badge, Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Icon, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Spinner, Stack, styled, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr, useBoolean } from '@chakra-ui/react';
 import { Field,  Form, Formik } from 'formik';
 import { FaImages } from 'react-icons/fa';
-import { validateEmail, validationDocument, validationNewPassword, validationNumber, validationRegister, validationWallet } from '../../../components/utils/validateInputs';
+import { 
+	validateEmail, 
+	validationNewPassword, 
+	validationNumber, 
+	validationRegister, 
+	validationWallet } 
+	from '../../../components/utils/validateInputs';
 import { jsx, css } from '@emotion/react';
 import { containerEqual } from './style';
 import { useAddDocumentPictureMutation, useUpdateAuthPasswordMutation, useUpdateNumberTelephoneMutation, useUpdateWalletMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
@@ -12,7 +18,6 @@ import { Loading } from '../../../components/utils/loading';
 import FormInput from '../../../components/utils/formInput';
 import { PopMsg } from '../../../components/utils/PopMsg';
 import { MdCreate, MdPhonelinkSetup } from 'react-icons/md';
-import { ImageFile } from 'react-dropzone';
 import { UploadFile } from './UploadFile';
 import { GiWallet } from 'react-icons/gi';
 import { MdOutlinePassword } from 'react-icons/md';
@@ -29,7 +34,7 @@ export const BodyAccount = () =>{
 			Router.push('/home/login');
 			console.log(dataUser?.name!	);
 		}
-	},[userInfoGraph.loading]);
+	},[dataUser?.name, userInfoGraph.loading]);
 
 	return(
 

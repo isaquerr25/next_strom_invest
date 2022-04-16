@@ -32,6 +32,7 @@ const TokenConfirms = () =>{
 		if(tokenConfirm != undefined){
 			fetchData();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[tokenConfirm]);
 	return (
 		<>

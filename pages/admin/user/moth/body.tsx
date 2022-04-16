@@ -82,7 +82,7 @@ export const BodySetOne = () =>{
 
 
 
-	},[staffInfoGraph.loading]);
+	},[dataUser?.cyclesStart, staffInfoGraph.loading]);
 
 
 	useEffect(()=>{
@@ -281,6 +281,7 @@ export const BodySetOne = () =>{
 					initialValues={{priceMoth:'',finishDate:new Date()}}
 					onSubmit={async (values: typesCycle, { setSubmitting, setErrors }) => {
 						setSubmitting(true);
+						// eslint-disable-next-line react-hooks/rules-of-hooks
 						const result = await useCreateMonthly({variables:{
 							profit: Math.round(Number(values.priceMoth)*100),
 							finishDate: new Date(finishDate!)
