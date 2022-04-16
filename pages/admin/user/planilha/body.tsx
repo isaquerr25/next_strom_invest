@@ -16,6 +16,7 @@ import { PopMsg } from '../../../../components/utils/PopMsg';
 import { useRouter } from 'next/router';
 import { calculatorDays } from '../../../user/cycles/process/utils';
 import { addDays } from 'date-fns';
+import { finished } from 'stream/promises';
 
 
 export const BodySetOne = () =>{
@@ -242,23 +243,10 @@ const TableTransfer = () => {
 								color = 'green';
 							}
 
-
-							let finalValue:any ='';
-
-							if (compose.state == 'CANCEL'){
-								finalValue ='CANCEL';
-
-							}else{
-								const datFi = compose.finishDate ?? addDays(new Date(), 16);
-								finalValue =compose.value ?? calculatorDays(new Date(),datFi)+' Days';
-								if(typeof(finalValue) == typeof Number()){
-									finalValue = convertMoney(finalValue/100);
-								}
-							}
 							return(
 								<Tr color={color} key={compose.id}>
 									<Td textColor={color}>{compose.id}</Td>
-									<Td textColor={color}>{finalValue}</Td>
+									<Td textColor={color}>{compose.value}</Td>
 									<Td textColor={color}>{compose.hash}</Td>
 									<Td textColor={color}>{compose.action}</Td>
 									<Td textColor={color}>{compose.wallet}</Td>
