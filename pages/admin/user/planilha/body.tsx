@@ -15,6 +15,7 @@ import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
 import { PopMsg } from '../../../../components/utils/PopMsg';
 import { useRouter } from 'next/router';
 import { calculatorDays } from '../../../user/cycles/process/utils';
+import { addDays } from 'date-fns';
 
 
 export const BodySetOne = () =>{
@@ -248,7 +249,8 @@ const TableTransfer = () => {
 								finalValue ='CANCEL';
 
 							}else{
-								finalValue =compose.value ?? calculatorDays(new Date(),compose.finishDate ?? new Date())+' Days';
+								const datFi = compose.finishDate ?? addDays(new Date(), 16);
+								finalValue =compose.value ?? calculatorDays(new Date(),datFi)+' Days';
 								if(typeof(finalValue) == typeof Number()){
 									finalValue = convertMoney(finalValue/100);
 								}
