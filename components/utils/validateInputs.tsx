@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-export const validateTrading = (value) => {
+export const validateTrading = (value:string) => {
 	let error;
 	if (!value) {
 		error = 'Number is required';
