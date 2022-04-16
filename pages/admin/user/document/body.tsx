@@ -131,10 +131,10 @@ const Block = ({id,value,title,email}:typeBlock) =>{
 		const result = (await alterDocumentGraph({variables:{id,state}})).data;
 		if(result){
 			alert('save');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/document');
 		}else{
 			alert('não salvo');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/document');
 		}
 	};
 
@@ -169,10 +169,10 @@ const Block = ({id,value,title,email}:typeBlock) =>{
 					justifyContent={'center'}
 					width={'100%'}
 				>
-				 <Button leftIcon={<FaNotEqual />} onClick={async()=>{await send(id,'INVALID');}} colorScheme='teal' variant='solid'>
+				 <Button leftIcon={<FaNotEqual />} onClick={async()=>{await send(id ?? 0,'INVALID');}} colorScheme='teal' variant='solid'>
 						Negar
 					</Button>
-					<Button rightIcon={<ArrowForwardIcon />} onClick={async()=>{await send(id,'VALID');}} colorScheme='teal' variant='outline'>
+					<Button rightIcon={<ArrowForwardIcon />} onClick={async()=>{await send(id ?? 0,'VALID');}} colorScheme='teal' variant='outline'>
 					Aceitar
 					</Button>
 				</Flex>

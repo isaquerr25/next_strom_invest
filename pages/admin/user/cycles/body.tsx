@@ -138,10 +138,10 @@ const Block = ({
 		const result = (await alterCycle({variables:{id,state,beginDate:new Date()}})).data;
 		if(result){
 			alert('save');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/cycles');
 		}else{
 			alert('não salvo');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/cycles');
 		}
 	};
 

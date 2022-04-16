@@ -73,7 +73,7 @@ export const BodySetOne = () =>{
 						gap={2}
 						alignItems={'flex-start'}
 					>
-						{stateTransaction!=null && stateTransaction.map((number) =>
+						{stateTransaction!=null && stateTransaction.map((number:any) =>
 
 							<Block
 								key={number.id}
@@ -117,11 +117,11 @@ interface typeBlock{
 	createdAt?:string
 	updatedAt?:string
 	wallet?:string
-	userId?:string
+	userId?:string|number
 	user_name?:string
 	user_wallet?:string
 	id:number
-	email?: string;
+	email?: string
 };
 
 
@@ -135,7 +135,6 @@ const Block = ({
 	updatedAt,
 	wallet,
 	userId,
-	user_id,
 	user_name,
 	user_wallet,
 	email,
@@ -150,10 +149,10 @@ const Block = ({
 		const result = (await alterTransaction({variables:{id,state}})).data;
 		if(result){
 			alert('save');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/withdraw');
 		}else{
 			alert('não salvo');
-			router.reload(window.location.pathname);
+			router.push('/admin/user/withdraw');
 		}
 	};
 

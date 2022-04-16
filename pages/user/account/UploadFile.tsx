@@ -64,7 +64,7 @@ export function UploadFile() {
 				hidden
 				accept="image/*"
 			/>
-			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={() => Router.reload(window.location.pathname)}/>
+			<PopMsg title={titleShow} msg={errorMsg} display={popShow} hide={() => Router.reload('/user/account')}/>
 
 		</div>
 	);
