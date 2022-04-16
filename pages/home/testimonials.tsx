@@ -14,7 +14,7 @@ const testimonials = [
 		name: 'Brandon P.',
 		role: 'Chief Marketing',
 		content:
-			'It really saves me time and effort. It\'s exactly what ours was missing. Storm Invest is the most valuable investment resource we know.',
+			'It really saves me time and effort. It\'s exactly what ours was missing. Tempest Invest is the most valuable investment resource we know.',
 		avatar:
 			'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
 	},
@@ -22,7 +22,7 @@ const testimonials = [
 		name: 'Krysta B.',
 		role: '',
 		content:
-			'I don\'t even have to worry about money anymore. We have worked with Storm Invest for the past 2 years. I got more than twice what I invested. I just have the company to thank! ',
+			'I don\'t even have to worry about money anymore. We have worked with Tempest Invest for the past 2 years. I got more than twice what I invested. I just have the company to thank! ',
 		avatar:
 			'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
 	},
@@ -30,7 +30,7 @@ const testimonials = [
 		name: 'Darcy L.',
 		role: '',
 		content:
-			'Top service, with quality and responsibility, deserving all the merit that the Storm Invest brand has achieved with great competence; Congratulations to the entire team for their professionalism.',
+			'Top service, with quality and responsibility, deserving all the merit that the Tempest Invest brand has achieved with great competence; Congratulations to the entire team for their professionalism.',
 		avatar:
 			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
 	},
@@ -38,7 +38,7 @@ const testimonials = [
 		name: 'Daniel T.',
 		role: '',
 		content:
-			'We were very satisfied with Storm Invest service!! We are one of its first customers and we have always had an accurate and quality service. Congratulations to the whole team!!',
+			'We were very satisfied with Tempest Invest service!! We are one of its first customers and we have always had an accurate and quality service. Congratulations to the whole team!!',
 		avatar:
 			'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
 	},

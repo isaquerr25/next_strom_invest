@@ -99,7 +99,7 @@ export function Nav() {
 					<Image
 						width={'100px'}
 						src={'../logo.png'??'./logo.png'}
-						alt='Storm Invest'
+						alt='Tempest Invest'
 					/>
 
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>

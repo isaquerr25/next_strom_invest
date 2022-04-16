@@ -162,7 +162,7 @@ const Block = ({id,value,title,email}:typeBlock) =>{
 				<img
 					width={'1500px'}
 					src={`http://localhost:4000/static/${value}`}
-					alt='Storm Invest'
+					alt='Tempest Invest'
 				/>
 				<Flex
 					alignItems='center'

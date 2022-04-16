@@ -89,11 +89,11 @@ export function FooterModify() {
 								width={'300px'}
 
 								src='./logo.png'
-								alt='Storm Invest'
+								alt='Tempest Invest'
 							/>
 						</Box>
 						<Text fontSize={'sm'}>
-              © 2020 STORM INVEST. All rights reserved
+              © 2020 TEMPEST INVEST. All rights reserved
 						</Text>
 
 					</Stack>

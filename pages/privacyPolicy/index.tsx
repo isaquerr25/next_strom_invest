@@ -4,12 +4,12 @@ const privacy = () => (
 	<Flex m={5}>
 		<Text>
       
-    Privacy Policy for Storm Invest<br/><br/>
+    Privacy Policy for Tempest Invest<br/><br/>
 
-    At Storm Invest, accessible from www.storminvest.com, 
+    At Tempest Invest, accessible from www.tempestinvest.com, 
     one of our main priorities is the privacy of our visitors. 
     This Privacy Policy document contains types of information 
-    that is collected and recorded by Storm Invest and how we use it.<br/>
+    that is collected and recorded by Tempest Invest and how we use it.<br/>
 
     If you have additional questions or require more 
     information about our Privacy Policy, 
@@ -17,7 +17,7 @@ const privacy = () => (
 
     This Privacy Policy applies only to our online activities
      and is valid for visitors to our website with regards to 
-     the information that they shared and/or collect in Storm
+     the information that they shared and/or collect in Tempest
      Invest. This policy is not applicable to any information 
      collected offline or via channels other than this website.
       Our Privacy Policy was created with the help of the Free 
@@ -59,7 +59,7 @@ const privacy = () => (
 
     Log Files<br/><br/>
 
-    Storm Invest follows a standard procedure of using log files. 
+    Tempest Invest follows a standard procedure of using log files. 
     These files log visitors when they visit websites. All hosting 
     companies do this and a part of hosting services' analytics.
      The information collected by log files include internet protocol 
@@ -72,7 +72,7 @@ const privacy = () => (
       demographic information.<br/><br/>
     Cookies and Web Beacons<br/><br/>
 
-    Like any other website, Storm Invest uses 'cookies'. These 
+    Like any other website, Tempest Invest uses 'cookies'. These 
     cookies are used to store information including visitors' 
     preferences, and the pages on the website that the visitor 
     accessed or visited. The information is used to optimize 
@@ -84,22 +84,22 @@ const privacy = () => (
     Advertising Partners Privacy Policies<br/>
 
     You may consult this list to find the Privacy Policy for 
-    each of the advertising partners of Storm Invest.<br/>
+    each of the advertising partners of Tempest Invest.<br/>
 
     Third-party ad servers or ad networks uses technologies 
     like cookies, JavaScript, or Web Beacons that are used 
     in their respective advertisements and links that appear
-    on Storm Invest, which are sent directly to users' browser. 
+    on Tempest Invest, which are sent directly to users' browser. 
     They automatically receive your IP address when this occurs. 
     These technologies are used to measure the effectiveness of 
     their advertising campaigns and/or to personalize the advertising 
     content that you see on websites that you visit.<br/>
 
-    Note that Storm Invest has no access to or control over these 
+    Note that Tempest Invest has no access to or control over these 
     cookies that are used by third-party advertisers.<br/>
     Third Party Privacy Policies<br/>
 
-    Storm Invest's Privacy Policy does not apply to other 
+    Tempest Invest's Privacy Policy does not apply to other 
     advertisers or websites. Thus, we are advising you to 
     consult the respective Privacy Policies of these 
     third-party ad servers for more detailed information. 
@@ -164,7 +164,7 @@ const privacy = () => (
     observe, participate in, and/or monitor and guide their online 
     activity.<br/><br/>
 
-    Storm Invest does not knowingly collect any Personal 
+    Tempest Invest does not knowingly collect any Personal 
     Identifiable Information from children under the age of 13. 
     If you think that your child provided this kind of 
     information on our website, we strongly encourage you to 

@@ -23,6 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<ApolloProvider client={client} >
 			<ChakraProvider>
 				<ThemeProvider>
+					<head>
+						<link  rel="icon" type="image/png"  href="logo_median.png" />
+					</head>
 					<Component {...pageProps} />
 				</ThemeProvider>
 			</ChakraProvider>

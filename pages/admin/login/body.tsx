@@ -60,7 +60,7 @@ export function SimpleCard() {
 		>
 			<Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
 				<Stack align={'center'}>
-					<Heading color='teal.100' textShadow='1px 2px #a5a5a5'fontSize={'8xl'} >STAFF STORM</Heading>
+					<Heading color='teal.100' textShadow='1px 2px #a5a5a5'fontSize={'8xl'} >STAFF Tempest</Heading>
 				</Stack>
 				<Box
 					rounded={'lg'}
