@@ -3,10 +3,11 @@ import Head from 'next/head';
 import {FooterModify} from '../../components/utils/footerModify';
 import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
-import {RegisterBody} from './body';
+import {RegisterBody} from '../../components/pageComponents/newPassword/body';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
 import { type } from 'os';
+import Layout from '../../components/utils/layout';
 
 
 type typeRou = string
@@ -15,13 +16,12 @@ const Register = () =>{
 	const router = useRouter();
 	const token = router.query.token;
 	return(
-		<>
-			<HeaderMod title='Register' />
-			<Nav/>
-
+		
+		<Layout title={'New Password'} navType={'home'} displayFooter={true}>
 			<RegisterBody props={router.query.token}/>
-			<FooterModify/>
-		</>
+			<HeaderMod title='Register' />
+		</Layout>
+
 	);
 
 };

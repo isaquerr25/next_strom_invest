@@ -4,7 +4,7 @@ import {FooterModify} from '../../../../components/utils/footerModify';
 import { HeaderMod } from '../../../../components/utils/headerTitle';
 import {Nav} from '../../../../components/utils/navigate';
 import { NavLogin } from '../../../../components/utils/navigateAdmin';
-import { BodySetOne } from './body';
+import { BodySetOne } from '../../../../components/pageComponents/admin/user/moth/body';
 
 
 

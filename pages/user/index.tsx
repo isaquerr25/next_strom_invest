@@ -4,18 +4,16 @@ import {FooterModify} from '../../components/utils/footerModify';
 import { HeaderMod } from '../../components/utils/headerTitle';
 import {Nav} from '../../components/utils/navigate';
 import { NavLogin } from '../../components/utils/navigateLogin';
-import { BodySetOne } from './body';
+import { BodySetOne } from '../../components/pageComponents/user/body';
+import Layout from '../../components/utils/layout';
 
 
 
 const Dashboard = () =>{
 	return(
-		<>
-			<HeaderMod title='Dashboard' />
-			<NavLogin />
+		<Layout title={'Dashboard'} navType={'user'} displayFooter={false}>
 			<BodySetOne/>
-			{/* <FooterModify/> */}
-		</>
+		</Layout>
 	);
 };
 

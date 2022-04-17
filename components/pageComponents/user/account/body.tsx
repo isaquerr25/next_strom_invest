@@ -7,16 +7,20 @@ import {
 	validationNumber, 
 	validationRegister, 
 	validationWallet } 
-	from '../../../components/utils/validateInputs';
+	from '../../../utils/validateInputs';
 import { jsx, css } from '@emotion/react';
 import { containerEqual } from './style';
-import { useAddDocumentPictureMutation, useUpdateAuthPasswordMutation, useUpdateNumberTelephoneMutation, useUpdateWalletMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import { useAddDocumentPictureMutation, 
+	useUpdateAuthPasswordMutation, 
+	useUpdateNumberTelephoneMutation, 
+	useUpdateWalletMutation, 
+	useUserInfoDocumentQuery } from '../../../generated/graphql';
 import Router  from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { Console } from 'console';
-import { Loading } from '../../../components/utils/loading';
-import FormInput from '../../../components/utils/formInput';
-import { PopMsg } from '../../../components/utils/PopMsg';
+import { Loading } from '../../../utils/loading';
+import FormInput from '../../../utils/formInput';
+import { PopMsg } from '../../../utils/PopMsg';
 import { MdCreate, MdPhonelinkSetup } from 'react-icons/md';
 import { UploadFile } from './UploadFile';
 import { GiWallet } from 'react-icons/gi';

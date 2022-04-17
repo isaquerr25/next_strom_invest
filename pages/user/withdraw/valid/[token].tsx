@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useValidWithdrawMutation } from '../../../generated/graphql';
 import {useEffect, useState} from 'react';
 import { Loading } from '../../../../components/utils/loading';
 import { PopMsg } from '../../../../components/utils/PopMsg';
 import { useBoolean } from '@chakra-ui/react';
 import Router from 'next/router';
+import { useValidWithdrawMutation } from '../../../../components/generated/graphql';
 
 
 const Post = () => {

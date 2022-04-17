@@ -4,24 +4,24 @@ import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
 import { NavLogin } from '../../../components/utils/navigateLogin';
-import { ForexRow } from '../forextoRow';
-import { BodyCycle } from './body';
+import { ForexRow } from '../../../components/pageComponents/user/forextoRow';
+import { BodyCycle } from '../../../components/pageComponents/user/cycle/body';
+import Layout from '../../../components/utils/layout';
 
 
 
 
 const Cycles = () =>{
 	return(
-		<>
-			<HeaderMod title='Cycles' />
-			<NavLogin />
+		<Layout title={'Cycles'} navType={'user'} displayFooter={false}>
+
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 
 			</Box>
 			<BodyCycle/>
-			{/* <FooterModify/> */}
-		</>
+		
+		</Layout>
 	);
 };
 

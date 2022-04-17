@@ -3,7 +3,7 @@ import Head from 'next/head';
 import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
-import {SimpleCard} from './body';
+import {SimpleCard} from '../../../components/pageComponents/admin/login/body';
 
 
 

@@ -28,11 +28,11 @@ import {
 	MdOutlineEmail,
 } from 'react-icons/md';
 import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
-import { useCreateEmailBackMutation } from '../generated/graphql';
+import { useCreateEmailBackMutation } from '../../generated/graphql';
 import { Formik,Field, Form } from 'formik';
-import { PopMsg } from '../../components/utils/PopMsg';
+import { PopMsg } from '../../utils/PopMsg';
 import { useState } from 'react';
-import FormInput from '../../components/utils/formInput';
+import FormInput from '../../utils/formInput';
 import { FiSend } from 'react-icons/fi';
 
 interface typesEmail{

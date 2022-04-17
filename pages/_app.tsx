@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'next-themes';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, from } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
@@ -23,9 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<ApolloProvider client={client} >
 			<ChakraProvider>
 				<ThemeProvider>
-					<head>
+					<Head>
 						<link  rel="icon" type="image/png"  href="logo_median.png" />
-					</head>
+					</Head>
 					<Component {...pageProps} />
 				</ThemeProvider>
 			</ChakraProvider>

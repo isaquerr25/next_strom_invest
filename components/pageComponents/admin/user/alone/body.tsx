@@ -9,9 +9,9 @@ import { FC, MouseEventHandler, ReactElement, ReactNode, useEffect, useState} fr
 import { FaNotEqual, FaPlaneArrival, FaPlaneDeparture, FaPoll, FaRegChartBar } from 'react-icons/fa';
 import { CgSandClock } from 'react-icons/cg';
 import { SiClockify } from 'react-icons/si';
-import Carousel from '../../../../components/utils/Carousel';
-import { convertMoney } from '../../../../components/utils/convertMoney';
-import { Loading } from '../../../../components/utils/loading';
+import Carousel from '../../../../utils/Carousel';
+import { convertMoney } from '../../../../utils/convertMoney';
+import { Loading } from '../../../../utils/loading';
 import { useActiveStartStaffQuery,
 	useAllCycleQuery,
 	useAllDocumentsValidationQuery ,
@@ -27,18 +27,18 @@ import { useActiveStartStaffQuery,
 	useUserInfoIdStaffMutation,
 	useAllCycleByUserStaffMutation,
 	useAllTransactionsByUserStaffMutation
-} from '../../../generated/graphql';
+} from '../../../../generated/graphql';
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
-import { PopMsg } from '../../../../components/utils/PopMsg';
+import { PopMsg } from '../../../../utils/PopMsg';
 import { useRouter } from 'next/router';
-import { calculatorDays } from '../../../user/cycles/process/utils';
+import { calculatorDays } from '../../../user/cycle/process/utils';
 import { BsCashCoin, BsFillCalendarCheckFill } from 'react-icons/bs';
 import { GiWallet } from 'react-icons/gi';
 import DatePicker from 'react-datepicker';
 import { addDays, addMonths } from 'date-fns';
 import { Form, Formik,FormikHandlers } from 'formik';
-import FormInput from '../../../../components/utils/formInput';
-import { daysInMonth } from '../../../user/cycles/utils';
+import FormInput from '../../../../utils/formInput';
+import { daysInMonth } from '../../../user/cycle/utils';
 import { IoWalletOutline } from 'react-icons/io5';
 import NumberFormat from 'react-number-format';
 import 'react-datepicker/dist/react-datepicker.css';

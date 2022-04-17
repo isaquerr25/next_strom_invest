@@ -15,10 +15,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { GiWallet } from 'react-icons/gi';
 import { IoWalletOutline } from 'react-icons/io5';
 import { FormatMoney } from 'format-money-js';
-import { useAllCycleByUserQuery, useAllTransactionsByUserQuery, useUserInfoDocumentQuery } from '../../../generated/graphql';
-import { Loading } from '../../../../components/utils/loading';
+import { useAllCycleByUserQuery, useAllTransactionsByUserQuery, useUserInfoDocumentQuery } from '../../../../generated/graphql';
+import { Loading } from '../../../../utils/loading';
 import { calculatorDays } from './utils';
-import { convertMoney } from '../../../../components/utils/convertMoney';
+import { convertMoney } from '../../../../utils/convertMoney';
 
 
 export const BodyCycleProcess = () =>{

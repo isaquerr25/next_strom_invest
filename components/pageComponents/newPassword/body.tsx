@@ -24,10 +24,10 @@ import { Form, Formik } from 'formik';
 
 import { MdCreate } from 'react-icons/md';
 import Router  from 'next/router';
-import FormInput from '../../components/utils/formInput';
-import { PopMsg } from '../../components/utils/PopMsg';
-import { validationPassword, validationRegister } from '../../components/utils/validateInputs';
-import {useNewPasswordMutation } from '../generated/graphql';
+import FormInput from '../../utils/formInput';
+import { PopMsg } from '../../utils/PopMsg';
+import { validationPassword, validationRegister } from '../../utils/validateInputs';
+import {useNewPasswordMutation } from '../../generated/graphql';
 
 
 interface Values{

@@ -1,9 +1,9 @@
 import { gql, useApolloClient, useMutation } from '@apollo/client';
 import { Button, useBoolean } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
-import { PopMsg } from '../../../components/utils/PopMsg';
-import { useAddDocumentPictureMutation } from '../../generated/graphql';
 import Router from 'next/router';
+import { PopMsg } from '../../../utils/PopMsg';
+import { useAddDocumentPictureMutation } from '../../../generated/graphql';
 
 const SINGLE_UPLOAD_MUTATION = gql`
   mutation singleUpload($file: Upload!) {
@@ -34,7 +34,7 @@ export function UploadFile() {
 		},
 	}) =>
 		validity.valid &&
-    sendDocument({ variables: { picture: file } }).then((back) => {
+    sendDocument({ variables: { picture: file } }).then((back:any) => {
 
     	if(back){
     		setErrorMsg('File sent for analysis');

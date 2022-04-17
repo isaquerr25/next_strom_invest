@@ -3,8 +3,8 @@
 const nextConfig = {
 	reactStrictMode: true,
 	env: {
-    URL: process.env.URL,
-  }
+		URL: process.env.URL,
+	}
 };
 
 

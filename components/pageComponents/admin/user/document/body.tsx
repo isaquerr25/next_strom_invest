@@ -7,13 +7,15 @@ import { CgSandClock } from 'react-icons/cg';
 import { SiClockify } from 'react-icons/si';
 
 
-import Carousel from '../../../../components/utils/Carousel';
-import { convertMoney } from '../../../../components/utils/convertMoney';
-import { Loading } from '../../../../components/utils/loading';
-import { useActiveStartStaffQuery, useAllDocumentsValidationQuery , useAlterDocumentMutation} from '../../../generated/graphql';
+import Carousel from '../../../../utils/Carousel';
+import { convertMoney } from '../../../../utils/convertMoney';
+import { Loading } from '../../../../utils/loading';
+import { useActiveStartStaffQuery, 
+	useAllDocumentsValidationQuery , 
+	useAlterDocumentMutation} from '../../../../generated/graphql';
 import { photo } from './api';
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
-import { PopMsg } from '../../../../components/utils/PopMsg';
+import { PopMsg } from '../../../../utils/PopMsg';
 import { useRouter } from 'next/router';
 
 
@@ -56,7 +58,7 @@ export const BodySetOne = () =>{
 
 
 
-	},[staffInfoGraph.loading]);
+	},[dataUser?.cyclesStart, staffInfoGraph.loading]);
 
 	return(
 

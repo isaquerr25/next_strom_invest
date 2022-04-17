@@ -8,10 +8,10 @@ import { SiClockify , SiXrp , SiDogecoin , SiLitecoin,SiMonero} from 'react-icon
 
 
 
-import Carousel from '../../components/utils/Carousel';
-import { convertMoney } from '../../components/utils/convertMoney';
-import { Loading } from '../../components/utils/loading';
-import { useUserAllMoneyQuery, useUserInfoDocumentQuery } from '../generated/graphql';
+import Carousel from '../../utils/Carousel';
+import { convertMoney } from '../../utils/convertMoney';
+import { Loading } from '../../utils/loading';
+import { useUserAllMoneyQuery, useUserInfoDocumentQuery } from '../../generated/graphql';
 import { ForexShow } from './forexGraph';
 import axios from 'axios';
 

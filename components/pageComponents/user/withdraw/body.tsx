@@ -4,12 +4,13 @@ import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import { GiWallet } from 'react-icons/gi';
 import { IoWalletOutline } from 'react-icons/io5';
-import { convertMoney } from '../../../components/utils/convertMoney';
-import FormInput from '../../../components/utils/formInput';
-import { Loading } from '../../../components/utils/loading';
-import { PopMsg } from '../../../components/utils/PopMsg';
-import { validationWithdraw } from '../../../components/utils/validateInputs';
-import { useCreateTransactionMutation, useUpdateWalletMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import { convertMoney } from '../../../utils/convertMoney';
+import FormInput from '../../../utils/formInput';
+import { Loading } from '../../../utils/loading';
+import { PopMsg } from '../../../utils/PopMsg';
+import { validationWithdraw } from '../../../utils/validateInputs';
+import { useCreateTransactionMutation, useUpdateWalletMutation, 
+	useUserInfoDocumentQuery } from '../../../generated/graphql';
 
 
 export const BodyWithdraw = () =>{

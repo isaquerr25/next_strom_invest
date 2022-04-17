@@ -7,16 +7,16 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { GiWallet } from 'react-icons/gi';
 import { IoWalletOutline } from 'react-icons/io5';
-import FormInput from '../../../components/utils/formInput';
-import { Loading } from '../../../components/utils/loading';
-import { PopMsg } from '../../../components/utils/PopMsg';
-import {validateUSD,validateEmail} from '../../../components/utils/validateInputs';
-import { useCreateCycleMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import FormInput from '../../../utils/formInput';
+import { Loading } from '../../../utils/loading';
+import { PopMsg } from '../../../utils/PopMsg';
+import {validateUSD,validateEmail} from '../../../utils/validateInputs';
+import { useCreateCycleMutation, useUserInfoDocumentQuery } from '../../../generated/graphql';
 import { daysInMonth } from './utils';
 import { FormatMoney } from 'format-money-js';
 import { BsCashCoin } from 'react-icons/bs';
 import { ForexRow } from '../forextoRow';
-import { convertMoney } from '../../../components/utils/convertMoney';
+import { convertMoney } from '../../../utils/convertMoney';
 
 export const BodyCycle= () =>{
 

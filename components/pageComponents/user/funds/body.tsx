@@ -8,11 +8,12 @@ import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import { GiWallet } from 'react-icons/gi';
 import { IoWalletOutline } from 'react-icons/io5';
-import { convertMoney } from '../../../components/utils/convertMoney';
-import FormInput from '../../../components/utils/formInput';
-import { Loading } from '../../../components/utils/loading';
-import { PopMsg } from '../../../components/utils/PopMsg';
-import { useCreateDepositMutation, useCreateTransactionMutation, useUserInfoDocumentQuery } from '../../generated/graphql';
+import { convertMoney } from '../../../utils/convertMoney';
+import FormInput from '../../../utils/formInput';
+import { Loading } from '../../../utils/loading';
+import { PopMsg } from '../../../utils/PopMsg';
+import { useCreateDepositMutation, useCreateTransactionMutation, 
+	useUserInfoDocumentQuery } from '../../../generated/graphql';
 import { ForexRow } from '../forextoRow';
 import { Ticker, Timeline } from 'react-ts-tradingview-widgets';
 import { styled } from '@chakra-ui/react';

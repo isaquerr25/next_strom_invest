@@ -4,8 +4,9 @@ import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
 import { NavLogin } from '../../../components/utils/navigateLogin';
-import { ForexRow } from '../forextoRow';
-import { BodyTransactions } from './body';
+import { ForexRow } from '../../../components/pageComponents/user/forextoRow';
+import { BodyTransactions } from '../../../components/pageComponents/user/transactions/body';
+import Layout from '../../../components/utils/layout';
 
 
 
@@ -13,15 +14,13 @@ import { BodyTransactions } from './body';
 
 const Transactions = () =>{
 	return(
-		<>
-			<HeaderMod title='Transactions' />
-			<NavLogin />
+		
+		<Layout title={'Funds Deposit'} navType={'user'} displayFooter={false}>
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>
 			<BodyTransactions/>
-			{/* <FooterModify/> */}
-		</>
+		</Layout>
 	);
 };
 

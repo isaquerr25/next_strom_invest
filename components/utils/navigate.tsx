@@ -116,8 +116,8 @@ export function Nav() {
 						fontSize={'sm'}
 						fontWeight={400}
 						variant={'link'}
-
-						onClick={()=>{Router.push('/home/login');}}
+						href={'/home/login'}
+						
 					>
 						Sign In
 					</Button>

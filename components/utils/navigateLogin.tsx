@@ -55,7 +55,7 @@ interface NavItem {
 	href?: string;
 	icon?: IconType;
 }
-import { useLogoutMutation } from '../../pages/generated/graphql';
+import { useLogoutMutation } from '../generated/graphql';
 import { roundToNearestMinutes } from 'date-fns';
 import Router from 'next/router';
 import { MdOutlineSupportAgent } from 'react-icons/md';

@@ -4,18 +4,19 @@ import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
 import { NavLogin } from '../../../components/utils/navigateLogin';
-import { BodyFunds } from './body';
+import { BodyFunds } from '../../../components/pageComponents/user/funds/body';
+import Layout from '../../../components/utils/layout';
 
 
 
 
 const FundsDeposit = () =>{
 	return(
-		<>
-			<HeaderMod title='Funds Deposit' />
-			<NavLogin />
+		<Layout title={'Funds Deposit'} navType={'user'} displayFooter={false}>
+		
 			<BodyFunds/>
-		</>
+		
+		</Layout>
 	);
 };
 

@@ -1,0 +1,18 @@
+
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    restart: always
+    command: sh -c "yarn install && yarn build && yarn start"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - ${APP_PORT_V}:${APP_PORT}
+    env_file: ./.env

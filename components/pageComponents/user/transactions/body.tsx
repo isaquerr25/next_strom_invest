@@ -11,8 +11,8 @@ import { Box, Button, Flex, FormControl,
 
 import { Field,  Form, Formik } from 'formik';
 import {RepeatIcon} from '@chakra-ui/icons';
-import { Loading } from '../../../components/utils/loading';
-import { useUserInfoDocumentQuery, useAllTransactionsByUserQuery } from '../../generated/graphql';
+import { Loading } from '../../../utils/loading';
+import { useUserInfoDocumentQuery, useAllTransactionsByUserQuery } from '../../../generated/graphql';
 import Router from 'next/router';
 import { useEffect,useState } from 'react';
 

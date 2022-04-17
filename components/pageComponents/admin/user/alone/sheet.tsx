@@ -1,6 +1,6 @@
 import { Box, Table, TableCaption, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import { convertMoney } from '../../../../components/utils/convertMoney';
-import { calculatorDays } from '../../../user/cycles/process/utils';
+import { convertMoney } from '../../../../utils/convertMoney';
+import { calculatorDays } from '../../../user/cycle/process/utils';
 
 
 

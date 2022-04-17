@@ -5,17 +5,16 @@ import {FooterModify} from '../../../components/utils/footerModify';
 import { HeaderMod } from '../../../components/utils/headerTitle';
 import {Nav} from '../../../components/utils/navigate';
 import { NavLogin } from '../../../components/utils/navigateLogin';
-import { ForexRow } from '../forextoRow';
-import { BodyWithdraw } from './body';
+import { ForexRow } from '../../../components/pageComponents/user/forextoRow';
+import { BodyWithdraw } from '../../../components/pageComponents/user/withdraw/body';
+import Layout from '../../../components/utils/layout';
 
 
 
 
 const Withdraw = () =>{
 	return(
-		<>
-			<HeaderMod title='Requests' />
-			<NavLogin />
+		<Layout title={'Requests'} navType={'user'} displayFooter={false}>
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>
@@ -23,8 +22,8 @@ const Withdraw = () =>{
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<MiniChart colorTheme="dark" isTransparent></MiniChart>
 			</Box>
-			{/* <FooterModify/> */}
-		</>
+		</Layout>
+
 	);
 };
 
