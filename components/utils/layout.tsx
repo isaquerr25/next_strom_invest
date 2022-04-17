@@ -21,8 +21,8 @@ const Layout:React.FC<TypeLayout> = ({title,navType,displayFooter,children}) =>{
 			</Head>
 			<HeaderMod title={title} />
 			{navType=='home' && <NavHome/>}
-			{navType=='user' && <NavAdm/>}
-			{navType=='admin' && <NavLogin/>}
+			{navType=='admin' && <NavAdm/>}
+			{navType=='user' && <NavLogin/>}
 			{children}
 		  {displayFooter &&	<FooterModify/>}
 		</>

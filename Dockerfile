@@ -3,7 +3,7 @@ FROM node:16.3.0
 
 # Create the directory on the node image 
 # where our Next.js app will live
-WORKDIR /usr/app
+WORKDIR ./usr/app
 
 # Set /app as the working directory
 

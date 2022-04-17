@@ -54,11 +54,11 @@ export function UploadFile() {
 	const fileRef  = useRef() as React.MutableRefObject<HTMLInputElement>;
 	return(
 		<div>
-			{	fileRef != undefined && fileRef.current != undefined &&
-				<Button colorScheme='teal' variant='outline' onClick={() => fileRef.current.click()}>
+			
+			<Button colorScheme='teal' variant='outline' onClick={() => fileRef.current.click()}>
 					Send Document ID 
-				</Button>
-			}
+			</Button>
+			
 			<input
 				ref={fileRef}
 				onChange={onChange}
