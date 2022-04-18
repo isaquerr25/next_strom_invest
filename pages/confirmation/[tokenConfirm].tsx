@@ -17,8 +17,9 @@ const TokenConfirms = () =>{
 	
 		async function fetchData() {
 
-			const result = (await axios.get(`http://${process.env.URL}/confirmation/${tokenConfirm}`)).data;
+			const result = (await axios.get(`http://${process.env.URL}/confirmation_emial/${tokenConfirm}`));
 			const errors = result;
+			console.log(errors);
 			if (errors !=null) {
 				setErrorMsg('Account is valid.');
 				setTitleShow('Success');
@@ -32,8 +33,8 @@ const TokenConfirms = () =>{
 		if(tokenConfirm != undefined){
 			fetchData();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[tokenConfirm]);
+
+	},[setPopShow, tokenConfirm]);
 	return (
 		<>
 			{errorMsg=='' && <Loading/>}
