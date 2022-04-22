@@ -42,7 +42,7 @@ export const BodySetOne = () =>{
 			
 
 
-				const data = (await axios.get(`http://${process.env.URL}/exchange`)).data;
+				const data = (await axios.get(`http://${process.env.API_URL}/exchange`)).data;
 	
 				for(const af in data){
 					const identification:string = data[af].symbol.toString() ?? '';

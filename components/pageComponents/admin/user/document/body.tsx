@@ -6,7 +6,6 @@ import { FaNotEqual, FaPlaneArrival, FaPlaneDeparture, FaPoll, FaRegChartBar } f
 import { CgSandClock } from 'react-icons/cg';
 import { SiClockify } from 'react-icons/si';
 
-
 import Carousel from '../../../../utils/Carousel';
 import { convertMoney } from '../../../../utils/convertMoney';
 import { Loading } from '../../../../utils/loading';
@@ -161,9 +160,8 @@ const Block = ({id,value,title,email}:typeBlock) =>{
 				<Text color='white' fontSize='xl' fontWeight='black' >
 					{email}
 				</Text>
-				<img
-					width={'1500px'}
-					src={`http://localhost:4000/static/${value}`}
+				<Image
+					src={`${process.env.API_URL}/static/${value}`}
 					alt='Tempest Invest'
 				/>
 				<Flex

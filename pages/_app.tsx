@@ -11,7 +11,7 @@ import DotEnvUtil from '../components/utils/DotEnvUtil';
 export const client  = new ApolloClient({
 	// ssrMode: typeof window === 'undefined',
 	cache: new InMemoryCache(),
-	link: createUploadLink({ uri: `http://${process.env.URL}/graphql`,
+	link: createUploadLink({ uri: 'https://api.tempestinvest.com/graphql',
 		credentials: 'include',
 
 	})
