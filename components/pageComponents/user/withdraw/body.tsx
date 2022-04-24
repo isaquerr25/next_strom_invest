@@ -11,6 +11,7 @@ import { PopMsg } from '../../../utils/PopMsg';
 import { validationWithdraw } from '../../../utils/validateInputs';
 import { useCreateTransactionMutation, useUpdateWalletMutation, 
 	useUserInfoDocumentQuery } from '../../../generated/graphql';
+import { MiniChart } from 'react-ts-tradingview-widgets';
 
 
 export const BodyWithdraw = () =>{
@@ -55,11 +56,11 @@ export const BodyWithdraw = () =>{
 				>
 
 					<Text color='teal' fontSize={'2xl'}>
-          Withdraw
+         				Withdraw
 					</Text>
 
 					<Text color={'teal'}>
-            All fields below are mandatory
+            				All fields below are mandatory
 					</Text>
 					
 					<Flex alignItems={'center'} gap={1}>
@@ -90,6 +91,7 @@ export const BodyWithdraw = () =>{
 				</Flex>
 			</>
 			}
+			
 		</Flex>
 
 	);

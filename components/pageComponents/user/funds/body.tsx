@@ -99,7 +99,7 @@ export const BodyFunds = () =>{
 							w='auto'
 							bg='black'
 							borderRadius={10}
-							minW={'275px'}
+							minW={'230px'}
 							p={5}
 
 							gap={5}
@@ -108,7 +108,7 @@ export const BodyFunds = () =>{
 							<DescriptionAndRestriction/>
 
 						</Flex>
-						<Box  pointerEvents='none' w={{base:'full',sm:'auto'}} className='forexShowcss' borderColor={'teal.300'} borderStyle='solid' borderWidth='2px' bg='black' borderRadius={10}>
+						<Box  pointerEvents='none' w={{base:'full',sm:'auto',lg:'30%'}} className='forexShowcss' borderColor={'teal.300'} borderStyle='solid' borderWidth='2px' bg='black' borderRadius={10}>
 							<Timeline isTransparent colorTheme="dark" feedMode="market" market="crypto" height={400}/>
 
 						</Box>

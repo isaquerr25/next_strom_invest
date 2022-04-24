@@ -17,7 +17,7 @@ const Layout:React.FC<TypeLayout> = ({title,navType,displayFooter,children}) =>{
 	return(
 		<>
 			<Head>
-				<link  rel="icon" type="image/png" href="/favicon/logo_median.png" />
+				<link  rel="icon" type="image/png" href="/logo_median.png" />
 			</Head>
 			<HeaderMod title={title} />
 			{navType=='home' && <NavHome/>}

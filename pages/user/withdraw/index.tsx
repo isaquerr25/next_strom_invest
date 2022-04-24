@@ -20,7 +20,7 @@ const Withdraw = () =>{
 			</Box>
 			<BodyWithdraw/>
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
-				<MiniChart colorTheme="dark" isTransparent></MiniChart>
+				<MiniChart colorTheme="dark" isTransparent width="100%"></MiniChart>
 			</Box>
 		</Layout>
 
