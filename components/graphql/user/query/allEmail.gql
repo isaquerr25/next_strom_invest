@@ -1,0 +1,9 @@
+query AllEmail{
+  allEmail{
+    id
+    name
+    email
+    message
+    createdAt
+  }
+}

@@ -61,6 +61,7 @@ import { roundToNearestMinutes } from 'date-fns';
 import Router from 'next/router';
 import { GrDocumentUser } from 'react-icons/gr';
 import { GiMammoth } from 'react-icons/gi';
+import { MdOutlineEmail } from 'react-icons/md';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/admin/user' , label: 'Home', icon: FiHome },
 	{ href: '/admin/user/planilha' , label: 'Planilhas', icon: FaMoneyBill },
@@ -69,6 +70,7 @@ const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/admin/user/withdraw' , label: 'Requests Withdraw', icon: FaVoteYea },
 	{ href: '/admin/user/moth' , label: 'Moth Profit', icon: GiMammoth },
 	{ href: '/admin/user/alone' , label: 'Info User', icon: FaStreetView },
+	{ href: '/admin/user/email' , label: 'Emails', icon: MdOutlineEmail },
 ];
 
 
