@@ -17,7 +17,7 @@ const TokenConfirms = () =>{
 	
 		async function fetchData() {
 
-			const result = (await axios.get(`http://${process.env.API_URL}/confirmation_emial/${tokenConfirm}`));
+			const result = (await axios.get(`https://api.tempestinvest.com/confirmation_emial/${tokenConfirm}`));
 			const errors = result;
 			console.log(errors);
 			if (errors !=null) {
