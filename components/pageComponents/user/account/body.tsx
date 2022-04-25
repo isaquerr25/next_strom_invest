@@ -57,12 +57,12 @@ export const BodyAccount = () =>{
 					name={dataUser?.name!}
 					email={dataUser?.email!}
 					wallet={dataUser?.wallet!}
-					document={dataUser?.document!}
+					document={'VALID'}
 					numberTelephone={dataUser?.numberTelephone!}
 				/>
 
 				<DescriptionAndRestriction/>
-				<ValidateDocument statusDocument={dataUser?.document!}/>
+				<ValidateDocument statusDocument={'VALID'}/>
 				<ChangeSingleInfoUser/>
 				<NewPassword/>
 			</>
