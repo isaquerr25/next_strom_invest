@@ -41,7 +41,7 @@ const Login = () =>{
 					</Stack>
 					<Box
 						rounded={'lg'}
-						bg={useColorModeValue('white', 'gray.700')}
+						bg={'#001717'}
 						boxShadow={'lg'}
 						p={8}>
 

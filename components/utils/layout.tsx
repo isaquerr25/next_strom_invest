@@ -14,6 +14,7 @@ interface TypeLayout{
 }
 
 const Layout:React.FC<TypeLayout> = ({title,navType,displayFooter,children}) =>{
+	
 	return(
 		<>
 			<Head>

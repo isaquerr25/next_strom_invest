@@ -71,7 +71,7 @@ function TestimonialCard(props: TestimonialCardProps) {
 			p={10}
 			justifyContent={'space-between'}
 			position={'relative'}
-			bg={useColorModeValue('white', 'gray.800')}
+			bg={useColorModeValue('black', 'gray.800')}
 			_after={{
 				content: '""',
 				position: 'absolute',
@@ -154,7 +154,7 @@ export function GridBlurredBackdrop() {
 					fontSize={48}
 					fontFamily={'Work Sans'}
 					fontWeight={'bold'}
-					color={useColorModeValue('gray.700', 'gray.50')}>
+					color={useColorModeValue('gray.300', 'gray.50')}>
 					You re in good company
 				</chakra.h1>
 				<chakra.h2

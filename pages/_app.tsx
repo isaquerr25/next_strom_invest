@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, from } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import DotEnvUtil from '../components/utils/DotEnvUtil';
+import { theme } from '../theme';
 
 
 export const client  = new ApolloClient({
@@ -22,7 +23,7 @@ export const client  = new ApolloClient({
 function MyApp({ Component, pageProps }: AppProps) {
 	return(
 		<ApolloProvider client={client} >
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<ThemeProvider>
 					<Head>
 						<link  rel="icon" type="image/png"  href="logo_median.png" />
@@ -43,7 +44,6 @@ export async function getServerSideProps() {
 		},
 	};
 }
-
 
 
 export default MyApp;

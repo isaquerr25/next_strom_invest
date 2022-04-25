@@ -46,7 +46,7 @@ const SocialButton = ({
 }) => {
 	return (
 		<chakra.button
-			bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+			bg={useColorModeValue('black', 'whiteAlpha.100')}
 			rounded={'full'}
 			w={8}
 			h={8}
@@ -58,7 +58,7 @@ const SocialButton = ({
 			justifyContent={'center'}
 			transition={'background 0.3s ease'}
 			_hover={{
-				bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+				bg: useColorModeValue('black', 'whiteAlpha.200'),
 			}}>
 			<VisuallyHidden>{label}</VisuallyHidden>
 			{children}
@@ -76,9 +76,10 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export function FooterModify() {
 	return (
-		<Box
-			bg={useColorModeValue('gray.50', 'gray.900')}
-			color={useColorModeValue('gray.700', 'gray.200')}>
+		<Box  
+			border={'1px solid'}
+			borderColor={useColorModeValue('gray.800', 'gray.500')}
+		>
 			<Container as={Stack} maxW={'6xl'} py={10}>
 				<SimpleGrid
 					templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr' }}

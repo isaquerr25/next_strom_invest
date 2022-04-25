@@ -41,11 +41,11 @@ a {
   
 
   --background: black;
-  --foreground: white;
+  --foreground: black;
   --a:teal
 }
 
 [data-theme='white'] {
-  --background: white;
+  --background: black;
   --foreground: black;
 }
