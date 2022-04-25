@@ -128,22 +128,23 @@ const Block = ({
 		<Flex
 			direction={'row'}
 			alignItems='center'
-			justifyContent={'center'}
-			bg='#1e4cff'
-			borderRadius={5}
-			w={'500px'}
-			h={'500px'}
+			justifyContent={'flex-start'}
+			borderColor={'teal'}
+			borderRadius={'10px'}
+			w={'100%'}
+			h={'auto'}
 			pb={'10px'}
 			pt={'10px'}
 			p={'40px'}
+			style={{border: '4px solid teal'}}
 		>
 
-			<Flex  justifyContent={'center'} alignItems={'flex-end'} width={'450px'} flexDirection={'column'} gap={3} h={'100%'} >	
-				<Text  color='white' fontSize='lg' fontWeight='black' >
-					ID da Transação: {id}<br/>
-					name: {name}<br/>
+			<Flex  justifyContent={'center'} alignItems={'flex-start'}  paddingRight={'15px'} width={'100%'} flexDirection={'column'} gap={3} h={'100%'} >	
+				<Text  color='white' fontSize='lg' fontWeight='black' paddingRight={'15px'} >
+					ID da Email: {id}<br/>
+					Name: {name}<br/>
 					Email: {email}<br/>
-					message: {message}<br/>
+					Message: {message}<br/>
 					Data de Atualização: {createdAt}<br/>
 				</Text>
 			</Flex>
