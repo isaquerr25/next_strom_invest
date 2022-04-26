@@ -18,6 +18,7 @@ const Cycles = () =>{
 			<Box cursor={'none'} pointerEvents='none' className='forexShowcss' w={'full'}>
 				<ForexRow/>
 			</Box>
+			<BodyCycleProcess/>
 		</Layout>
 			
 			

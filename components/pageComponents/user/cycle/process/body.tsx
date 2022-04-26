@@ -42,6 +42,7 @@ export const BodyCycleProcess = () =>{
 			gap={2}
 			p={2}
 			flexDirection='column'
+			bg={'blackAlpha.500'}
 		>
 			{(userInfoGraph.loading &&  allCycle.loading )&& <Loading/>}
 			{dataUser &&

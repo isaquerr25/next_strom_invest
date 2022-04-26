@@ -17,6 +17,7 @@ import Router from 'next/router';
 import { useEffect,useState } from 'react';
 
 export const BodyTransactions = () =>{
+	
 	const [dropState,SetDropState] = useState('All');
 	const userInfoGraph   = useUserInfoDocumentQuery();
 	const allTransactions = useAllTransactionsByUserQuery();
@@ -40,6 +41,7 @@ export const BodyTransactions = () =>{
 			gap={2}
 			p={2}
 			flexDirection='column'
+			bg={'blackAlpha.500'}
 		>
 			{(userInfoGraph.loading &&  allTransactions.loading )&& <Loading/>}
 			{dataUser &&
@@ -51,7 +53,7 @@ export const BodyTransactions = () =>{
 					borderRadius={10}
 					paddingInline={'15px'}
 					paddingBlock={'15px'}
-
+		
 				>
 					<Flex justifyContent={'flex-start'} w='100%'>
 						<Text color='teal.300' fontSize={'2xl'}>
@@ -84,7 +86,7 @@ export const BodyTransactions = () =>{
 					boxShadow='xl'
 					flexDirection={'column'}
 					w='auto'
-					bg='transparent'
+
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
@@ -111,18 +113,20 @@ const TableTransaction = ({arrayTransactions,dropValue}:{arrayTransactions:any,d
 	
 		<Box
 			overflowY="auto"
-
+			
 			css={{
 				'&::-webkit-scrollbar': {
 					width: '4px',
 					height: '8px',
+					background: 'black',
 				},
 				'&::-webkit-scrollbar-track': {
 					width: '6px',
 					height: '2px',
+					background: 'black',
 				},
 				'&::-webkit-scrollbar-thumb': {
-					background: 'gray',
+					background: 'black',
 					borderRadius: '14px',
 				},
 			}}
