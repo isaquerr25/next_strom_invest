@@ -70,6 +70,7 @@ export const BodySetOne = () =>{
 				justifyContent={'center'}
 				flexDirection='column'
 				width={'100%'}
+				bg={'black'}
 			>
 
 				<Box width={'100%'} p={'10px'}>

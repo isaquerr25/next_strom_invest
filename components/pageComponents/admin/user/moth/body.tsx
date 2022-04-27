@@ -132,11 +132,11 @@ export const BodySetOne = () =>{
 					}}
 				>
 					{({ values,isSubmitting })  => (
-						<Form>
-							<Flex justifyContent={'center'} flexDirection={'column'} gap={3} bg='teal' alignItems={'center'}>
+						<Form  >
+							<Flex   justifyContent={'center'} flexDirection={'column'} gap={3}  alignItems={'center'}>
 								<Text verticalAlign={'middle'} textAlign={'center'} 
 									justifyContent={'center'} h='30px' w={'100%'} alignItems={'center'}>Busque qual mês quer alterar*</Text>
-								<Flex justifyContent={'center'} flexDirection={'row'} gap={3} bg='teal' alignItems={'center'}>
+								<Flex justifyContent={'center'} flexDirection={'row'} gap={3} alignItems={'center'}>
 								
 									<Text verticalAlign={'middle'} textAlign={'center'} 
 										justifyContent={'center'} h='30px' w={'30%'} alignItems={'center'}>ID Mês:</Text>
@@ -190,11 +190,8 @@ export const BodySetOne = () =>{
 							finishDate: new Date(finishDate!)
 						}});
 
-						console.log(values);
 						setSubmitting(false);
 						const errors = result.data?.updateMonthlyProfit[0];
-						console.log('errors');
-						console.log(errors);
 						if (errors?.message=='success') {
 							setErrorMsg('File sent for process');
 							setTitleShow('Success');
@@ -210,7 +207,7 @@ export const BodySetOne = () =>{
 
 					{({ values,isSubmitting })  => (
 						<Form  >
-							<Flex flexDirection={'column'} gap={1} bg='teal' w='100%'>
+							<Flex flexDirection={'column'} gap={1} w='100%'>
 								<Text w='100%'  textAlign={'center'} alignItems={'center'} fontSize={'lg'} fontWeight='bold'>
 									Atualizar Lucro Do mês
 								</Text>
@@ -220,7 +217,7 @@ export const BodySetOne = () =>{
 										<Text> {propsFind.id}</Text>
 									</Flex>
 									<FormLabel>Lucro%:</FormLabel>
-									<Text fontWeight={'bold'} color={'blackAlpha.500'} fontSize={'sm'}>Ex:4.5 = 4.5%</Text>
+									<Text fontWeight={'bold'} color={'white'} fontSize={'sm'}>Ex:4.5 = 4.5%</Text>
 									<FormInput type="text" name="profit" inputIcon={IoWalletOutline} />
 								</Box>
 								<Flex h={'100px'} gap={3}>
@@ -307,12 +304,12 @@ export const BodySetOne = () =>{
 
 					{({ values,isSubmitting })  => (
 						<Form >
-							<Flex justifyContent={'space-between'} flexDirection={'column'} bg='teal' h='415px' w='100%'>
-								<Box  bg='teal' h='250px' display={'flex'} flexDirection='column' justifyContent={'space-between'}>
+							<Flex justifyContent={'space-between'} flexDirection={'column'} h='415px' w='100%'>
+								<Box  h='250px' display={'flex'} flexDirection='column' justifyContent={'space-between'}>
 									<Text w='100%'  textAlign={'center'} alignItems={'center'} fontSize={'lg'} fontWeight='bold'>Adicionar nome Lucro do Mês</Text>
 									<Box>
 										<FormLabel>Lucro%:</FormLabel>
-										<Text fontWeight={'bold'} color={'blackAlpha.500'} fontSize={'sm'}>Ex:4.5 = 4.5%</Text>
+										<Text fontWeight={'bold'} color={'white'} fontSize={'sm'}>Ex:4.5 = 4.5%</Text>
 										<FormInput type="text" name="priceMoth" inputIcon={IoWalletOutline} />
 									</Box>
 									<Flex h={'100px'} gap={3}>
@@ -368,6 +365,7 @@ export const BodySetOne = () =>{
 			{(staffInfoGraph.loading)&& <Loading/>}
 			{dataUser &&
 			<Flex
+				bg={'white'}
 				alignItems={'center'}
 				justifyContent={'center'}
 				flexDirection='column'
@@ -388,7 +386,7 @@ export const BodySetOne = () =>{
 					>
 
 					
-						<Box h='450px' p='20px' bg='teal'  w={{md:'full',lg:'450px'}} borderRadius={'25px'} 
+						<Box h='450px' p='20px' bg={'blackAlpha.900'}  w={{md:'full',lg:'450px'}} borderRadius={'25px'} 
 							display={'flex'}
 							flexDirection='column'
 							gap={2}
@@ -396,7 +394,7 @@ export const BodySetOne = () =>{
 							<FormikFindMoth/>
 							<FormikInputs/>
 						</Box>
-						<Box p='20px' bg='teal' h='450px' w={{md:'full',lg:'350px'}} borderRadius={'25px'}>
+						<Box p='20px' bg={'blackAlpha.900'}   h='450px' w={{md:'full',lg:'350px'}} borderRadius={'25px'}>
 							<FormikNewMoth/>
 						</Box>
 						

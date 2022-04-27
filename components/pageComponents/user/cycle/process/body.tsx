@@ -92,15 +92,11 @@ export const BodyCycleProcess = () =>{
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
-
 					gap={5}
 					flex={1}
 					overflow='hidden'
-
 				>
-
 					<TableCycle arrayTransactions={dataCycles} dropValue={dropState}/>
-
 				</Flex>
 			</>
 			}

@@ -289,7 +289,7 @@ export const BodySetOne = () =>{
 			{(staffInfoGraph.loading)&& <Loading/>}
 			{dataUser &&
 			<Flex
-				
+				bg={'black'}
 				justifyContent={'center'}
 				flexDirection='column'
 				width={'100%'}
@@ -513,7 +513,17 @@ const CalenderCustomInput:FC<Props> = ({ placeholder ,value, onClick }) => (
 
 const StripUser =({props}:stripType )=>(
 	<Flex flexDirection={'column'} gap={5} w='100%'  m={'10px'} p={'25px'} borderRadius='25px'>
-		<Box  display={'flex'} flexDirection='column' gap={2} borderRadius='25px'  p={'20px'} boxShadow={'lg'} bg={'gray.400'}>
+		
+		<Box 
+			display={'flex'} 
+			flexDirection='column' 
+			gap={2} 
+			borderRadius='25px'  
+			p={'20px'} 
+			boxShadow={'lg'} 
+			borderColor={'teal'}
+			style={{border: '4px solid teal'}}>
+				
 			<Text fontWeight={'bold'} fontSize={'lg'}>Usuário</Text>
 			<Flex  gap={5} w='100%' justifyContent={'space-around'}>
 				<Text>Nome:{props.name}</Text>
@@ -526,8 +536,17 @@ const StripUser =({props}:stripType )=>(
 			</Flex>
 		</Box>
 
-		<Box display={'flex'} flexDirection='column' gap={2} borderRadius='25px'  p={'20px'} boxShadow={'lg'} bg={'gray.400'}>
-			<Text fontWeight={'bold'} fontSize={'lg'}>Tranaferências</Text>
+		<Box 
+			display={'flex'} 
+			flexDirection='column' 
+			gap={2} 
+			borderRadius='25px'  
+			p={'20px'} 
+			boxShadow={'lg'} 
+			borderColor={'teal'}
+			style={{border: '4px solid teal'}}>
+
+			<Text fontWeight={'bold'} fontSize={'lg'}>Transferências</Text>
 			<Flex  gap={5} w='100%' justifyContent={'space-around'}>
 				<Text>Q\Deposit:{props.qDeposit}</Text>
 				<Text>Valor Deposit:{props.allDeposit}</Text>
@@ -550,7 +569,16 @@ const StripUser =({props}:stripType )=>(
 		</Box>
 
 
-		<Box display={'flex'} flexDirection='column' gap={2} borderRadius='25px'  p={'20px'} boxShadow={'lg'} bg={'gray.400'}>
+		<Box 
+			display={'flex'} 
+			flexDirection='column' 
+			gap={2} 
+			borderRadius='25px'  
+			p={'20px'} 
+			boxShadow={'lg'}
+			borderColor={'teal'}
+			style={{border: '4px solid teal'}}
+		>
 			<Text fontWeight={'bold'} fontSize={'lg'}>Cycle</Text>
 			<Flex    gap={5} w='100%' justifyContent={'space-around'} >
 				<Text>Q\Cycle Process:{props.qCycleProcess}</Text>

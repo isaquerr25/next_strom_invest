@@ -46,6 +46,7 @@ export const BodySetOne = () =>{
 			{(staffInfoGraph.loading) 	 &&  <Loading/>}
 			{dataUser &&
 			<Flex
+				bg={'black'}
 				alignItems={'center'}
 				justifyContent={'center'}
 				flexDirection='column'
@@ -130,13 +131,13 @@ const Block = ({
 			alignItems='center'
 			justifyContent={'flex-start'}
 			borderColor={'teal'}
+			style={{border: '4px solid teal'}}
 			borderRadius={'10px'}
 			w={'100%'}
 			h={'auto'}
 			pb={'10px'}
 			pt={'10px'}
 			p={'40px'}
-			style={{border: '4px solid teal'}}
 		>
 
 			<Flex  justifyContent={'center'} alignItems={'flex-start'}  paddingRight={'15px'} width={'100%'} flexDirection={'column'} gap={3} h={'100%'} >	

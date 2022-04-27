@@ -41,8 +41,7 @@ export default function CaptionCarousel() {
 	const cards = [
 		{
 			title: 'Earnings per fortnight',
-			text:
-        'Get fortnightly earnings of up to 2%+',
+			text:  'Get fortnightly earnings of up to 6%+',
 		},
 		{
 			title: 'Transaction',
@@ -51,8 +50,7 @@ export default function CaptionCarousel() {
 		},
 		{
 			title: 'Profit Future',
-			text:
-        'All results presented in Profit Future are a possible approximation',
+			text:  'All results presented in Profit Future are a possible approximation',
 		},
 	];
 

@@ -64,7 +64,7 @@ export const BodyCycle= () =>{
 						Create Cycle Invest
 					</Text>
 					<Text color='teal'>
-					All fields below are mandatory
+						All fields below are mandatory
 					</Text>
 
 
@@ -89,12 +89,10 @@ export const BodyCycle= () =>{
 					borderRadius={10}
 					minW={'275px'}
 					p={5}
-
 					gap={5}
 					flex={1}
 				>
 					<DescriptionAndRestriction/>
-
 				</Flex>
 			</>
 			}
@@ -168,27 +166,28 @@ function FormikInputs() {
 						<Flex flexDirection={'column'} gap={3}>
 
 							<Box>
-								<Text color='teal'>Amount</Text>
+								<Text color='teal'>Amount:</Text>
 								<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 							</Box>
-							<Flex h={'100px'} gap={3}>
+							<Flex h={'100px'} gap={'30px'}>
 								<Box>
-									<Text  color='teal' >Date Close Cycle</Text>
+									<Text  color='teal' >Date Close Cycle:</Text>
 									<DatePicker
 										wrapperClassName="datePicker"
 										name='finishDateInput'
 										selected={finishDate}
 										onChange={(date) => setFinishDate(date)}
-										minDate={addDays(new Date(),+17)}
+										minDate={addDays(new Date(),+30)}
 										maxDate={addMonths(new Date(), 12)}
 										withPortal
 										customInput={<CalenderCustomInput />}
 									/>
 								</Box>
 								<Box height={'100%'} alignItems='center' justifyContent={'center'}>
-									<Text color='teal' fontSize={'lg'} >Profit Finish Cycle:</Text>
-
-									<Text color='teal' display={'flex'} alignItems='center'  h={'50px'} fontSize={'xl'} >{calculator(values.beginDate,finishDate,values.value)}</Text>
+									<Text color='teal' fontSize={'lg'}   >Profit Finish Cycle:</Text>
+									<Text color={'green.300'} display={'flex'} alignItems='center'  h={'50px'} fontSize={'xl'} >
+										{calculator(values.beginDate,finishDate,values.value)}
+									</Text>
 
 								</Box>
 							</Flex>
@@ -196,18 +195,18 @@ function FormikInputs() {
 								<Button
 									variant='outline'
 									colorScheme='teal'
-									w={{Base:'50%',sm:'70%'}}
+									w={'full'}
 									onClick={()=>{console.log('das');}}
 									type="submit"
 									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
 									disabled={isSubmitting}
 								>
-								Cycle Invest
+									Cycle Invest
 								</Button>
 								<Button
 									variant='outline'
 									colorScheme='orange'
-									
+									w={'350px'}
 									onClick={()=>{Router.push('/user/cycles/process');}}
 									type="button"
 									leftIcon={<Icon as={BsCashCoin} />}
@@ -239,21 +238,18 @@ const calculator= (beginDate:Date|null,finishDate:Date|null| undefined, valueUSD
 
 	}else{
 
-		const percenterProfit = 0.04;
+		const percenterProfit = 0.05;
 
 		let valuePrice = Number(valueUSD.replace(/[\$]|[,]/g,''));
 		let valueStart = Number(valueUSD.replace(/[\$]|[,]/g,''));
-
 		let  startDate = beginDate;
 
 		while( startDate <= finishDate ) {
 			const dayMoth = daysInMonth(startDate.getMonth(),startDate.getFullYear());
 
 			if(startDate.getMonth() == finishDate.getMonth() && startDate.getFullYear() == finishDate.getFullYear() &&
-			  beginDate.getMonth() == finishDate.getMonth() && beginDate.getFullYear() == finishDate.getFullYear()){
-
+			  	beginDate.getMonth() == finishDate.getMonth() && beginDate.getFullYear() == finishDate.getFullYear()){
 				valuePrice += valuePrice * (((dayMoth - beginDate.getDate())+(finishDate.getDate() - dayMoth)) * (percenterProfit /dayMoth));
-
 			}
 			else if(startDate == beginDate){
 				valuePrice += valuePrice * (dayMoth - beginDate.getDate())* (percenterProfit /dayMoth);
@@ -265,13 +261,10 @@ const calculator= (beginDate:Date|null,finishDate:Date|null| undefined, valueUSD
 				valuePrice += valuePrice * percenterProfit ;
 			}
 			startDate = addMonths(new Date(startDate), 1);
-
 		}
-
 		valuePrice -= valueStart;
 		const fm = new FormatMoney();
 		return fm.from(valuePrice,{ symbol: '$',decimals: 2 });
-
 	}
 };
 
@@ -295,7 +288,7 @@ const DescriptionAndRestriction = () =>(
 			with the additional profit generated over time. <br/>
 			* The forecast value is an approximation of how much profit you will receive.
 			Since it will only be counted at the end of the cycle.<br/>
-			* Minimum time per cycle is 17 days.<br/>
+			* Minimum time per cycle is 30 days.<br/>
 			* the actual start date starts from the activation of the cycle.
 		</Text>
 	</>

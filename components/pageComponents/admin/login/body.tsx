@@ -64,8 +64,8 @@ export function SimpleCard() {
 				</Stack>
 				<Box
 					rounded={'lg'}
-					bg={useColorModeValue('white', 'gray.700')}
 					boxShadow={'lg'}
+					bg={'#001717'}
 					p={8}>
 
 					<Formik

@@ -72,10 +72,12 @@ export const BodySetOne = () =>{
 				justifyContent={'center'}
 				flexDirection='column'
 				width={'100%'}
+				bg={'blackAlpha.700'}
 			>
 
 				<Box width={'100%'} p={'10px'}>
 					<Flex
+
 						justifyContent={'center'}
 						width={'100%'}
 						display='inline-flex'
@@ -84,18 +86,18 @@ export const BodySetOne = () =>{
 						alignItems={'flex-start'}
 						flexDirection='column'
 					>
-						<Text color='black' fontSize='xl' fontWeight='black' >
+						<Text color='white' fontSize='xl' fontWeight='black' >
 								Todos os Usuários
 						</Text>
 						<TableUser/>
-						<Text color='black' fontSize='xl' fontWeight='black' >
+						<Text color='white' fontSize='xl' fontWeight='black' >
 								Todas as Transações
 						</Text>						
 						<Box overflow={'scroll'} w='100%' h='600px'>
 
 							<TableTransfer/>
 						</Box>
-						<Text color='black' fontSize='xl' fontWeight='black' >
+						<Text color='white' fontSize='xl' fontWeight='black' >
 								Todos os Cyclos
 						</Text>
 						<Box overflow={'scroll'} w='100%' h='600px'>
@@ -173,7 +175,7 @@ const TableUser = () => {
 					{	(dataUser!=null &&  dataUser!=undefined )&&
 						dataUser.map( (compose) =>{
 
-							let color = 'black';
+							let color = 'white';
 
 							return(
 								<Tr color={color} key={compose.id}>
@@ -240,7 +242,7 @@ const TableTransfer = () => {
 					{	(dataTransfer!=null &&  dataTransfer!=undefined )&&
 						dataTransfer.map( (compose) =>{
 
-							let color = 'black';
+							let color = 'white';
 
 
 							if (compose.state == 'CANCEL'){
@@ -316,7 +318,7 @@ const TableCycle = () => {
 					{	(dataCycle!=null &&  dataCycle!=undefined )&&
 						dataCycle.map( (compose) =>{
 
-							let color = 'black';
+							let color = 'white';
 
 
 							if (compose.state == 'CANCEL'){

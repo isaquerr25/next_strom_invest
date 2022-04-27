@@ -49,6 +49,7 @@ export const BodySetOne = () =>{
 			{(CycleProcess.loading)&& <Loading/>}
 			{dataUser &&
 			<Flex
+				bg={'black'}
 				alignItems={'center'}
 				justifyContent={'center'}
 				flexDirection='column'
@@ -149,7 +150,7 @@ const Block = ({
 			direction={'row'}
 			alignItems='center'
 			justifyContent={'center'}
-			bg='#1e4cff'
+			bg={'blackAlpha.700'}
 			borderRadius={5}
 			w={'500px'}
 			h={'500px'}
