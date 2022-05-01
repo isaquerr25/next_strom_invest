@@ -9,10 +9,10 @@ import DotEnvUtil from '../components/utils/DotEnvUtil';
 import { theme } from '../theme';
 
 
-export const client  = new ApolloClient({
+const client  = new ApolloClient({
 	// ssrMode: typeof window === 'undefined',
 	cache: new InMemoryCache(),
-	link: createUploadLink({ uri: 'https://api.tempestinvest.com/graphql',
+	link: createUploadLink({ uri: 'http://localhost:4000/graphql/',
 		credentials: 'include',
 
 	})

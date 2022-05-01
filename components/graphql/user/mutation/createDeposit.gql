@@ -1,5 +1,5 @@
-mutation CreateDeposit($action: String!, $value: Int!) {
-  createDeposit(data: { action: $action, value: $value }) {
+mutation CreateDeposit($action: String!, $value: Int!, $days: String!) {
+  createDeposit(data: { action: $action, value: $value, days:$days }) {
     url
     status {
       field

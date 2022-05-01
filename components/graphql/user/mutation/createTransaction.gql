@@ -1,5 +1,5 @@
-mutation CreateTransaction($action: String!, $value: Int!) {
-  createTransaction(data: { action: $action, value: $value, userId: 0 }) {
+mutation CreateTransaction($action: String!, $value: Int!, $days: String!) {
+  createTransaction(data: { action: $action, value: $value, userId: 0 , days:$days }) {
     field
     message
   }

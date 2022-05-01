@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Icon, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Spinner, Text, useBoolean } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Icon, Image, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Radio, RadioGroup, Spinner, Stack, Text, useBoolean } from '@chakra-ui/react';
 import { addDays, addMonths } from 'date-fns';
 import { Field,  Form, Formik } from 'formik';
 import Router from 'next/router';
@@ -17,7 +17,7 @@ import { FormatMoney } from 'format-money-js';
 import { BsCashCoin } from 'react-icons/bs';
 import { ForexRow } from '../forextoRow';
 import { convertMoney } from '../../../utils/convertMoney';
-
+import {WiTime3, WiTime4, WiTime7} from 'react-icons/wi';
 export const BodyCycle= () =>{
 
 	/* -------------------------------------------------------------------------- */
@@ -105,8 +105,9 @@ function FormikInputs() {
 
 	type typesCycle = {
 		value:''
-		beginDate:Date
-		finishDateInput:Date
+		useMoney:boolean
+		moneyUser:string
+		useToggle:any
 	}
 	const [cycleGraphql, ] = useCreateCycleMutation();
 	const [finishDate, setFinishDate] = useState<Date|null>();
@@ -117,48 +118,54 @@ function FormikInputs() {
 
 	const [popFunction, setPopFunction] = useState<()=>void>();
 	const [popNameButton, setPopNameButton] = useState<string|null>();
+	const [useProcessSubmit, setProcessSubmit] = useState(false);
 	const [cycleGraph, setCycleGraph] = useState<typesCycle>({
 
 		value:'',
-		beginDate:(addDays(new Date(),+1)),
-		finishDateInput:(addDays(new Date(),+17)),
+		useMoney:false,
+		useToggle:'',
+		moneyUser:''
 	});
+
+
+	const sendCycle =  async (daysStr:string,value:string,useMoney:boolean,moneyUser:string) => {
+
+		const valuePrice = Number(value.replace(/[\$]|[,]/g,''))*100;
+		const valueInPrice = Number(moneyUser.replace(/[\$]|[,]/g,''))*100;
+
+		if((valuePrice + valueInPrice ) >= 5000){
+			setProcessSubmit(true);
+			const result = await cycleGraphql({variables:{
+				valueUSD: valuePrice,
+				useMoney: useMoney,
+				moneyUser: valueInPrice,
+				days: daysStr,
+			}});
+			setProcessSubmit(false);
+			const errors =  result!.data!.createCycle!.status![0]!  ;
+
+			if (errors?.message=='success') {
+				setErrorMsg('File sent for process');
+				setTitleShow('Success');
+				setPopShow.on();
+			} else {
+				setErrorMsg(errors?.message  ?? '');
+				setTitleShow('Error');
+				setPopShow.on();
+			}
+
+		}else{
+			setErrorMsg('Value under 50 dollars');
+			setTitleShow('Error');
+			setPopShow.on();
+		}
+	};
 
 	return (
 		<>
-
 			<Formik
 				initialValues={cycleGraph}
 				onSubmit={async (values: typesCycle, { setSubmitting, setErrors }) => {
-					setSubmitting(true);
-					const valuePrice = Number(values.value.replace(/[\$]|[,]/g,''))*100;
-
-					if(valuePrice >= 5000){
-						const result = await cycleGraphql({variables:{
-
-							valueUSD: valuePrice,
-							beginDate: values.beginDate,
-							finishDate: finishDate
-
-						}});
-						setSubmitting(false);
-						const errors = result.data?.createCycle[0];
-
-						if (errors?.message=='success') {
-							setErrorMsg('File sent for process');
-							setTitleShow('Success');
-							setPopShow.on();
-						} else {
-							setErrorMsg(errors?.message  ?? '');
-							setTitleShow('Error');
-							setPopShow.on();
-						}
-
-					}else{
-						setErrorMsg('Value under 50 dollars');
-						setTitleShow('Error');
-						setPopShow.on();
-					}
 				}}
 			>
 				{({ values,isSubmitting })  => (
@@ -167,55 +174,119 @@ function FormikInputs() {
 
 							<Box>
 								<Text color='teal'>Amount:</Text>
-								<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
-							</Box>
-							<Flex h={'100px'} gap={'30px'}>
-								<Box>
-									<Text  color='teal' >Date Close Cycle:</Text>
-									<DatePicker
-										wrapperClassName="datePicker"
-										name='finishDateInput'
-										selected={finishDate}
-										onChange={(date) => setFinishDate(date)}
-										minDate={addDays(new Date(),+30)}
-										maxDate={addMonths(new Date(), 12)}
-										withPortal
-										customInput={<CalenderCustomInput />}
-									/>
-								</Box>
-								<Box height={'100%'} alignItems='center' justifyContent={'center'}>
-									<Text color='teal' fontSize={'lg'}   >Profit Finish Cycle:</Text>
-									<Text color={'green.300'} display={'flex'} alignItems='center'  h={'50px'} fontSize={'xl'} >
-										{calculator(values.beginDate,finishDate,values.value)}
-									</Text>
+								<Flex gap={5} alignItems={'center'}>
+									<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 
-								</Box>
-							</Flex>
-							<Flex justifyContent={'space-between'} gap={1}>
+
+									<RadioGroup name="useToggle" pl={5}>
+										<Stack direction='row'>
+											<Radio >First</Radio>
+											<Radio >Second</Radio>
+											<Radio >Third</Radio>
+										</Stack>
+									</RadioGroup>
+
+								</Flex>
+							</Box>
+							
+							<Flex justifyContent={'space-between'} gap={1} >
 								<Button
 									variant='outline'
 									colorScheme='teal'
+									h={'auto'}
 									w={'full'}
-									onClick={()=>{console.log('das');}}
-									type="submit"
-									leftIcon={isSubmitting ? <Spinner /> : <Icon as={GiWallet} />}
-									disabled={isSubmitting}
-								>
-									Cycle Invest
+									py={2}
+									textAlign={'center'}
+									onClick={()=>{sendCycle('cycle30',values.value,values.useMoney,values.moneyUser);}}
+									type="button"
+									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'green.500'} as={WiTime3} />}
+									display={'flex'}
+									flexWrap={'wrap'}
+									flexDirection={'column'}
+									disabled={useProcessSubmit}
+									gap={'4px'}
+								>	
+									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
+										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										Cycle Invest 30 Days 
+										</Text>
+										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										Profit Final: {calculator((new Date()),addDays(new Date(),+30),values.value)}
+										</Text>
+									</Box>
+									
 								</Button>
+
 								<Button
 									variant='outline'
-									colorScheme='orange'
-									w={'350px'}
-									onClick={()=>{Router.push('/user/cycles/process');}}
+									colorScheme='teal'
+									h={'auto'}
+									w={'full'}
+									py={2}
+									textAlign={'center'}
+									onClick={()=>{sendCycle('cycle60',values.value,values.useMoney,values.moneyUser);}}
 									type="button"
-									leftIcon={<Icon as={BsCashCoin} />}
-								>
-									<Text fontSize={'12px'}>
-										See all Cycles in Process
-									</Text>
+									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'yellow.500'} as={WiTime4} />}
+									display={'flex'}
+									flexWrap={'wrap'}
+									flexDirection={'column'}
+									disabled={useProcessSubmit}
+									gap={'4px'}
+								>	
+									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
+										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										Cycle Invest 60 Days 
+										</Text>
+										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										Profit Final: {calculator(new Date(),addDays(new Date(),+60),values.value)}
+										</Text>
+										
+									</Box>
+									
+								</Button>
+								
+								<Button
+									variant='outline'
+									colorScheme='teal'
+									h={'auto'}
+									w={'full'}
+									py={2}
+									textAlign={'center'}
+									onClick={()=>{sendCycle('cycle120',values.value,values.useMoney,values.moneyUser);}}
+									type="button"
+									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'purple.500'} as={WiTime7} />}
+									display={'flex'}
+									flexWrap={'wrap'}
+									flexDirection={'column'}
+									disabled={useProcessSubmit}
+									gap={'4px'}
+								>	
+									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
+										<Text fontSize={['14px', '16px', '18px']} >
+										Cycle Invest 120 Days 
+										</Text>
+										<Text fontSize={['14px', '16px', '18px']}>
+										Profit Final: {calculator(new Date(),addDays(new Date(),+120),values.value)}
+										</Text>
+									</Box>
+									
 								</Button>
 							</Flex>
+							<Text fontSize={'12px'} mt={5}>
+								See all Cycles in Process:
+							</Text>
+							<Button
+								variant='outline'
+								colorScheme='orange'
+								w={'250px'}
+								onClick={()=>{Router.push('/user/cycles/process');}}
+								type="button"
+								leftIcon={<Icon  as={BsCashCoin} />}
+							>
+								<Text fontSize={'12px'}>
+										See all Cycles in Process
+								</Text>
+							</Button>
 						</Flex>
 					</Form>
 				)}

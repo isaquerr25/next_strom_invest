@@ -1,16 +1,21 @@
 mutation CreateCycle(
-  $valueUSD: Int!
-  $beginDate: DateTime!
-  $finishDate: DateTime!
+  $valueUSD: Int!,
+  $useMoney: Boolean!,
+  $moneyUser: Int,
+  $days: String!
 ) {
   createCycle(
     data: {
       valueUSD: $valueUSD
-      beginDate: $beginDate
-      finishDate: $finishDate
+      useMoney:$useMoney
+      moneyUser:$moneyUser
+      days:$days
     }
   ) {
-    field
-    message
+		url
+    status{
+      field
+      message
+    }
   }
 }

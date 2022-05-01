@@ -61,7 +61,6 @@ import Router from 'next/router';
 import { MdOutlineSupportAgent } from 'react-icons/md';
 const NAV_ITEMS: Array<NavItem> = [
 	{ href: '/user' , label: 'Home', icon: FiHome },
-	{ href: '/user/funds' , label: 'Deposit', icon: FaMoneyBill },
 	{ href: '/user/cycles' , label: 'Cycles', icon: FaCompass },
 	{ href: '/user/transactions' , label: 'Transactions', icon: FaChartLine },
 	{ href: '/user/withdraw' , label: 'Withdraw', icon: FaVoteYea },
