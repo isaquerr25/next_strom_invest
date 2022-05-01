@@ -14,7 +14,7 @@ import {validateUSD,validateEmail} from '../../../utils/validateInputs';
 import { useCreateCycleMutation, useUserInfoDocumentQuery } from '../../../generated/graphql';
 import { daysInMonth } from './utils';
 import { FormatMoney } from 'format-money-js';
-import { BsCashCoin } from 'react-icons/bs';
+import { BsCashCoin, BsLayoutSidebarInsetReverse, BsLayoutSidebarReverse } from 'react-icons/bs';
 import { ForexRow } from '../forextoRow';
 import { convertMoney } from '../../../utils/convertMoney';
 import {WiTime3, WiTime4, WiTime7} from 'react-icons/wi';
@@ -70,11 +70,11 @@ export const BodyCycle= () =>{
 
 
 					<Box>
-						<Flex alignItems={'center'} gap={1}>
+						<Flex alignItems={'center'} gap={1} mb={5}>
 							<Text color='teal'>Trading Amount:</Text>
 							<Text color='green.300' fontSize={'xl'}>{convertMoney(dataUser.valuePrice/100)}</Text>
 						</Flex>
-						<FormikInputs/>
+						<FormikInputs valueMoneyUser={dataUser.valuePrice/100}/>
 					</Box>
 
 				</Flex>
@@ -101,7 +101,7 @@ export const BodyCycle= () =>{
 	);
 };
 
-function FormikInputs() {
+function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 
 	type typesCycle = {
 		value:''
@@ -119,6 +119,7 @@ function FormikInputs() {
 	const [popFunction, setPopFunction] = useState<()=>void>();
 	const [popNameButton, setPopNameButton] = useState<string|null>();
 	const [useProcessSubmit, setProcessSubmit] = useState(false);
+	const [useToggleValue, setUseToggleValue] = React.useState('1');
 	const [cycleGraph, setCycleGraph] = useState<typesCycle>({
 
 		value:'',
@@ -126,7 +127,6 @@ function FormikInputs() {
 		useToggle:'',
 		moneyUser:''
 	});
-
 
 	const sendCycle =  async (daysStr:string,value:string,useMoney:boolean,moneyUser:string) => {
 
@@ -161,6 +161,11 @@ function FormikInputs() {
 		}
 	};
 
+
+	useEffect(()=>{
+
+		
+	},[useToggleValue]);
 	return (
 		<>
 			<Formik
@@ -173,20 +178,43 @@ function FormikInputs() {
 						<Flex flexDirection={'column'} gap={3}>
 
 							<Box>
-								<Text color='teal'>Amount:</Text>
-								<Flex gap={5} alignItems={'center'}>
+								
+								<Flex gap={2} alignItems={'center'} mb={5} justifyContent='space-around'>
+									<Text fontSize={'22px'} color='teal' width={'200px'}>Amount:</Text>
 									<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
 
 
-									<RadioGroup name="useToggle" pl={5}>
-										<Stack direction='row'>
-											<Radio >First</Radio>
-											<Radio >Second</Radio>
-											<Radio >Third</Radio>
+									<RadioGroup ml={5} onChange={(ado)=>{
+										setUseToggleValue(ado);
+										if(ado === '3'){
+											values.moneyUser = ( valueMoneyUser>= Number(values.value.replace(/[\$]|[,]/g,'')) ? values.value : convertMoney(valueMoneyUser));
+
+										}
+									}} value={useToggleValue} w={'900px'}>
+										<Stack direction='row' w={'full'}>
+											<Radio value='1'>Deposit</Radio>
+											<Radio value='2'>Partial Deposit</Radio>
+											{ valueMoneyUser>= Number(values.value.replace(/[\$]|[,]/g,'')) && 
+												<Radio value='3'>Only in Account</Radio>
+											}
+											{ valueMoneyUser < Number(values.value.replace(/[\$]|[,]/g,'')) && 
+												<Radio isDisabled value='3'>Only in Account</Radio>
+											}
 										</Stack>
 									</RadioGroup>
 
 								</Flex>
+								{ useToggleValue !=='1' &&
+								<Flex my={5} gap={2} justifyContent='left' alignItems={'center'}>
+									<Text fontSize={'22px'} color='teal' width={'175px'}>Value in Account:</Text>
+									<Box w={'180px'} >
+										<FormInput type="number" name="moneyUser" inputIcon={IoWalletOutline} />
+
+									</Box>
+									
+								</Flex>
+
+								}
 							</Box>
 							
 							<Flex justifyContent={'space-between'} gap={1} >
@@ -197,7 +225,7 @@ function FormikInputs() {
 									w={'full'}
 									py={2}
 									textAlign={'center'}
-									onClick={()=>{sendCycle('cycle30',values.value,values.useMoney,values.moneyUser);}}
+									onClick={()=>{sendCycle('cycle30',values.value,useToggleValue !== '1',values.moneyUser);}}
 									type="button"
 									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'green.500'} as={WiTime3} />}
 									display={'flex'}
@@ -224,7 +252,7 @@ function FormikInputs() {
 									w={'full'}
 									py={2}
 									textAlign={'center'}
-									onClick={()=>{sendCycle('cycle60',values.value,values.useMoney,values.moneyUser);}}
+									onClick={()=>{sendCycle('cycle60',values.value,useToggleValue !== '1',values.moneyUser);}}
 									type="button"
 									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'yellow.500'} as={WiTime4} />}
 									display={'flex'}
