@@ -12,7 +12,7 @@ import { theme } from '../theme';
 const client  = new ApolloClient({
 	// ssrMode: typeof window === 'undefined',
 	cache: new InMemoryCache(),
-	link: createUploadLink({ uri: 'http://localhost:4000/graphql/',
+	link: createUploadLink({ uri: 'https://api.tempestinvest.com/graphql/',
 		credentials: 'include',
 
 	})
