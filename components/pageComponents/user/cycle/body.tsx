@@ -43,6 +43,9 @@ export const BodyCycle= () =>{
 			justifyContent={'center'}
 			gap={2}
 			p={2}
+			minH={'100vh'}
+			h={'100%'}
+			bg='blackAlpha.400'
 		>
 			
 			{userInfoGraph.loading && <Loading/>}
@@ -115,6 +118,7 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [popShow, setPopShow] = useBoolean(false);
 	const [titleShow, setTitleShow] = useState('Error');
+	const [useButton, setButton] = useState('');
 
 	const [popFunction, setPopFunction] = useState<()=>void>();
 	const [popNameButton, setPopNameButton] = useState<string|null>();
@@ -141,19 +145,27 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 				moneyUser: valueInPrice,
 				days: daysStr,
 			}});
+			setButton('');
 			setProcessSubmit(false);
 			const errors =  result!.data!.createCycle!.status![0]!  ;
+			const urlPayment =  result!.data!.createCycle!.url  ;
 
 			if (errors?.message=='success') {
-				setErrorMsg('File sent for process');
+				if (urlPayment !=undefined){
+
+					window.open(urlPayment ?? '#', '_blank');
+				}
+				setErrorMsg('Waiting for payment');
 				setTitleShow('Success');
+				setPopNameButton('Payment Screen');
 				setPopShow.on();
+				
 			} else {
 				setErrorMsg(errors?.message  ?? '');
 				setTitleShow('Error');
 				setPopShow.on();
 			}
-
+			
 		}else{
 			setErrorMsg('Value under 50 dollars');
 			setTitleShow('Error');
@@ -179,9 +191,13 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 
 							<Box>
 								
-								<Flex gap={2} alignItems={'center'} mb={5} justifyContent='space-around'>
-									<Text fontSize={'22px'} color='teal' width={'200px'}>Amount:</Text>
-									<FormInput type="number" placeholder='0' name="value" inputIcon={IoWalletOutline} />
+								<Flex flexDirection={['column','row']} gap={2} alignItems={'center'} mb={5} justifyContent='space-around'>
+									<Flex justifyContent={'left'}  minW={'250px'} w={'100%'} gap={2} alignItems={'center'}  >
+
+										<Text fontSize={'22px'} color='teal' width={'100px'}>Amount:</Text>
+										<FormInput type="number" placeholder='0'  name="value" inputIcon={IoWalletOutline} />
+
+									</Flex>
 
 
 									<RadioGroup ml={5} onChange={(ado)=>{
@@ -190,8 +206,8 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 											values.moneyUser = ( valueMoneyUser>= Number(values.value.replace(/[\$]|[,]/g,'')) ? values.value : convertMoney(valueMoneyUser));
 
 										}
-									}} value={useToggleValue} w={'900px'}>
-										<Stack direction='row' w={'full'}>
+									}} value={useToggleValue} w={['100%','900px']}>
+										<Stack direction='row' w={'full'} >
 											<Radio value='1'>Deposit</Radio>
 											<Radio value='2'>Partial Deposit</Radio>
 											{ valueMoneyUser>= Number(values.value.replace(/[\$]|[,]/g,'')) && 
@@ -205,12 +221,12 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 
 								</Flex>
 								{ useToggleValue !=='1' &&
-								<Flex my={5} gap={2} justifyContent='left' alignItems={'center'}>
-									<Text fontSize={'22px'} color='teal' width={'175px'}>Value in Account:</Text>
-									<Box w={'180px'} >
-										<FormInput type="number" name="moneyUser" inputIcon={IoWalletOutline} />
+								<Flex my={5}  justifyContent='left' alignItems={'center'}  w={'100%'}>
+									<Text fontSize={'22px'} color='teal' width={'250px'}>Value in Account:</Text>
+									
+									<FormInput type="number" name="moneyUser" inputIcon={IoWalletOutline} />
 
-									</Box>
+									
 									
 								</Flex>
 
@@ -225,9 +241,9 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 									w={'full'}
 									py={2}
 									textAlign={'center'}
-									onClick={()=>{sendCycle('cycle30',values.value,useToggleValue !== '1',values.moneyUser);}}
+									onClick={()=>{ setButton('cycle30') ;sendCycle('cycle30',values.value,useToggleValue !== '1',values.moneyUser);}}
 									type="button"
-									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'green.500'} as={WiTime3} />}
+									leftIcon={useButton == 'cycle30' && useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'green.500'} as={WiTime3} />}
 									display={'flex'}
 									flexWrap={'wrap'}
 									flexDirection={'column'}
@@ -235,10 +251,10 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 									gap={'4px'}
 								>	
 									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
-										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										<Text fontSize={['12px', '16px', '18px']} display={'block'}>
 										Cycle Invest 30 Days 
 										</Text>
-										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										<Text mt={'10px'} fontSize={['12px', '16px', '18px']} display={'block'}>
 										Profit Final: {calculator((new Date()),addDays(new Date(),+30),values.value)}
 										</Text>
 									</Box>
@@ -252,9 +268,9 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 									w={'full'}
 									py={2}
 									textAlign={'center'}
-									onClick={()=>{sendCycle('cycle60',values.value,useToggleValue !== '1',values.moneyUser);}}
+									onClick={()=>{setButton('cycle60') ;sendCycle('cycle60',values.value,useToggleValue !== '1',values.moneyUser);}}
 									type="button"
-									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'yellow.500'} as={WiTime4} />}
+									leftIcon={ useButton == 'cycle60' &&  useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'yellow.500'} as={WiTime4} />}
 									display={'flex'}
 									flexWrap={'wrap'}
 									flexDirection={'column'}
@@ -262,10 +278,10 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 									gap={'4px'}
 								>	
 									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
-										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										<Text fontSize={['12px', '16px', '18px']} display={'block'}>
 										Cycle Invest 60 Days 
 										</Text>
-										<Text fontSize={['14px', '16px', '18px']} display={'block'}>
+										<Text mt={'10px'} fontSize={['12px', '16px', '18px']} display={'block'}>
 										Profit Final: {calculator(new Date(),addDays(new Date(),+60),values.value)}
 										</Text>
 										
@@ -280,20 +296,20 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 									w={'full'}
 									py={2}
 									textAlign={'center'}
-									onClick={()=>{sendCycle('cycle120',values.value,values.useMoney,values.moneyUser);}}
+									onClick={()=>{ setButton('cycle120') ; sendCycle('cycle120',values.value,useToggleValue !== '1',values.moneyUser);}}
 									type="button"
-									leftIcon={useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'purple.500'} as={WiTime7} />}
+									leftIcon={ useButton == 'cycle120' && useProcessSubmit ? <Spinner /> : <Icon w={['32px', '30px', '47px']} h={['32px', '30px', '47px']} color={'purple.500'} as={WiTime7} />}
 									display={'flex'}
 									flexWrap={'wrap'}
 									flexDirection={'column'}
-									disabled={useProcessSubmit}
+									disabled={  useProcessSubmit}
 									gap={'4px'}
 								>	
 									<Box w={['100%','auto']} whiteSpace={'break-spaces'}>
-										<Text fontSize={['14px', '16px', '18px']} >
+										<Text fontSize={['12px', '16px', '18px']} >
 										Cycle Invest 120 Days 
 										</Text>
-										<Text fontSize={['14px', '16px', '18px']}>
+										<Text mt={'10px'} fontSize={['12px', '16px', '18px']} display={'block'}>
 										Profit Final: {calculator(new Date(),addDays(new Date(),+120),values.value)}
 										</Text>
 									</Box>
@@ -322,7 +338,7 @@ function FormikInputs({valueMoneyUser}:{valueMoneyUser:number}) {
 			</Formik>
 			<PopMsg
 				nameButton={'Ok!'} title={titleShow} msg={errorMsg}
-				display={popShow} hide={()=>{setPopShow.off();popFunction;}}
+				display={popShow} hide={()=>{setPopShow.off();Router.reload();}}
 			/>
 
 		</>
@@ -377,10 +393,7 @@ const DescriptionAndRestriction = () =>(
 			Please fill in the required fields below
 		</Text>
 		<Text color='teal'>
-			Minimum in account is 50 USD
-		</Text>
-		<Text color='teal'>
-			To make a new investment cycle, the money must already be in account
+			Minimum to Cycle is 50 USD
 		</Text>
 		<Text color='teal'>
 			* After the end of each cycle, the money will return to your account

@@ -22,7 +22,8 @@ import { useActiveStartStaffQuery,
 	useUpdateMonthlyProfitMutation,
 	useUpdateTransactionMutation,
 	useIdMonthlyProfitMutation,
-	useCreateMonthlyProfitMutation
+	useCreateMonthlyProfitMutation,
+	useDeleteMonthlyProfitMutation
 } from '../../../../generated/graphql';
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons';
 import { PopMsg } from '../../../../utils/PopMsg';
@@ -38,7 +39,7 @@ import { daysInMonth } from '../../../user/cycle/utils';
 import { IoWalletOutline } from 'react-icons/io5';
 import NumberFormat from 'react-number-format';
 import 'react-datepicker/dist/react-datepicker.css';
-import { MdOutlineFindReplace, MdOutlineTipsAndUpdates } from 'react-icons/md';
+import { MdOutlineDeleteForever, MdOutlineFindReplace, MdOutlineTipsAndUpdates } from 'react-icons/md';
 import { GrDocumentUpdate } from 'react-icons/gr';
 
 
@@ -50,6 +51,7 @@ export const BodySetOne = () =>{
 	});
 
 	const [UseGetTypeTransaction,] = useGetTypeTransactionMutation();
+	const [UseDeleteMonthlyProfit,] = useDeleteMonthlyProfitMutation();
 	const [UseUpdateMonthlyProfit,] = useUpdateMonthlyProfitMutation();
 
 	const staffInfoGraph   = useActiveStartStaffQuery();
@@ -67,6 +69,7 @@ export const BodySetOne = () =>{
 
 
 	const [popShow, setPopShow] = useBoolean(false);
+	const [useButton, setButton] = useState(false);
 	const [titleShow, setTitleShow] = useState('Error');
 
 	const [popFunction, setPopFunction] = useState<()=>void>();
@@ -183,6 +186,7 @@ export const BodySetOne = () =>{
 					initialValues={propsFind}
 					onSubmit={async (values: typesCycle, { setSubmitting, setErrors }) => {
 						setSubmitting(true);
+						setButton(true);
 						
 						const result = await UseUpdateMonthlyProfit({variables:{
 							id: Number(values.id),
@@ -191,6 +195,7 @@ export const BodySetOne = () =>{
 						}});
 
 						setSubmitting(false);
+						setButton(false);
 						const errors = result.data?.updateMonthlyProfit[0];
 						if (errors?.message=='success') {
 							setErrorMsg('File sent for process');
@@ -234,7 +239,7 @@ export const BodySetOne = () =>{
 									</Box>
 
 								</Flex>
-								<Flex justifyContent={'space-between'}>
+								<Flex justifyContent={'space-between'} gap={2}>
 									<Button
 										w={'100%'}
 										bg={'blue.400'}
@@ -245,9 +250,40 @@ export const BodySetOne = () =>{
 										onClick={()=>{console.log('das');}}
 										type="submit"
 										leftIcon={isSubmitting ? <Spinner /> : <Icon as={MdOutlineTipsAndUpdates} color='white'/>}
-										disabled={isSubmitting}
+										disabled={useButton || isSubmitting}
 									>
-									Atualizar
+									Alterar Lucro Do Mes
+									</Button>
+									<Button
+										colorScheme='red' 
+										variant='outline'
+										w={'100%'}
+										
+										_hover={{
+											bg: 'red.500',
+										}}
+										onClick={async ()=>{
+											setButton(true);
+											const resume = await UseDeleteMonthlyProfit({variables:{id:propsFind.id}});
+											const data = resume.data?.deleteMonthlyProfit[0];
+											if (data?.message=='success') {
+												setErrorMsg('Delete Success');
+												setTitleShow('Success');
+												setPopShow.on();
+											} else {
+												setErrorMsg(data?.message  ?? '');
+												setTitleShow('Error');
+												setPopShow.on();
+											}
+											setButton(false);
+											Router.reload();
+										}}
+										
+										type="button"
+										leftIcon={isSubmitting ? <Spinner /> : <Icon  as={MdOutlineDeleteForever} color='white'/>}
+										disabled={ useButton || isSubmitting}
+									>
+										Deletar
 									</Button>
 								</Flex>
 							</Flex>
@@ -256,7 +292,7 @@ export const BodySetOne = () =>{
 
 				</Formik>
 				<PopMsg
-					nameButton={'popNameButton'} title={titleShow} msg={errorMsg}
+					nameButton={'OK!'} title={titleShow} msg={errorMsg}
 					display={popShow} hide={()=>{setPopShow.off();popFunction;}}
 				/>
 
@@ -278,6 +314,7 @@ export const BodySetOne = () =>{
 					initialValues={{priceMoth:'',finishDate:new Date()}}
 					onSubmit={async (values: typesCycle, { setSubmitting, setErrors }) => {
 						setSubmitting(true);
+						setButton(true);
 						// eslint-disable-next-line react-hooks/rules-of-hooks
 						const result = await useCreateMonthly({variables:{
 							profit: Math.round(Number(values.priceMoth)*100),
@@ -298,6 +335,7 @@ export const BodySetOne = () =>{
 							setTitleShow('Error');
 							setPopShow.on();
 						}
+						setButton(false);
 						setSubmitting(false);
 					}}
 				>
@@ -340,7 +378,8 @@ export const BodySetOne = () =>{
 										onClick={()=>{console.log('das');}}
 										type="submit"
 										leftIcon={isSubmitting ? <Spinner /> : <Icon as={BsFillCalendarCheckFill} />}
-										disabled={isSubmitting}
+										disabled={useButton || isSubmitting}
+										
 									>
 									Criar Novo Lucro do Mês
 									</Button>
@@ -351,7 +390,7 @@ export const BodySetOne = () =>{
 
 				</Formik>
 				<PopMsg
-					nameButton={'popNameButton'} title={titleShow} msg={errorMsg}
+					nameButton={'OK!!'} title={titleShow} msg={errorMsg}
 					display={popShow} hide={()=>{setPopShow.off();popFunction;}}
 				/>
 
@@ -365,12 +404,12 @@ export const BodySetOne = () =>{
 			{(staffInfoGraph.loading)&& <Loading/>}
 			{dataUser &&
 			<Flex
-				bg={'white'}
+				bg={'blackAlpha.400'}
 				alignItems={'center'}
 				justifyContent={'center'}
 				flexDirection='column'
 				width={'100%'}
-
+				minH={'100vh'}
 			>
 
 				<Box width={'100%'} p={'10px'}>

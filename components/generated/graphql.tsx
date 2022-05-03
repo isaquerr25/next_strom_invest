@@ -31,17 +31,17 @@ export type CreateUser = {
 export type CycleAll = {
   __typename?: 'CycleAll';
   action: Scalars['String'];
-  beginDate: Scalars['DateTime'];
+  beginDate?: Maybe<Scalars['DateTime']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   finalValueBTC?: Maybe<Scalars['String']>;
   finalValueUSD?: Maybe<Scalars['Int']>;
   finishDate?: Maybe<Scalars['DateTime']>;
   hash?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
-  state: Scalars['String'];
+  state?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   userId?: Maybe<Scalars['Int']>;
-  valueBTC: Scalars['String'];
+  valueBTC?: Maybe<Scalars['String']>;
   valueUSD: Scalars['Int'];
 };
 
@@ -541,7 +541,7 @@ export type AllCycleByUserStaffMutationVariables = Exact<{
 }>;
 
 
-export type AllCycleByUserStaffMutation = { __typename?: 'Mutation', allCycleByUserStaff?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC: string, finalValueUSD?: number | null, finalValueBTC?: string | null, state: string, beginDate: any, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, hash?: string | null }> | null };
+export type AllCycleByUserStaffMutation = { __typename?: 'Mutation', allCycleByUserStaff?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC?: string | null, finalValueUSD?: number | null, finalValueBTC?: string | null, state?: string | null, beginDate?: any | null, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, hash?: string | null }> | null };
 
 export type AllTransactionsByUserStaffMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -612,6 +612,13 @@ export type CreateUserResolverMutationVariables = Exact<{
 
 
 export type CreateUserResolverMutation = { __typename?: 'Mutation', createUserResolver: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
+
+export type DeleteMonthlyProfitMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteMonthlyProfitMutation = { __typename?: 'Mutation', deleteMonthlyProfit: Array<{ __typename?: 'GraphState', field?: string | null, message?: string | null }> };
 
 export type GetTypeTransactionMutationVariables = Exact<{
   action: Scalars['String'];
@@ -735,12 +742,12 @@ export type ActiveStartStaffQuery = { __typename?: 'Query', activeStartStaff?: {
 export type AllCycleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllCycleQuery = { __typename?: 'Query', allCycle?: Array<{ __typename?: 'CycleAll', action: string, id: number, createdAt?: any | null, beginDate: any, finishDate?: any | null, valueBTC: string, valueUSD: number, finalValueUSD?: number | null, finalValueBTC?: string | null, hash?: string | null, state: string, userId?: number | null }> | null };
+export type AllCycleQuery = { __typename?: 'Query', allCycle?: Array<{ __typename?: 'CycleAll', action: string, id: number, createdAt?: any | null, beginDate?: any | null, finishDate?: any | null, valueBTC?: string | null, valueUSD: number, finalValueUSD?: number | null, finalValueBTC?: string | null, hash?: string | null, state?: string | null, userId?: number | null }> | null };
 
 export type AllCycleByUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllCycleByUserQuery = { __typename?: 'Query', allCycleByUser?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC: string, finalValueUSD?: number | null, finalValueBTC?: string | null, state: string, beginDate: any, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, userId?: number | null }> | null };
+export type AllCycleByUserQuery = { __typename?: 'Query', allCycleByUser?: Array<{ __typename?: 'CycleAll', id: number, action: string, valueUSD: number, valueBTC?: string | null, finalValueUSD?: number | null, finalValueBTC?: string | null, state?: string | null, beginDate?: any | null, finishDate?: any | null, createdAt?: any | null, updatedAt?: any | null, userId?: number | null }> | null };
 
 export type AllCycleUserAdminProcessQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1194,6 +1201,40 @@ export function useCreateUserResolverMutation(baseOptions?: Apollo.MutationHookO
 export type CreateUserResolverMutationHookResult = ReturnType<typeof useCreateUserResolverMutation>;
 export type CreateUserResolverMutationResult = Apollo.MutationResult<CreateUserResolverMutation>;
 export type CreateUserResolverMutationOptions = Apollo.BaseMutationOptions<CreateUserResolverMutation, CreateUserResolverMutationVariables>;
+export const DeleteMonthlyProfitDocument = gql`
+    mutation DeleteMonthlyProfit($id: Int!) {
+  deleteMonthlyProfit(data: {id: $id}) {
+    field
+    message
+  }
+}
+    `;
+export type DeleteMonthlyProfitMutationFn = Apollo.MutationFunction<DeleteMonthlyProfitMutation, DeleteMonthlyProfitMutationVariables>;
+
+/**
+ * __useDeleteMonthlyProfitMutation__
+ *
+ * To run a mutation, you first call `useDeleteMonthlyProfitMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteMonthlyProfitMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteMonthlyProfitMutation, { data, loading, error }] = useDeleteMonthlyProfitMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteMonthlyProfitMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMonthlyProfitMutation, DeleteMonthlyProfitMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMonthlyProfitMutation, DeleteMonthlyProfitMutationVariables>(DeleteMonthlyProfitDocument, options);
+      }
+export type DeleteMonthlyProfitMutationHookResult = ReturnType<typeof useDeleteMonthlyProfitMutation>;
+export type DeleteMonthlyProfitMutationResult = Apollo.MutationResult<DeleteMonthlyProfitMutation>;
+export type DeleteMonthlyProfitMutationOptions = Apollo.BaseMutationOptions<DeleteMonthlyProfitMutation, DeleteMonthlyProfitMutationVariables>;
 export const GetTypeTransactionDocument = gql`
     mutation GetTypeTransaction($action: String!, $state: String!) {
   getTypeTransaction(data: {action: $action, state: $state}) {

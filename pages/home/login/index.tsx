@@ -56,11 +56,12 @@ const Login = () =>{
 
 								setSubmitting(true);
 								const result = await loginAuthUser({variables:values});
-								setSubmitting(false);
+								
 								const errors = result.data?.loginAuthUser[0];
 								if (errors?.field=='success') {
 									Router.push('/user');
 								} else {
+									setSubmitting(false);
 									setErrorMsg(errors?.message  ?? '');
 									setPopShow.on();
 								}

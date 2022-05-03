@@ -42,7 +42,9 @@ export const BodyCycleProcess = () =>{
 			gap={2}
 			p={2}
 			flexDirection='column'
-			bg={'blackAlpha.500'}
+			bg={'black'}
+			minH={'100vh'}
+			h='100%'
 		>
 			{(userInfoGraph.loading &&  allCycle.loading )&& <Loading/>}
 			{dataUser &&
@@ -167,7 +169,7 @@ const TableCycle = ({arrayTransactions,dropValue}:{
 								finalValue ='CANCEL';
 
 							}else{
-								finalValue =compose.finalValueUSD ?? calculatorDays(new Date(),compose.finishDate)+' Days';
+								finalValue =compose.finalValueUSD ?? calculatorDays(new Date(),compose.finishDate);
 								if(typeof(finalValue) == typeof Number()){
 									finalValue = convertMoney(finalValue/100);
 								}
@@ -181,8 +183,8 @@ const TableCycle = ({arrayTransactions,dropValue}:{
 									<Td textColor={color}>{convertMoney(money/100)}</Td>
 									<Td textColor={color}>{finalValue}</Td>
 									<Td textColor={color}>{compose.state}</Td>
-									<Td textColor={color}>{compose.beginDate.toString().split('T')[0]}</Td>
-									<Td textColor={color}>{compose.finishDate.toString().split('T')[0]}</Td>
+									<Td textColor={color}>{compose.beginDate?.toString().split('T')[0] ?? 'WAIT PROCESS'}</Td>
+									<Td textColor={color}>{compose.finishDate?.toString().split('T')[0] ?? 'WAIT PROCESS'}</Td>
 								</Tr>
 							);}
 						)
@@ -205,8 +207,8 @@ interface TypesComposeCycleProcess{
 	finalValueUSD?: number;
 	finalValueBTC?: BigInt;
 	state?: string;
-	beginDate: Date;
-	finishDate: Date;
+	beginDate?: Date;
+	finishDate?: Date;
 	createdAt?: Date;
 	updatedAt?: Date;
 	userId?: number;
@@ -223,7 +225,7 @@ interface TypesCycleProcess{
 	finalValueUSD?: number | null
 	finalValueBTC?: string | null 
 	state: string
-	beginDate: any
+	beginDate?: any
 	finishDate?: any | null
 	createdAt?: any | null
 	updatedAt?: any | null

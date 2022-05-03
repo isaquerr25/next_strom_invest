@@ -71,6 +71,7 @@ export const BodySetOne = () =>{
 				flexDirection='column'
 				width={'100%'}
 				bg={'black'}
+				minH={'100vh'}
 			>
 
 				<Box width={'100%'} p={'10px'}>

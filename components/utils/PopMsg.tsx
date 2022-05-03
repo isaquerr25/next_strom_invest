@@ -2,6 +2,8 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 import { VscError } from 'react-icons/vsc';
 import { GrValidate } from 'react-icons/gr';
 import { BsBasket, BsPatchQuestion } from 'react-icons/bs';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 interface typePopup {
   display: boolean;
@@ -28,9 +30,9 @@ export function PopMsg({title,msg,display,hide,nameButton}:typePopup) {
 					<ModalHeader>{title}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody display={'flex'} flexDirection='column' minH={'100px'} gap={5} width='100%' justifyContent='center' alignItems={'center'}>
-						{title==='Success' && <Icon alignItems={'center'}  boxSize={'20'} as={GrValidate} color='green' />}
-						{title==='Payment' && <Icon alignItems={'center'}  boxSize={'20'} as={BsBasket} color='teal.500' />}
-						{(title!='Success' && title!='Payment')  && <Icon alignItems={'center'}  boxSize={'20'} as={VscError} color='red' />}
+						{title==='Success' && <Icon alignItems={'center'}  boxSize={'20'} as={FaRegCheckCircle} color='green' stroke='green' />}
+						{title==='Payment' && <Icon alignItems={'center'}  boxSize={'20'} as={BsBasket} color='teal.500'  stroke='teal.500' />}
+						{(title!='Success' && title!='Payment')  && <Icon alignItems={'center'}  boxSize={'20'} as={VscError} color='red' stroke='red' />}
 						<Text fontWeight={'bold'}>
 							{msg}
 						</Text>

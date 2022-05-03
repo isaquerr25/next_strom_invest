@@ -1,0 +1,8 @@
+mutation DeleteMonthlyProfit($id:Int!){
+  deleteMonthlyProfit(data:{
+    id:$id
+  }){
+    field
+    message
+  }
+}

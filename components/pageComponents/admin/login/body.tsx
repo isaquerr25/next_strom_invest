@@ -79,11 +79,12 @@ export function SimpleCard() {
 
 							setSubmitting(true);
 							const result = await loginStaff({variables:values});
-							setSubmitting(false);
+							
 							const errors = result.data?.loginStaff[0];
 							if (errors?.field=='success') {
 								Router.push('/admin/user');
 							} else {
+								setSubmitting(false);
 								setErrorMsg(errors?.message  ?? '');
 								setPopShow.on();
 							}
