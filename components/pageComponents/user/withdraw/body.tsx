@@ -146,7 +146,8 @@ function FormikWallet() {
 					if(valuePrice >= 5000){
 						const result = await transitionGraphql({variables:{
 							action:values.action,
-							value:valuePrice
+							value:valuePrice,
+							days:'s'
 						}});
 						setSubmitting(false);
 						const errors = result.data?.createTransaction[0];
