@@ -77,15 +77,15 @@ export const BodySetOne = () =>{
 
 							<Block
 								key={number.id}
-								action={number.action}
+								action={number.action ?? '-'}
 								value={number.valueUSD != undefined ? Number(number.valueUSD) : 0 }
-								state={number.state}
+								state={number.state  ?? '-'}
 								beginDate={number.beginDate}
 								finishDate={number.finishDate}
-								userId={number.user.id}
-								user_name={number.user.name ?? ''}
+								userId={number.user?.id  ?? '-'}
+								user_name={number.user?.name ?? ''}
 								id={number.id}
-								email={number.user.email}
+								email={number.user?.email  ?? '-'}
 								hash={number.hash}
 							/>
 
