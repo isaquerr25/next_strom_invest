@@ -94,7 +94,7 @@ interface typeTableCycle{
     id: number;
     action: string;
     valueUSD: number;
-    valueBTC: string;
+    valueBTC?: string | null | undefined;
     finalValueUSD?: number | null | undefined;
     finalValueBTC?: string | null | undefined;
     state?: string | null | undefined;
@@ -167,7 +167,7 @@ export const TableCycle = ({prop}:typeTableCycle) => (
 									<Td>{compose.id}</Td>
 									<Td>{compose.action}</Td>
 									<Td>{convertMoney(Number(compose.valueUSD)/100)?? '0'}</Td>
-									<Td>{compose.valueBTC}</Td>
+									<Td>{compose.valueBTC ?? '-'}</Td>
 									<Td>{convertMoney(Number(compose.finalValueUSD)/100)?? '0'}</Td>
 									<Td>{compose.finalValueBTC}</Td>
 									<Td>{compose.state}</Td>

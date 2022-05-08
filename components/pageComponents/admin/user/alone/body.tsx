@@ -76,9 +76,9 @@ interface typeTableCycle{
     id: number;
     action: string;
     valueUSD: number;
-    valueBTC: string;
+    valueBTC?: string | null | undefined;
     finalValueUSD?: number | null | undefined;
-    finalValueBTC?: string | null | undefined;
+    finalValueBTC?: string | null | undefined; 
     state?: string | null | undefined;
     beginDate?: string | null | undefined;
     finishDate?: string | null | undefined;
